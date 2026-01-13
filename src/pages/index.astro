@@ -1,16 +1,61 @@
 ---
+import MainLayout from '../layouts/MainLayout.astro';
+import content from '../data/content.json';
 
+const { projects } = content;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<MainLayout title="Index">
+  <div class="pt-32 px-4 lg:px-6 mb-20">
+    
+    <!-- 1. THE HEADLINE (Editorial/Poetic) -->
+    <h1 class="font-sans text-[12vw] leading-[0.8] mb-24 uppercase opacity-90 font-bold">
+      Systematic<br>
+      <span class="ml-[15vw] italic font-light text-accent-blue">& Poetic</span>
+    </h1>
+
+    <!-- 2. THE TABLE HEADER (Systematic/Office) -->
+    <div class="grid grid-cols-12 border-b border-system-black pb-2 font-mono text-xs tracking-widest opacity-50 uppercase">
+      <div class="col-span-1">No.</div>
+      <div class="col-span-6 md:col-span-5">Project / Entity</div>
+      <div class="col-span-3 hidden md:block">Category</div>
+      <div class="col-span-2 hidden md:block text-right">Year</div>
+      <div class="col-span-5 md:col-span-1 text-right">Status</div>
+    </div>
+
+    <!-- 3. THE PROJECT LIST -->
+    <div class="flex flex-col">
+      {projects.map((project, index) => (
+        <a href={`/work/${project.slug}`} class="group relative border-b border-system-black py-6 hover:bg-white/50 transition-colors duration-300 ease-luxury">
+          
+          <!-- The Row Data -->
+          <div class="grid grid-cols-12 items-baseline pointer-events-none">
+            <div class="col-span-1 font-mono text-sm">
+              {(index + 1).toString().padStart(2, '0')}
+            </div>
+            <div class="col-span-6 md:col-span-5 font-sans text-3xl font-medium tracking-tight group-hover:italic transition-all">
+              {project.title}
+            </div>
+            <div class="col-span-3 hidden md:block font-mono text-xs uppercase pt-2">
+              [{project.category}]
+            </div>
+            <div class="col-span-2 hidden md:block font-mono text-xs text-right pt-2">
+              {project.year}
+            </div>
+            <div class="col-span-5 md:col-span-1 text-right font-mono text-xs pt-2 text-accent-blue">
+              ↗ VIEW
+            </div>
+          </div>
+
+          <!-- The Floating Image (Reveals on Hover) -->
+          <!-- We use 'group-hover' to show it. We will use simple CSS for position now, JS for cursor tracking later. -->
+          <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30vw] h-[40vh] hidden group-hover:block pointer-events-none z-10 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+             <img src={project.tech_stack && project.tech_stack.length > 0 ? project.tech_stack[0] : ''} alt={project.title} class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+          </div>
+
+        </a>
+      ))}
+    </div>
+
+  </div>
+</MainLayout>

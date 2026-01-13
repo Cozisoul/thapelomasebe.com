@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "version": "2.0",
+    "generator": "TMM-OS Publisher"
+  },
+  "status": {
+    "id": 1,
+    "current_focus": "Architecting TMM-OS Web Portal",
+    "rhythmic_mode": "Output",
+    "last_updated": "2026-01-09 14:35:29"
+  },
+  "projects": [
+    {
+      "id": 5,
+      "title": "Sonic Geographies",
+      "slug": "sonic-geographies",
+      "category": "Data Science",
+      "year": 2025,
+      "client": "Personal Inquiry",
+      "narrative_md": "Mapping the DNA of South African Music through Graph Theory.",
+      "hero_image": "/images/sonic-hero.jpg",
+      "is_featured": 1
+    },
+    {
+      "id": 6,
+      "title": "Love Me Again",
+      "slug": "love-me-again",
+      "category": "Fine Art",
+      "year": 2025,
+      "client": "Social Practice",
+      "narrative_md": "The art of repair. Rescuing discarded objects and restoring their dignity.",
+      "hero_image": "/images/love-hero.jpg",
+      "is_featured": 1
+    },
+    {
+      "id": 7,
+      "title": "The Biko Archives",
+      "slug": "biko-archives",
+      "category": "Creative Tech",
+      "year": 2024,
+      "client": "AI Research",
+      "narrative_md": "Re-animating the archive. Using GANs to explore visual history.",
+      "hero_image": "/images/biko-hero.jpg",
+      "is_featured": 1
+    }
+  ]
+}

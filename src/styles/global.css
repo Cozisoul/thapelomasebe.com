@@ -1,0 +1,74 @@
+/* Tailwind directives - MUST be first */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Google Fonts for fallbacks */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap');
+
+/* 1. THE FONTS */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-display: swap;
+}
+
+/* 2. THE RESET (Digital Brutalism) */
+:root {
+  background-color: #FFF8E7; /* Cosmic Latte */
+  color: #050505; /* System Black */
+  cursor: crosshair; /* The Precision Cursor */
+}
+
+/* 3. LENIS (The Heavy Scroll) */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* 4. UTILITIES */
+::selection {
+  background: #0000FF; /* Blueprint Blue */
+  color: #FFF8E7;
+}
+
+/* Hide scrollbar for that app-like feel */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* Font utility classes */
+.font-sans {
+  font-family: 'Satoshi', 'Inter', sans-serif;
+}
+.font-mono {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+}

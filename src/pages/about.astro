@@ -1,0 +1,91 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout title="Practice">
+  
+  <div class="min-h-screen pt-40 pb-20 px-6 flex flex-col items-center">
+    
+    <!-- 1. THE IDENTIFIER -->
+    <div class="w-full max-w-2xl mb-12 flex justify-between font-mono text-xs uppercase tracking-widest opacity-50 border-b border-system-black pb-2">
+      <span>00.01</span>
+      <span>Biography</span>
+      <span>ZA</span>
+    </div>
+
+    <!-- 2. THE NARRATIVE (Editorial Layout) -->
+    <article class="w-full max-w-2xl font-sans text-xl md:text-2xl leading-[1.4] tracking-tight space-y-12">
+      
+      <p>
+        <span class="font-bold">Thapelo Madiba Masebe</span> is a transdisciplinary practitioner operating at the intersection of data, memory, and emerging African identity.
+      </p>
+
+      <p>
+        His practice charts an emotional geography that stretches from his origins in <span class="text-accent-blue">Seshego, Limpopo</span> (representing ancestral memory) to his current studio in <span class="text-accent-blue">Johannesburg</span> (representing the urban intersection).
+      </p>
+
+      <p>
+        He works from a professional office, not a traditional studio. This operational model prioritizes systems over chaos, merging the rigor of Data Science with the intuition of Fine Art. He calls this duality the <span class="italic text-accent-red">Systematic-Poetic</span>.
+      </p>
+
+      <p>
+        Currently, he is formalizing his technical stack through a Data Science Learnership while architecting <strong>Studio Masebe</strong>, a decentralized cultural institution for the 21st century.
+      </p>
+
+    </article>
+
+    <!-- 3. THE SKILLS MATRIX (The "Data" Layer) -->
+    <div class="w-full max-w-2xl mt-32">
+      <div class="font-mono text-xs uppercase tracking-widest opacity-50 mb-8 border-b border-system-black pb-2">
+        00.02 // Capabilities
+      </div>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-4">
+        <!-- Column 1 -->
+        <div class="flex flex-col gap-2">
+          <span class="font-mono text-[10px] text-accent-blue">LOGIC</span>
+          <ul class="font-sans text-sm space-y-1">
+            <li>Python (Pandas/NumPy)</li>
+            <li>SQL / Database Arch</li>
+            <li>Machine Learning</li>
+            <li>GraphRAG</li>
+          </ul>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="flex flex-col gap-2">
+          <span class="font-mono text-[10px] text-accent-red">SENSATION</span>
+          <ul class="font-sans text-sm space-y-1">
+            <li>Art Direction</li>
+            <li>Photography</li>
+            <li>Generative Art</li>
+            <li>Sound Design</li>
+          </ul>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="flex flex-col gap-2">
+          <span class="font-mono text-[10px] text-system-black/50">SYSTEMS</span>
+          <ul class="font-sans text-sm space-y-1">
+            <li>Linux / Bash</li>
+            <li>Git / Version Control</li>
+            <li>Docker</li>
+            <li>Astro / React</li>
+          </ul>
+        </div>
+
+         <!-- Column 4 -->
+         <div class="flex flex-col gap-2">
+          <span class="font-mono text-[10px] text-system-black/50">OFFICE</span>
+          <ul class="font-sans text-sm space-y-1">
+            <li>Project Management</li>
+            <li>Creative Strategy</li>
+            <li>Technical Writing</li>
+            <li>Brand Architecture</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</MainLayout>
