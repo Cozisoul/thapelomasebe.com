@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "2.0",
-    "generator": "TMM-OS Publisher"
+    "generated_by": "TMM-OS Publisher"
   },
   "status": {
     "id": 1,
@@ -11,37 +11,433 @@
   },
   "projects": [
     {
-      "id": 5,
-      "title": "Sonic Geographies",
-      "slug": "sonic-geographies",
-      "category": "Data Science",
-      "year": 2025,
-      "client": "Personal Inquiry",
-      "narrative_md": "Mapping the DNA of South African Music through Graph Theory.",
-      "hero_image": "/images/sonic-hero.jpg",
-      "is_featured": 1
+      "id": 33,
+      "title": "Areyeng di zweiling",
+      "slug": "areyeng-di-zweiling",
+      "year": 2024,
+      "category": "Creative Tech",
+      "summary": "A visual exploration of life post-pandemic and the newfound freedom to travel. Features car spinning culture in South African townships.",
+      "narrative": "### About this Project\n\nA visual exploration of life post-pandemic and the newfound freedom to travel. Features car spinning culture in South African townships.",
+      "stack": [
+        "Digital Video Collage"
+      ],
+      "hero_image": "/images/areyeng-di-zweiling.jpg"
     },
     {
-      "id": 6,
-      "title": "Love Me Again",
-      "slug": "love-me-again",
+      "id": 32,
+      "title": "Enhle Mbali Media Kit",
+      "slug": "enhle-mbali-media-kit",
+      "year": 2024,
+      "category": "Commercial",
+      "summary": "Studio portraits for Enhle Mbali\u2019s media kit.",
+      "narrative": "### About this Project\n\nStudio portraits for Enhle Mbali\u2019s media kit.",
+      "stack": [
+        "Digital Photography (Black & White)"
+      ],
+      "hero_image": "/images/enhle-mbali-media-kit.jpg"
+    },
+    {
+      "id": 31,
+      "title": "Factorie Brand Shoot",
+      "slug": "factorie-brand-shoot",
+      "year": 2024,
+      "category": "Commercial",
+      "summary": "Brand campaign shoot for Factorie featuring vibrant, youthful energy.",
+      "narrative": "### About this Project\n\nBrand campaign shoot for Factorie featuring vibrant, youthful energy.",
+      "stack": [
+        "Digital Photography"
+      ],
+      "hero_image": "/images/factorie-brand-shoot.jpg"
+    },
+    {
+      "id": 30,
+      "title": "Lia Butler Media Kit",
+      "slug": "lia-butler-media-kit",
+      "year": 2024,
+      "category": "Commercial",
+      "summary": "High-contrast studio portraits for Lia Butler\u2019s media kit.",
+      "narrative": "### About this Project\n\nHigh-contrast studio portraits for Lia Butler\u2019s media kit.",
+      "stack": [
+        "Digital Photography (Black & White)"
+      ],
+      "hero_image": "/images/lia-butler-media-kit.jpg"
+    },
+    {
+      "id": 29,
+      "title": "Makundai Print Shoot",
+      "slug": "makundai-print-shoot",
+      "year": 2024,
+      "category": "Commercial",
+      "summary": "Fashion editorial for Trempleway Today lifestyle magazine.",
+      "narrative": "### About this Project\n\nFashion editorial for Trempleway Today lifestyle magazine.",
+      "stack": [
+        "Digital Photography"
+      ],
+      "hero_image": "/images/makundai-print-shoot.jpg"
+    },
+    {
+      "id": 28,
+      "title": "Ama Qamata Editorial",
+      "slug": "ama-qamata-editorial",
+      "year": 2024,
+      "category": "Commercial",
+      "summary": "Editorial shoot in collaboration with Thickleeyonce, featuring fashion by Thebe Magugu & Rich Mnisi.",
+      "narrative": "### About this Project\n\nEditorial shoot in collaboration with Thickleeyonce, featuring fashion by Thebe Magugu & Rich Mnisi.",
+      "stack": [
+        "Digital Photography (Black & White)"
+      ],
+      "hero_image": "/images/ama-qamata-editorial.jpg"
+    },
+    {
+      "id": 27,
+      "title": "Ama Qamata Film Screening",
+      "slug": "ama-qamata-film-screening",
+      "year": 2024,
+      "category": "Commercial",
+      "summary": "Captured on film: Photography for Ama Qamata\u2019s \"Fight Like A Girl\" movie screening.",
+      "narrative": "### About this Project\n\nCaptured on film: Photography for Ama Qamata\u2019s \"Fight Like A Girl\" movie screening.",
+      "stack": [
+        "35mm Film"
+      ],
+      "hero_image": "/images/ama-qamata-film-screening.jpg"
+    },
+    {
+      "id": 26,
+      "title": "Kay-leigh D Fischer Portfolio",
+      "slug": "kay-leigh-d-fischer-portfolio",
+      "year": 2024,
+      "category": "Commercial",
+      "summary": "Portfolio shoot for artist Kay-leigh Fischer during her Block Black art residency.",
+      "narrative": "### About this Project\n\nPortfolio shoot for artist Kay-leigh Fischer during her Block Black art residency.",
+      "stack": [
+        "Digital Photography"
+      ],
+      "hero_image": "/images/kay-leigh-d-fischer-portfolio.jpg"
+    },
+    {
+      "id": 25,
+      "title": "Vans Editorial Shoot",
+      "slug": "vans-editorial-shoot",
+      "year": 2024,
+      "category": "Commercial",
+      "summary": "Editorial shoot for Vans and the Sportscene brand, capturing urban youth culture and skate aesthetics.",
+      "narrative": "### About this Project\n\nEditorial shoot for Vans and the Sportscene brand, capturing urban youth culture and skate aesthetics.",
+      "stack": [
+        "Digital Photography"
+      ],
+      "hero_image": "/images/vans-editorial-shoot.jpg"
+    },
+    {
+      "id": 24,
+      "title": "Excommunicado Music Video",
+      "slug": "excommunicado-music-video",
+      "year": 2024,
+      "category": "Creative Tech",
+      "summary": "Director & Editor for the music video by Jabba ft Kgale. A high-energy visual production.",
+      "narrative": "### About this Project\n\nDirector & Editor for the music video by Jabba ft Kgale. A high-energy visual production.",
+      "stack": [
+        "Digital Video"
+      ],
+      "hero_image": "/images/excommunicado-music-video.jpg"
+    },
+    {
+      "id": 16,
+      "title": "Lebus",
+      "slug": "lebus",
+      "year": 2024,
       "category": "Fine Art",
-      "year": 2025,
-      "client": "Social Practice",
-      "narrative_md": "The art of repair. Rescuing discarded objects and restoring their dignity.",
-      "hero_image": "/images/love-hero.jpg",
-      "is_featured": 1
+      "summary": "A sculpture tapping into memory: a recreation of the car my dad drove for over 20 years. It plays with the aesthetics of childhood brick toys.",
+      "narrative": "### About this Project\n\nA sculpture tapping into memory: a recreation of the car my dad drove for over 20 years. It plays with the aesthetics of childhood brick toys.",
+      "stack": [
+        "Acrylic & Pastel on Styrofoam"
+      ],
+      "hero_image": "/images/lebus.jpg"
+    },
+    {
+      "id": 2,
+      "title": "come in...",
+      "slug": "come-in",
+      "year": 2021,
+      "category": "Fine Art",
+      "summary": "Abstract exploration of open invitations and layered emotional states.",
+      "narrative": "### About this Project\n\nAbstract exploration of open invitations and layered emotional states.",
+      "stack": [
+        "Acrylic on A2 Paper"
+      ],
+      "hero_image": "/images/come-in.jpg"
+    },
+    {
+      "id": 4,
+      "title": "fruit...",
+      "slug": "fruit",
+      "year": 2021,
+      "category": "Fine Art",
+      "summary": "A study on ripeness, growth, intimacy, and the passage of time.",
+      "narrative": "### About this Project\n\nA study on ripeness, growth, intimacy, and the passage of time.",
+      "stack": [
+        "Acrylic on A3 Paper"
+      ],
+      "hero_image": "/images/fruit.jpg"
+    },
+    {
+      "id": 14,
+      "title": "Untitled 01",
+      "slug": "untitled-01",
+      "year": 2021,
+      "category": "Fine Art",
+      "summary": "A striking installation representing the bustling city and its people. The unlikely combination of materials explores the relationship between inhabitants and their environment.",
+      "narrative": "### About this Project\n\nA striking installation representing the bustling city and its people. The unlikely combination of materials explores the relationship between inhabitants and their environment.",
+      "stack": [
+        "Found Objects (Wash tubs, blankets, tiles)"
+      ],
+      "hero_image": "/images/untitled-01.jpg"
+    },
+    {
+      "id": 15,
+      "title": "Untitled 02",
+      "slug": "untitled-02",
+      "year": 2021,
+      "category": "Fine Art",
+      "summary": "An installation where ordinary objects form a serene landscape of hills, a river, and the sun, showcasing the creative potential of everyday items.",
+      "narrative": "### About this Project\n\nAn installation where ordinary objects form a serene landscape of hills, a river, and the sun, showcasing the creative potential of everyday items.",
+      "stack": [
+        "Found Objects (Car parts, grass, corrugated iron)"
+      ],
+      "hero_image": "/images/untitled-02.jpg"
+    },
+    {
+      "id": 13,
+      "title": "them...",
+      "slug": "them",
+      "year": 2020,
+      "category": "Fine Art",
+      "summary": "A study in repetitive, circular forms.",
+      "narrative": "### About this Project\n\nA study in repetitive, circular forms.",
+      "stack": [
+        "Acrylic on A4 Paper"
+      ],
+      "hero_image": "/images/them.jpg"
+    },
+    {
+      "id": 1,
+      "title": "Reading Genesis (Series)",
+      "slug": "reading-genesis-(series)",
+      "year": 2020,
+      "category": "Fine Art",
+      "summary": "A foundational series of abstract paintings exploring form, line, and composition.",
+      "narrative": "### About this Project\n\nA foundational series of abstract paintings exploring form, line, and composition.",
+      "stack": [
+        "Acrylic on Paper"
+      ],
+      "hero_image": "/images/reading-genesis-(series).jpg"
+    },
+    {
+      "id": 12,
+      "title": "that chaos of my mind...",
+      "slug": "that-chaos-of-my-mind",
+      "year": 2020,
+      "category": "Fine Art",
+      "summary": "A dense, energetic composition reflecting internal states.",
+      "narrative": "### About this Project\n\nA dense, energetic composition reflecting internal states.",
+      "stack": [
+        "Acrylic on A4 Paper"
+      ],
+      "hero_image": "/images/that-chaos-of-my-mind.jpg"
+    },
+    {
+      "id": 11,
+      "title": "that & that, brush studies 1/2",
+      "slug": "that-&-that-brush-studies-1/2",
+      "year": 2020,
+      "category": "Fine Art",
+      "summary": "Explorations of texture and mark-making.",
+      "narrative": "### About this Project\n\nExplorations of texture and mark-making.",
+      "stack": [
+        "Acrylic on A6 Paper"
+      ],
+      "hero_image": "/images/that-&-that-brush-studies-1/2.jpg"
+    },
+    {
+      "id": 10,
+      "title": "greys...",
+      "slug": "greys",
+      "year": 2020,
+      "category": "Fine Art",
+      "summary": "A study in monochromatic tone and contrast.",
+      "narrative": "### About this Project\n\nA study in monochromatic tone and contrast.",
+      "stack": [
+        "Acrylic on A6 Paper"
+      ],
+      "hero_image": "/images/greys.jpg"
+    },
+    {
+      "id": 9,
+      "title": "ONLY...",
+      "slug": "only",
+      "year": 2020,
+      "category": "Fine Art",
+      "summary": "Minimalist abstraction.",
+      "narrative": "### About this Project\n\nMinimalist abstraction.",
+      "stack": [
+        "Acrylic on A6 Paper"
+      ],
+      "hero_image": "/images/only.jpg"
+    },
+    {
+      "id": 8,
+      "title": "sticks and stones...",
+      "slug": "sticks-and-stones",
+      "year": 2020,
+      "category": "Fine Art",
+      "summary": "A monochromatic study of line and structure.",
+      "narrative": "### About this Project\n\nA monochromatic study of line and structure.",
+      "stack": [
+        "Acrylic on A6 Paper"
+      ],
+      "hero_image": "/images/sticks-and-stones.jpg"
     },
     {
       "id": 7,
-      "title": "The Biko Archives",
-      "slug": "biko-archives",
-      "category": "Creative Tech",
-      "year": 2024,
-      "client": "AI Research",
-      "narrative_md": "Re-animating the archive. Using GANs to explore visual history.",
-      "hero_image": "/images/biko-hero.jpg",
-      "is_featured": 1
+      "title": "Untitled (Rothko Study)",
+      "slug": "untitled-(rothko-study)",
+      "year": 2020,
+      "category": "Fine Art",
+      "summary": "A study in color fields and emotional depth, inspired by Mark Rothko.",
+      "narrative": "### About this Project\n\nA study in color fields and emotional depth, inspired by Mark Rothko.",
+      "stack": [
+        "Acrylic on Craft Card Paper"
+      ],
+      "hero_image": "/images/untitled-(rothko-study).jpg"
+    },
+    {
+      "id": 6,
+      "title": "BLOBBY...",
+      "slug": "blobby",
+      "year": 2020,
+      "category": "Fine Art",
+      "summary": "An experimental study in organic forms.",
+      "narrative": "### About this Project\n\nAn experimental study in organic forms.",
+      "stack": [
+        "Acrylic on A6 Paper"
+      ],
+      "hero_image": "/images/blobby.jpg"
+    },
+    {
+      "id": 5,
+      "title": "faces sometimes...",
+      "slug": "faces-sometimes",
+      "year": 2020,
+      "category": "Fine Art",
+      "summary": "An abstract exploration of identity and presence.",
+      "narrative": "### About this Project\n\nAn abstract exploration of identity and presence.",
+      "stack": [
+        "Acrylic on Craft Paper"
+      ],
+      "hero_image": "/images/faces-sometimes.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Violence and Chaos...",
+      "slug": "violence-and-chaos",
+      "year": 2020,
+      "category": "Fine Art",
+      "summary": "A gestural, expressive piece confronting raw emotion and societal unrest.",
+      "narrative": "### About this Project\n\nA gestural, expressive piece confronting raw emotion and societal unrest.",
+      "stack": [
+        "Acrylic on A4 Paper"
+      ],
+      "hero_image": "/images/violence-and-chaos.jpg"
+    },
+    {
+      "id": 18,
+      "title": "Lebone",
+      "slug": "lebone",
+      "year": 2019,
+      "category": "Commercial",
+      "summary": "A series exploring the art of contortion through a single subject, celebrating the grace and flexibility of the human form.",
+      "narrative": "### About this Project\n\nA series exploring the art of contortion through a single subject, celebrating the grace and flexibility of the human form.",
+      "stack": [
+        "35mm Film"
+      ],
+      "hero_image": "/images/lebone.jpg"
+    },
+    {
+      "id": 19,
+      "title": "Remnants of Rhodes",
+      "slug": "remnants-of-rhodes",
+      "year": 2019,
+      "category": "Commercial",
+      "summary": "Explores the lingering remnants of colonization at the abandoned Groote Schuur Zoo. Depicts graffiti on colonial structures.",
+      "narrative": "### About this Project\n\nExplores the lingering remnants of colonization at the abandoned Groote Schuur Zoo. Depicts graffiti on colonial structures.",
+      "stack": [
+        "35mm Film"
+      ],
+      "hero_image": "/images/remnants-of-rhodes.jpg"
+    },
+    {
+      "id": 20,
+      "title": "Us as thee Culture",
+      "slug": "us-as-thee-culture",
+      "year": 2019,
+      "category": "Commercial",
+      "summary": "Explores the intersection of nostalgia and modern creativity in South Africa. Captures the fluidity and diversity of the cultural landscape. Collaboration with Tandekile Mkhize.",
+      "narrative": "### About this Project\n\nExplores the intersection of nostalgia and modern creativity in South Africa. Captures the fluidity and diversity of the cultural landscape. Collaboration with Tandekile Mkhize.",
+      "stack": [
+        "35mm Film"
+      ],
+      "hero_image": "/images/us-as-thee-culture.jpg"
+    },
+    {
+      "id": 22,
+      "title": "Still",
+      "slug": "still",
+      "year": 2018,
+      "category": "Commercial",
+      "summary": "A series of portraits and urban landscapes capturing moments of stillness.",
+      "narrative": "### About this Project\n\nA series of portraits and urban landscapes capturing moments of stillness.",
+      "stack": [
+        "35mm Film"
+      ],
+      "hero_image": "/images/still.jpg"
+    },
+    {
+      "id": 23,
+      "title": "ME",
+      "slug": "me",
+      "year": 2018,
+      "category": "Commercial",
+      "summary": "A series of double exposures shot over 5 days, serving as manifestations of the inner self. Photographer: Mita Ramabulata.",
+      "narrative": "### About this Project\n\nA series of double exposures shot over 5 days, serving as manifestations of the inner self. Photographer: Mita Ramabulata.",
+      "stack": [
+        "Digital (Polaroid Format)"
+      ],
+      "hero_image": "/images/me.jpg"
+    },
+    {
+      "id": 17,
+      "title": "Fluid Energy",
+      "slug": "fluid-energy",
+      "year": 2018,
+      "category": "Commercial",
+      "summary": "Explores the flow of energy between individuals and their environment. Directed by Leo Kekana.",
+      "narrative": "### About this Project\n\nExplores the flow of energy between individuals and their environment. Directed by Leo Kekana.",
+      "stack": [
+        "35mm Film"
+      ],
+      "hero_image": "/images/fluid-energy.jpg"
+    },
+    {
+      "id": 21,
+      "title": "Life as it happens",
+      "slug": "life-as-it-happens",
+      "year": 2017,
+      "category": "Commercial",
+      "summary": "Captures the beauty of daily life and the passage of time through its subjects. Features architectural studies and portraits.",
+      "narrative": "### About this Project\n\nCaptures the beauty of daily life and the passage of time through its subjects. Features architectural studies and portraits.",
+      "stack": [
+        "35mm Film"
+      ],
+      "hero_image": "/images/life-as-it-happens.jpg"
     }
   ]
 }

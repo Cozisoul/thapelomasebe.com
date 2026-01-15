@@ -50,7 +50,7 @@ const { projects } = content;
           <!-- The Floating Image (Reveals on Hover) -->
           <!-- We use 'group-hover' to show it. We will use simple CSS for position now, JS for cursor tracking later. -->
           <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30vw] h-[40vh] hidden group-hover:block pointer-events-none z-10 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-             <img src={project.tech_stack && project.tech_stack.length > 0 ? project.tech_stack[0] : ''} alt={project.title} class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+             <img src={project.hero_image} alt={project.title} class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
           </div>
 
         </a>

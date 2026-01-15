@@ -1,10 +1,10 @@
-/* Tailwind directives - MUST be first */
+/* Import Google Fonts - must come first per CSS spec */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap');
+
+/* Tailwind directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Import Google Fonts for fallbacks */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap');
 
 /* 1. THE FONTS */
 @font-face {

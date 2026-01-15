@@ -1,9 +1,8 @@
 ---
-import MainLayout from '../../layouts/MainLayout.astro';
-import content from '../../data/content.json';
+import MainLayout from "../../layouts/MainLayout.astro";
+import content from "../../data/content.json";
 
 // 1. GENERATE PATHS
-// This tells Astro to build a page for every project found in your JSON.
 export async function getStaticPaths() {
   const { projects } = content;
   return projects.map((project) => ({
@@ -16,93 +15,89 @@ const { project } = Astro.props;
 ---
 
 <MainLayout title={project.title}>
-  
   <div class="flex flex-col lg:flex-row min-h-screen">
-    
     <!-- LEFT COLUMN: THE LOGIC (Sticky) -->
-    <!-- Holds the narrative, context, and specs. -->
-    <aside class="w-full lg:w-1/2 lg:h-screen lg:sticky lg:top-0 p-6 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-system-black bg-cosmic-latte z-10">
-      
+    <aside
+      class="w-full lg:w-1/2 lg:h-screen lg:sticky lg:top-0 p-6 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-system-black bg-cosmic-latte z-10"
+    >
       <!-- Top: Header -->
       <div class="mt-24 lg:mt-32">
-        <div class="font-mono text-xs uppercase tracking-widest opacity-60 mb-4">
+        <div
+          class="font-mono text-xs uppercase tracking-widest opacity-60 mb-4"
+        >
           {project.id} — {project.category}
         </div>
-        <h1 class="font-sans font-normal text-6xl lg:text-7xl leading-[0.9] uppercase tracking-tighter mb-8">
+        <h1
+          class="font-sans font-normal text-6xl lg:text-7xl leading-[0.9] uppercase tracking-tighter mb-8"
+        >
           {project.title}
         </h1>
-        
-        <!-- The Narrative (Simple Text Render) -->
-        <div class="font-sans text-lg leading-relaxed max-w-md opacity-90 whitespace-pre-wrap">
-          {project.narrative_md}
+
+        <!-- The Narrative -->
+        <div
+          class="font-sans text-lg leading-relaxed max-w-md opacity-90 whitespace-pre-wrap"
+        >
+          {project.narrative || project.summary}
         </div>
       </div>
 
       <!-- Bottom: Specs -->
-      <div class="grid grid-cols-2 gap-8 font-mono text-[10px] uppercase tracking-widest opacity-60 mt-12 lg:mt-0">
+      <div
+        class="grid grid-cols-2 gap-8 font-mono text-[10px] uppercase tracking-widest opacity-60 mt-12 lg:mt-0"
+      >
         <div>
-          <span class="block mb-2 text-accent-blue">[CLIENT]</span>
-          {project.client}
+          <span class="block mb-2 text-accent-blue">[CATEGORY]</span>
+          {project.category}
         </div>
         <div>
           <span class="block mb-2 text-accent-blue">[YEAR]</span>
           {project.year}
         </div>
         <div class="col-span-2">
-          <span class="block mb-2 text-accent-blue">[TECH STACK]</span>
-          <!-- If tech_stack is a string, display it. If it's an array/JSON, join it. -->
-          {Array.isArray(project.tech_stack) ? project.tech_stack.join(' / ') : project.tech_stack || 'TBD'}
+          <span class="block mb-2 text-accent-blue">[TECH / MEDIUM]</span>
+          {
+            Array.isArray(project.stack)
+              ? project.stack.join(" / ")
+              : project.stack || "TBD"
+          }
         </div>
       </div>
-      
     </aside>
 
     <!-- RIGHT COLUMN: THE SENSATION (Scroll) -->
-    <!-- Holds the high-res visual stream. -->
-    <section class="w-full lg:w-1/2 bg-system-black text-cosmic-latte min-h-screen">
-      
-      <!-- We map through the assets. If you don't have assets_json yet, we show the hero image. -->
+    <section
+      class="w-full lg:w-1/2 bg-system-black text-cosmic-latte min-h-screen"
+    >
       <div class="flex flex-col">
-        
         <!-- Primary Hero Image -->
         <div class="w-full">
-            <img src={project.hero_image} class="w-full h-auto object-cover" alt={project.title} />
-             <div class="p-4 font-mono text-[9px] uppercase tracking-widest opacity-50 border-b border-white/20">
-                FIG. 01 — HERO VISUAL
-             </div>
+          <img
+            src={project.hero_image}
+            class="w-full h-auto object-cover"
+            alt={project.title}
+          />
+          <div
+            class="p-4 font-mono text-[9px] uppercase tracking-widest opacity-50 border-b border-white/20"
+          >
+            FIG. 01 — HERO VISUAL
+          </div>
         </div>
 
-        <!-- Dynamic Assets Loop (Future Proofing) -->
-        <!-- Once you populate 'assets_json' in your DB, they will appear here. -->
-        {project.assets_json && project.assets_json.map((asset, i) => (
-           <div class="w-full">
-             {asset.type === 'video' ? (
-                <video src={asset.url} autoplay loop muted playsinline class="w-full h-auto"></video>
-             ) : (
-                <img src={asset.url} class="w-full h-auto object-cover" />
-             )}
-             <div class="p-4 font-mono text-[9px] uppercase tracking-widest opacity-50 border-b border-white/20">
-                FIG. { (i + 2).toString().padStart(2, '0') } — {asset.caption || 'DETAIL'}
-             </div>
-           </div>
-        ))}
-        
         <!-- Placeholder for "More to come" if empty -->
-        {!project.assets_json && (
-           <div class="h-[50vh] flex items-center justify-center font-mono text-xs opacity-30">
-              [ADDITIONAL ASSETS LOADING FROM ARCHIVE...]
-           </div>
-        )}
-
+        <div
+          class="h-[50vh] flex items-center justify-center font-mono text-xs opacity-30"
+        >
+          [ADDITIONAL ASSETS LOADING FROM ARCHIVE...]
+        </div>
       </div>
     </section>
-
   </div>
 
   <!-- NAVIGATION OVERRIDE -->
-  <!-- We add a specific 'Close' button for this view -->
-  <a href="/" class="fixed top-6 right-6 font-mono text-xs z-50 mix-blend-difference text-cosmic-latte hover:text-accent-red cursor-pointer">
+  <a
+    href="/"
+    class="fixed top-6 right-6 font-mono text-xs z-50 mix-blend-difference text-cosmic-latte hover:text-accent-red cursor-pointer"
+  >
     [CLOSE]
   </a>
-
 </MainLayout>
