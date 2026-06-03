@@ -1,0 +1,135 @@
+---
+/**
+ * LogoBanner.astro
+ * An infinite-scrolling marquee of logos/brands.
+ * Uses CSS-only animation with duplicated content for seamless looping.
+ *
+ * Props:
+ *  - items: Array of { name: string, logo?: string } 
+ *    (logo = URL to an SVG/image, or omit for a text-only badge)
+ *  - direction?: 'left' | 'right' (default: 'left')
+ *  - speed?: 'slow' | 'normal' | 'fast' (default: 'normal')
+ */
+export interface Props {
+  items: { name: string; logo?: string }[];
+  direction?: 'left' | 'right';
+  speed?: 'slow' | 'normal' | 'fast';
+}
+
+const { items, direction = 'left', speed = 'normal' } = Astro.props;
+
+const speedMap = {
+  slow: '60s',
+  normal: '40s',
+  fast: '25s',
+};
+const duration = speedMap[speed];
+const animDirection = direction === 'right' ? 'reverse' : 'normal';
+---
+
+<div class="logo-banner-wrapper">
+  <div
+    class="logo-banner-track"
+    style={`--banner-duration: ${duration}; --banner-direction: ${animDirection};`}
+  >
+    {/* Render items twice for seamless loop */}
+    {[0, 1].map(() => (
+      <div class="logo-banner-set" aria-hidden="true">
+        {items.map((item) => (
+          <div class="logo-banner-item">
+            {item.logo ? (
+              <img
+                src={item.logo}
+                alt={item.name}
+                class="logo-banner-img"
+                loading="lazy"
+              />
+            ) : (
+              <span class="logo-banner-text">{item.name}</span>
+            )}
+          </div>
+        ))}
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .logo-banner-wrapper {
+    width: 100%;
+    overflow: hidden;
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 8%,
+      black 92%,
+      transparent
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 8%,
+      black 92%,
+      transparent
+    );
+    padding: 1.5rem 0;
+  }
+
+  .logo-banner-track {
+    display: flex;
+    width: max-content;
+    animation: banner-scroll var(--banner-duration) linear infinite;
+    animation-direction: var(--banner-direction);
+  }
+
+  .logo-banner-track:hover {
+    animation-play-state: paused;
+  }
+
+  .logo-banner-set {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    padding-right: 3rem;
+  }
+
+  .logo-banner-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    opacity: 0.4;
+    transition: opacity 0.3s ease, filter 0.3s ease;
+    filter: grayscale(100%);
+  }
+
+  .logo-banner-item:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+  }
+
+  .logo-banner-img {
+    height: 28px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .logo-banner-text {
+    font-family: 'Satoshi', 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: #050505;
+  }
+
+  @keyframes banner-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+</style>

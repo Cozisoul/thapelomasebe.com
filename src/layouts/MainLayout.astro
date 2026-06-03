@@ -1,32 +1,63 @@
 ---
-import '../styles/global.css';
-import Cursor from '../components/Cursor.jsx';
+import "../styles/global.css";
+import Cursor from "../components/Cursor.jsx";
 const { title } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- SEO -->
     <title>{title} | THAPELO MASEBE</title>
+    <meta
+      name="description"
+      content="Thapelo Masebe — Data Scientist & Creative Technologist. Portfolio of work spanning AI, data science, and visual art."
+    />
+    <link rel="canonical" href={Astro.url.href} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={`${title} | THAPELO MASEBE`} />
+    <meta
+      property="og:description"
+      content="Data Scientist & Creative Technologist operating at the intersection of data, memory, and emerging African identity."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url.href} />
   </head>
   <body class="antialiased bg-cosmic-latte text-system-black">
-    
-    <!-- NOISE OVERLAY (Texture) -->
-    <div class="fixed inset-0 pointer-events-none opacity-[0.03] z-50 mix-blend-overlay" 
-         style="background-image: url('/noise.png');">
-    </div>
+    <!-- NOISE OVERLAY (Texture via SVG filter — no external file needed) -->
+    <svg class="fixed inset-0 w-full h-full pointer-events-none z-50 mix-blend-overlay opacity-[0.04]" xmlns="http://www.w3.org/2000/svg">
+      <filter id="noise">
+        <feTurbulence type="fractalNoise" baseFrequency="0.80" numOctaves="4" stitchTiles="stitch"/>
+      </filter>
+      <rect width="100%" height="100%" filter="url(#noise)"/>
+    </svg>
 
     <!-- CUSTOM CURSOR -->
     <Cursor client:load />
 
     <!-- NAVIGATION (Fixed) -->
-    <nav class="fixed top-0 left-0 w-full p-6 flex justify-between z-40 mix-blend-difference text-cosmic-latte">
-      <a href="/" class="font-sans font-medium tracking-tight hover:italic transition-all">THAPELO MADIBA MASEBE</a>
+    <nav
+      class="fixed top-0 left-0 w-full p-6 flex justify-between z-40 mix-blend-difference text-cosmic-latte"
+    >
+      <a
+        href="/"
+        class="font-sans font-medium tracking-tight hover:italic transition-all"
+        >THAPELO MADIBA MASEBE</a
+      >
       <div class="font-mono text-xs flex gap-4">
         <a href="/">[INDEX]</a>
+        <a href="/art">[ART]</a>
         <a href="/about">[INFO]</a>
       </div>
     </nav>
@@ -38,22 +69,22 @@ const { title } = Astro.props;
 
     <!-- SMOOTH SCROLL SCRIPT -->
     <script>
-      import Lenis from '@studio-freight/lenis'
+      import Lenis from "@studio-freight/lenis";
 
       const lenis = new Lenis({
         duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        direction: 'vertical',
-        gestureDirection: 'vertical',
-        smooth: true,
-      })
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: "vertical",
+        gestureOrientation: "vertical",
+        smoothWheel: true,
+      });
 
-      function raf(time) {
-        lenis.raf(time)
-        requestAnimationFrame(raf)
+      function raf(time: number) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
       }
 
-      requestAnimationFrame(raf)
+      requestAnimationFrame(raf);
     </script>
   </body>
 </html>

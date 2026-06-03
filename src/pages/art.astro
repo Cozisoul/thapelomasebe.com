@@ -1,0 +1,19 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import ArtCanvas from '../components/ArtCanvas.jsx';
+import projects from '../data/art_projects.json';
+---
+
+<MainLayout title="Art Portfolio">
+  {/* Header Section */}
+  <div class="fixed top-0 left-0 w-full p-6 pt-24 md:pt-20 pointer-events-none z-30 mix-blend-difference text-cosmic-latte flex justify-between items-end md:items-start h-32 md:h-auto">
+    <div class="hidden md:block"></div> {/* Spacer for fixed nav */}
+    <div class="font-mono text-xs uppercase tracking-widest text-right max-w-xs opacity-70">
+      00.07 // Transdisciplinary Art<br/>
+      Select works spanning painting, photography, and installation.
+    </div>
+  </div>
+
+  {/* Interactive Canvas */}
+  <ArtCanvas client:load projects={projects} />
+</MainLayout>

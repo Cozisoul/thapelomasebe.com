@@ -79,7 +79,7 @@ const { project } = Astro.props;
              {asset.type === 'video' ? (
                 <video src={asset.url} autoplay loop muted playsinline class="w-full h-auto"></video>
              ) : (
-                <img src={asset.url} class="w-full h-auto object-cover" />
+                <img src={asset.url} class="w-full h-auto object-cover" alt={asset.caption || project.title} />
              )}
              <div class="p-4 font-mono text-[9px] uppercase tracking-widest opacity-50 border-b border-white/20">
                 FIG. { (i + 2).toString().padStart(2, '0') } — {asset.caption || 'DETAIL'}

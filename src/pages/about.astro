@@ -1,5 +1,66 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import LogoBanner from '../components/LogoBanner.astro';
+
+// Tools & Technologies
+const toolLogos = [
+  { name: 'Python', logo: 'https://cdn.simpleicons.org/python/050505' },
+  { name: 'Pandas', logo: 'https://cdn.simpleicons.org/pandas/050505' },
+  { name: 'NumPy', logo: 'https://cdn.simpleicons.org/numpy/050505' },
+  { name: 'TensorFlow', logo: 'https://cdn.simpleicons.org/tensorflow/050505' },
+  { name: 'PyTorch', logo: 'https://cdn.simpleicons.org/pytorch/050505' },
+  { name: 'PostgreSQL', logo: 'https://cdn.simpleicons.org/postgresql/050505' },
+  { name: 'Docker', logo: 'https://cdn.simpleicons.org/docker/050505' },
+  { name: 'Git', logo: 'https://cdn.simpleicons.org/git/050505' },
+  { name: 'React', logo: 'https://cdn.simpleicons.org/react/050505' },
+  { name: 'Astro', logo: 'https://cdn.simpleicons.org/astro/050505' },
+  { name: 'Linux', logo: 'https://cdn.simpleicons.org/linux/050505' },
+  { name: 'Tableau', logo: 'https://cdn.simpleicons.org/tableau/050505' },
+  { name: 'Power BI', logo: 'https://cdn.simpleicons.org/powerbi/050505' },
+  { name: 'Ollama', logo: 'https://cdn.simpleicons.org/ollama/050505' },
+  { name: 'Hugging Face', logo: 'https://cdn.simpleicons.org/huggingface/050505' },
+  { name: 'LangChain', logo: 'https://cdn.simpleicons.org/langchain/050505' },
+  { name: 'GraphRAG' },
+  { name: 'DaVinci Resolve', logo: 'https://cdn.simpleicons.org/davinciresolve/050505' },
+  { name: 'Final Cut Pro' },
+  { name: 'Adobe Suite' },
+  { name: 'Canva' },
+  { name: 'ChatGPT' },
+  { name: 'n8n', logo: 'https://cdn.simpleicons.org/n8n/050505' },
+  { name: 'Supercollider' },
+  { name: 'Hootsuite', logo: 'https://cdn.simpleicons.org/hootsuite/050505' },
+  { name: 'Sprout Social' },
+];
+
+// Clients & Companies
+const clientLogos = [
+  { name: 'Google', logo: 'https://cdn.simpleicons.org/google/050505' },
+  { name: 'Mastercard', logo: 'https://cdn.simpleicons.org/mastercard/050505' },
+  { name: 'Ogilvy', logo: 'https://logo.clearbit.com/ogilvy.com' },
+  { name: 'Vans', logo: 'https://logo.clearbit.com/vans.com' },
+  { name: 'Old Mutual' },
+  { name: 'Cotton On' },
+  { name: 'Viktor & Rolf' },
+  { name: 'Brand South Africa' },
+  { name: 'Global South Africans' },
+  { name: 'Play Your Part' },
+  { name: 'Block Black' },
+  { name: 'Match Padel SA' },
+  { name: 'The Longevity Centre' },
+  { name: 'Leebex' },
+  { name: 'Thickleeyonce' },
+  { name: 'Deviare' },
+];
+
+// Certification Providers
+const certLogos = [
+  { name: 'IBM', logo: 'https://cdn.simpleicons.org/ibm/050505' },
+  { name: 'AWS', logo: 'https://cdn.simpleicons.org/amazonaws/050505' },
+  { name: 'Google', logo: 'https://cdn.simpleicons.org/google/050505' },
+  { name: 'OpenCV', logo: 'https://cdn.simpleicons.org/opencv/050505' },
+  { name: 'Microsoft', logo: 'https://cdn.simpleicons.org/microsoft/050505' },
+  { name: 'Deviare' },
+];
 ---
 
 <MainLayout title="Practice">
@@ -29,7 +90,7 @@ import MainLayout from '../layouts/MainLayout.astro';
       </p>
 
       <p>
-        Currently, he is formalizing his technical stack through a Data Science Learnership while architecting <strong>Studio Masebe</strong>, a decentralized cultural institution for the 21st century.
+        He recently formalized his technical stack through a Data Science Learnership while architecting <strong>Studio Masebe</strong>, a decentralized cultural institution for the 21st century.
       </p>
 
     </article>
@@ -43,8 +104,8 @@ import MainLayout from '../layouts/MainLayout.astro';
       <div class="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-4">
         <!-- Column 1 -->
         <div class="flex flex-col gap-2">
-          <span class="font-mono text-[10px] text-accent-blue">LOGIC</span>
-          <ul class="font-sans text-sm space-y-1">
+          <span class="font-mono text-xs text-accent-blue">LOGIC</span>
+          <ul class="font-sans text-lg space-y-1">
             <li>Python (Pandas/NumPy)</li>
             <li>SQL / Database Arch</li>
             <li>Machine Learning</li>
@@ -54,8 +115,8 @@ import MainLayout from '../layouts/MainLayout.astro';
 
         <!-- Column 2 -->
         <div class="flex flex-col gap-2">
-          <span class="font-mono text-[10px] text-accent-red">SENSATION</span>
-          <ul class="font-sans text-sm space-y-1">
+          <span class="font-mono text-xs text-accent-red">SENSATION</span>
+          <ul class="font-sans text-lg space-y-1">
             <li>Art Direction</li>
             <li>Photography</li>
             <li>Generative Art</li>
@@ -65,8 +126,8 @@ import MainLayout from '../layouts/MainLayout.astro';
 
         <!-- Column 3 -->
         <div class="flex flex-col gap-2">
-          <span class="font-mono text-[10px] text-system-black/50">SYSTEMS</span>
-          <ul class="font-sans text-sm space-y-1">
+          <span class="font-mono text-xs text-system-black/50">SYSTEMS</span>
+          <ul class="font-sans text-lg space-y-1">
             <li>Linux / Bash</li>
             <li>Git / Version Control</li>
             <li>Docker</li>
@@ -76,13 +137,205 @@ import MainLayout from '../layouts/MainLayout.astro';
 
          <!-- Column 4 -->
          <div class="flex flex-col gap-2">
-          <span class="font-mono text-[10px] text-system-black/50">OFFICE</span>
-          <ul class="font-sans text-sm space-y-1">
+          <span class="font-mono text-xs text-system-black/50">OFFICE</span>
+          <ul class="font-sans text-lg space-y-1">
             <li>Project Management</li>
             <li>Creative Strategy</li>
             <li>Technical Writing</li>
             <li>Brand Architecture</li>
           </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOLS LOGO BANNER -->
+    <div class="w-full max-w-4xl mt-12">
+      <LogoBanner items={toolLogos} speed="normal" direction="left" />
+    </div>
+
+    <!-- 4. THE EXPERIENCE TIMELINE -->
+    <div class="w-full max-w-2xl mt-32">
+      <div class="font-mono text-xs uppercase tracking-widest opacity-50 mb-8 border-b border-system-black pb-2">
+        00.03 // Experience
+      </div>
+      
+      <div class="space-y-16">
+        <!-- Ogilvy South Africa -->
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-col md:flex-row md:justify-between items-baseline gap-1">
+            <h3 class="font-sans font-bold text-xl uppercase tracking-tight">Data Scientist / Junior Data Analyst</h3>
+            <span class="font-mono text-sm text-system-black/50">April 2025 – Present</span>
+          </div>
+          <div class="font-mono text-xs uppercase tracking-wider text-accent-blue">
+            Ogilvy South Africa | City of Johannesburg
+          </div>
+          <div class="font-mono text-xs text-system-black/60 border-l-2 border-accent-blue pl-3 py-1">
+            Key Client Accounts: Google, Mastercard, OM Bank, Brand South Africa, Global South Africans, Play Your Part.
+          </div>
+          <ul class="font-sans text-lg space-y-2 list-disc pl-4 leading-relaxed opacity-90">
+            <li>Design and deploy sentiment analysis pipelines utilizing Large Language Models (LLMs) to extract actionable brand insights from vast amounts of unstructured consumer data.</li>
+            <li>Develop interactive Looker dashboards and compile comprehensive report decks to track campaign performance, visualizing complex datasets for non-technical stakeholders and executive teams.</li>
+            <li>Bridge the gap between data and creative strategy, utilizing SQL and Python to extract and clean high-volume data to inform high-level business decisions.</li>
+          </ul>
+        </div>
+
+        <!-- Deviare -->
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-col md:flex-row md:justify-between items-baseline gap-1">
+            <h3 class="font-sans font-bold text-xl uppercase tracking-tight">Data Science Practitioner</h3>
+            <span class="font-mono text-sm text-system-black/50">April 2025 – April 2026</span>
+          </div>
+          <div class="font-mono text-xs uppercase tracking-wider text-accent-blue">
+            Deviare | Johannesburg
+          </div>
+          <ul class="font-sans text-lg space-y-2 list-disc pl-4 leading-relaxed opacity-90">
+            <li>Completed a rigorous, structured Data Science Learnership, executing end-to-end data lifecycles.</li>
+            <li>Built and deployed machine learning projects encompassing multiple algorithms (Linear/Logistic Regression, K-Means Clustering, Decision Trees, Random Forests).</li>
+            <li>Mastered data visualization and business intelligence reporting using Tableau and Power BI.</li>
+            <li>Compiled a comprehensive open-source portfolio detailing data extraction, wrangling, and algorithmic problem-solving.</li>
+          </ul>
+        </div>
+
+        <!-- Freelance Visual Director -->
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-col md:flex-row md:justify-between items-baseline gap-1">
+            <h3 class="font-sans font-bold text-xl uppercase tracking-tight">Freelance Photographer, Videographer & Creative Director</h3>
+            <span class="font-mono text-sm text-system-black/50">Jan 2017 – Present</span>
+          </div>
+          <div class="font-mono text-xs uppercase tracking-wider text-accent-blue">
+            Self-Employed | Johannesburg
+          </div>
+          <div class="font-mono text-xs text-system-black/60 border-l-2 border-accent-blue pl-3 py-1">
+            Clients: Vans, Cotton On, Viktor & Rolf, Match Padel SA, The Longevity Centre, Block Black, Thickleeyonce, Leebex.
+          </div>
+          <ul class="font-sans text-lg space-y-2 list-disc pl-4 leading-relaxed opacity-90">
+            <li>Shot, scripted, edited, and managed full production pipelines for commercial campaigns, social media, and documentary content.</li>
+            <li>Collaborated with marketing teams and influencers to develop campaign concepts and execution plans, ensuring tight deadlines and high client satisfaction.</li>
+            <li>Utilized advanced editing software (Da Vinci Resolve, Adobe Suite, Final Cut Pro) for high-quality visual storytelling and algorithmic content optimization.</li>
+          </ul>
+        </div>
+
+        <!-- UCT Photosoc / Varsity Newspaper -->
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-col md:flex-row md:justify-between items-baseline gap-1">
+            <h3 class="font-sans font-bold text-xl uppercase tracking-tight">Photography Studio Manager & Image Editor</h3>
+            <span class="font-mono text-sm text-system-black/50">Jan 2018 – Dec 2019</span>
+          </div>
+          <div class="font-mono text-xs uppercase tracking-wider text-accent-blue">
+            UCT Photosoc & Varsity Newspaper | Cape Town
+          </div>
+          <ul class="font-sans text-lg space-y-2 list-disc pl-4 leading-relaxed opacity-90">
+            <li>Managed the university photography studio, oversaw equipment, and conducted photography workshops.</li>
+            <li>Edited, selected, and retouched photos for publication in the Varsity Newspaper, managing digital archives and ensuring adherence to copyright laws.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLIENT LOGO BANNER -->
+    <div class="w-full max-w-4xl mt-12">
+      <LogoBanner items={clientLogos} speed="slow" direction="right" />
+    </div>
+
+    <!-- 5. THE CERTIFICATIONS -->
+    <div class="w-full max-w-2xl mt-32">
+      <div class="font-mono text-xs uppercase tracking-widest opacity-50 mb-8 border-b border-system-black pb-2">
+        00.04 // Certifications
+      </div>
+      
+      <ul class="font-sans text-lg space-y-4">
+        <li class="flex justify-between items-baseline border-b border-dashed border-system-black/20 pb-2">
+          <span class="font-medium">Data Science Practitioner Certificate | Deviare</span>
+          <span class="font-mono text-sm text-system-black/60">April 2026</span>
+        </li>
+        <li class="flex justify-between items-baseline border-b border-dashed border-system-black/20 pb-2">
+          <span class="font-medium">Introducing Generative AI | AWS</span>
+          <span class="font-mono text-sm text-system-black/60">Nov 2025</span>
+        </li>
+        <li class="flex justify-between items-baseline border-b border-dashed border-system-black/20 pb-2">
+          <span class="font-medium">FREE OpenCV Bootcamp | OpenCV University</span>
+          <span class="font-mono text-sm text-system-black/60">Oct 2025</span>
+        </li>
+        <li class="flex justify-between items-baseline border-b border-dashed border-system-black/20 pb-2">
+          <span class="font-medium">Building Generative AI-Powered Applications with Python | IBM</span>
+          <span class="font-mono text-sm text-system-black/60">Sep 2025</span>
+        </li>
+        <li class="flex justify-between items-baseline border-b border-dashed border-system-black/20 pb-2">
+          <span class="font-medium">Generative AI and LLMs: Architecture and Data Preparation | IBM</span>
+          <span class="font-mono text-sm text-system-black/60">Sep 2025</span>
+        </li>
+        <li class="flex justify-between items-baseline border-b border-dashed border-system-black/20 pb-2">
+          <span class="font-medium">Google Analytics Certification</span>
+          <span class="font-mono text-sm text-system-black/60">Aug 2025</span>
+        </li>
+        <li class="flex justify-between items-baseline border-b border-dashed border-system-black/20 pb-2">
+          <span class="font-medium">Deep Learning using TensorFlow | IBM</span>
+          <span class="font-mono text-sm text-system-black/60">Jul 2025</span>
+        </li>
+        <li class="flex justify-between items-baseline border-b border-dashed border-system-black/20 pb-2">
+          <span class="font-medium">AWS Educate Machine Learning Foundations</span>
+          <span class="font-mono text-sm text-system-black/60">Jul 2025</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- CERTIFICATION PROVIDER LOGO BANNER -->
+    <div class="w-full max-w-4xl mt-12">
+      <LogoBanner items={certLogos} speed="normal" direction="left" />
+    </div>
+
+    <!-- 6. SYSTEMS & REPOSITORIES -->
+    <div class="w-full max-w-2xl mt-32">
+      <div class="font-mono text-xs uppercase tracking-widest opacity-50 mb-8 border-b border-system-black pb-2">
+        00.05 // Systems & Repositories
+      </div>
+      
+      <ul class="font-sans text-lg space-y-4">
+        <li class="flex flex-col md:flex-row gap-2 border-b border-system-black/10 pb-3">
+          <a href="#" class="font-mono text-xs text-accent-blue hover:italic shrink-0">[ Project 0723 ]</a>
+          <span class="opacity-90">Architecting a 100% local, privacy-first AI agent ecosystem using LangGraph, Qdrant, and Ollama.</span>
+        </li>
+        <li class="flex flex-col md:flex-row gap-2 border-b border-system-black/10 pb-3">
+          <a href="https://github.com/Cozisoul/CalibratingTheCosmos-UHF" target="_blank" rel="noopener noreferrer" class="font-mono text-xs text-accent-blue hover:italic shrink-0">[ CalibratingTheCosmos-UHF ]</a>
+          <span class="opacity-90">Python-based radio astronomy data pipeline for MeerKAT telescope observations. <span class="font-mono text-[10px] text-system-black/50 ml-1">(GitHub)</span></span>
+        </li>
+        <li class="flex flex-col md:flex-row gap-2 border-b border-system-black/10 pb-3">
+          <a href="https://huggingface.co/coziSoul" target="_blank" rel="noopener noreferrer" class="font-mono text-xs text-accent-blue hover:italic shrink-0">[ Flask Chatbot Blenderbot ]</a>
+          <span class="opacity-90">Full-stack conversational AI application utilizing Flask and Transformer models. <span class="font-mono text-[10px] text-system-black/50 ml-1">(Hugging Face)</span></span>
+        </li>
+        <li class="flex flex-col md:flex-row gap-2 border-b border-system-black/10 pb-3">
+          <a href="https://huggingface.co/coziSoul" target="_blank" rel="noopener noreferrer" class="font-mono text-xs text-accent-blue hover:italic shrink-0">[ AI Vision Toolkit ]</a>
+          <span class="opacity-90">Image captioning and classification application utilizing Salesforce BLIP models. <span class="font-mono text-[10px] text-system-black/50 ml-1">(Hugging Face)</span></span>
+        </li>
+        <li class="flex flex-col md:flex-row gap-2 border-b border-system-black/10 pb-3">
+          <a href="https://github.com/Cozisoul/DataSciencePortfolio" target="_blank" rel="noopener noreferrer" class="font-mono text-xs text-accent-blue hover:italic shrink-0">[ DataSciencePortfolio ]</a>
+          <span class="opacity-90">Open-source archive detailing EDA, wrangling, and ML algorithm implementations. <span class="font-mono text-[10px] text-system-black/50 ml-1">(GitHub)</span></span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 7. NETWORK -->
+    <div class="w-full max-w-2xl mt-32 mb-32">
+      <div class="font-mono text-xs uppercase tracking-widest opacity-50 mb-8 border-b border-system-black pb-2">
+        00.06 // Network
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs uppercase tracking-wider">
+        <div class="flex gap-4">
+          <span class="opacity-50 w-24">MAILTO:</span>
+          <a href="mailto:thapelomasebe@hotmail.com" class="hover:text-accent-blue transition-colors">thapelomasebe@hotmail.com</a>
+        </div>
+        <div class="flex gap-4">
+          <span class="opacity-50 w-24">LINKEDIN:</span>
+          <a href="https://linkedin.com/in/thapelo-masebe-733a67143" target="_blank" rel="noopener noreferrer" class="hover:text-accent-blue transition-colors">/in/thapelo-masebe-733a67143</a>
+        </div>
+        <div class="flex gap-4">
+          <span class="opacity-50 w-24">GITHUB:</span>
+          <a href="https://github.com/Cozisoul" target="_blank" rel="noopener noreferrer" class="hover:text-accent-blue transition-colors">/Cozisoul</a>
+        </div>
+        <div class="flex gap-4">
+          <span class="opacity-50 w-24">HUGGING FACE:</span>
+          <a href="https://huggingface.co/coziSoul" target="_blank" rel="noopener noreferrer" class="hover:text-accent-blue transition-colors">/coziSoul</a>
         </div>
       </div>
     </div>

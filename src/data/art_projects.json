@@ -1,0 +1,589 @@
+[
+  {
+    "id": "proj-001",
+    "title": "Reading Genesis Art Series",
+    "tags": [
+      "aes72studio",
+      "Painting",
+      "Transdisciplinary Art"
+    ],
+    "year": 2020,
+    "description": "A collection of my earliest abstract paintings in A6–A2 format, exploring memory, abstraction, and brush studies.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/reading-genesis-art-series-3.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/reading-genesis-art-series-3.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/reading-genesis-art-series-4.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/reading-genesis-art-series-5.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/reading-genesis-art-series-6.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/reading-genesis-art-series-7.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/reading-genesis-art-series-8.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/reading-genesis-art-series-9.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 120, "y": 140, "width": "350px", "rotation": -3 }
+  },
+  {
+    "id": "proj-003",
+    "title": "come in...",
+    "tags": [
+      "aes72studio",
+      "Painting"
+    ],
+    "year": 2021,
+    "description": "Acrylic painting on A2 paper reflecting open invitations and layered emotional states.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/come-in-1.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/come-in-1.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 780, "y": 80, "width": "400px", "rotation": 1 }
+  },
+  {
+    "id": "proj-004",
+    "title": "Violence and Chaos...",
+    "tags": [
+      "aes72studio",
+      "Painting"
+    ],
+    "year": 2020,
+    "description": "An acrylic painting on A4 paper confronting raw emotion, inner turbulence and societal unrest.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/violence-and-chaos-2.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/violence-and-chaos-2.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 200, "y": 400, "width": "350px", "rotation": 4 }
+  },
+  {
+    "id": "proj-005",
+    "title": "fruit…",
+    "tags": [
+      "aes72studio",
+      "Painting"
+    ],
+    "year": 2021,
+    "description": "Acrylic on A3 paper — a simple yet layered study on ripeness, growth, and intimacy.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/fruit-1.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/fruit-1.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 600, "y": 400, "width": "300px", "rotation": -2 }
+  },
+  {
+    "id": "proj-006",
+    "title": "Faces Sometimes…",
+    "tags": [
+      "aes72studio",
+      "Painting"
+    ],
+    "year": 2020,
+    "description": "Acrylic on craft paper — abstract faces reflecting fragmented identity and fleeting impressions.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/faces-sometimes-2.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/faces-sometimes-2.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 100, "y": 650, "width": "280px", "rotation": 3 }
+  },
+  {
+    "id": "proj-007",
+    "title": "Blobby-2",
+    "tags": [
+      "aes72studio",
+      "Painting"
+    ],
+    "year": 2020,
+    "description": "Acrylic on A6 paper — a playful, amorphous abstract exploring softness and impermanence.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/blobby-2.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/blobby-2.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 900, "y": 250, "width": "320px", "rotation": 5 }
+  },
+  {
+    "id": "proj-008",
+    "title": "Untitled (Rothko Study)",
+    "tags": [
+      "aes72studio",
+      "Painting",
+      "Study"
+    ],
+    "year": 2020,
+    "description": "A Rothko-inspired craft paper study on tonal depth and color field meditation.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/untitled-rothko-study-2.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/untitled-rothko-study-2.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 750, "y": 600, "width": "350px", "rotation": -6 }
+  },
+  {
+    "id": "proj-009",
+    "title": "Fluid Energy",
+    "tags": [
+      "thapography",
+      "Photography",
+      "Photo Essay"
+    ],
+    "year": 2018,
+    "description": "A film photo essay exploring energy flow between people and place, shot on film by Lebo Kekana and Thapelo Masebe.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/fluid-energy-1.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/fluid-energy-1.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/fluid-energy-2.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/fluid-energy-3.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/fluid-energy-4.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/fluid-energy-5.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/fluid-energy-6.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/fluid-energy-7.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/fluid-energy-8.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/fluid-energy-9.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/fluid-energy-10.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/fluid-energy-11.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/fluid-energy-12.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/fluid-energy-13.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/fluid-energy-14.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/fluid-energy-15.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 400, "y": 700, "width": "480px", "rotation": 1 }
+  },
+  {
+    "id": "proj-010",
+    "title": "Remnants of Rhodes",
+    "tags": [
+      "thapography",
+      "Photography",
+      "Photo Essay"
+    ],
+    "year": 2019,
+    "description": "A haunting film series shot at Groote Schuur Zoo examining colonial remnants in abandoned sites.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/remnants-of-rhodes-1.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/remnants-of-rhodes-1.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/remnants-of-rhodes-2.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/remnants-of-rhodes-3.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/remnants-of-rhodes-4.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/remnants-of-rhodes-9.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 200, "y": 800, "width": "500px", "rotation": 2 }
+  },
+  {
+    "id": "proj-011",
+    "title": "Lebone",
+    "tags": [
+      "thapography",
+      "Photography",
+      "Photo Essay"
+    ],
+    "year": 2019,
+    "description": "A contortion study exploring the human body's strength and grace through intimate film photography.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/lebone-1.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/lebone-1.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/lebone-2.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/lebone-3.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/lebone-4.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 700, "y": 800, "width": "450px", "rotation": -2 }
+  },
+  {
+    "id": "proj-012",
+    "title": "Us as thee Culture",
+    "tags": [
+      "thapography",
+      "Photography",
+      "Photo Essay"
+    ],
+    "year": 2019,
+    "description": "A nostalgic yet forward-looking film essay on the intersection of South African culture, subcultures, and modern creativity.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/us-as-thee-culture-1.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/us-as-thee-culture-1.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/us-as-thee-culture-2.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/us-as-thee-culture-3.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/us-as-thee-culture-4.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/us-as-thee-culture-5.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/us-as-thee-culture-6.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/us-as-thee-culture-7.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/us-as-thee-culture-8.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/us-as-thee-culture-9.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/us-as-thee-culture-10.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/us-as-thee-culture-11.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/us-as-thee-culture-12.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/us-as-thee-culture-13.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/us-as-thee-culture-14.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/us-as-thee-culture-15.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/us-as-thee-culture-16.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/us-as-thee-culture-17.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/us-as-thee-culture-18.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 850, "y": 550, "width": "400px", "rotation": 3 }
+  },
+  {
+    "id": "proj-013",
+    "title": "Life as it Happens",
+    "tags": [
+      "thapography",
+      "Photography"
+    ],
+    "year": 2017,
+    "description": "A film portrait series capturing everyday moments as living proof of fleeting time.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/life-as-it-happens-2.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/life-as-it-happens-2.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/life-as-it-happens-3.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/life-as-it-happens-4.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/life-as-it-happens-5.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/life-as-it-happens-6.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/life-as-it-happens-7.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/life-as-it-happens-8.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/life-as-it-happens-9.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/life-as-it-happens-10.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/life-as-it-happens-11.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/life-as-it-happens-12.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/life-as-it-happens-13.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/life-as-it-happens-14.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/life-as-it-happens-15.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/life-as-it-happens-16.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/life-as-it-happens-17.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/life-as-it-happens-18.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/life-as-it-happens-19.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/life-as-it-happens-20.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/life-as-it-happens-21.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 500, "y": 950, "width": "420px", "rotation": 0 }
+  },
+  {
+    "id": "proj-014",
+    "title": "Still",
+    "tags": [
+      "thapography",
+      "Photography"
+    ],
+    "year": 2018,
+    "description": "Double exposure self-portraits shot over five days, exploring internal landscapes and identity layers.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/still-2.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/still-2.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/still-3.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/still-4.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/still-5.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/still-6.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/still-7.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/still-8.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/still-9.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/still-10.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/still-11.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 1000, "y": 750, "width": "450px", "rotation": -1 }
+  },
+  {
+    "id": "proj-015",
+    "title": "Untitled 01 (City Skyline Installation)",
+    "tags": [
+      "aes72studio",
+      "Installation",
+      "Found Objects"
+    ],
+    "year": 2021,
+    "description": "An installation using wash tubs, blankets, and tiles to depict a bustling cityscape — a meditation on urban living.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/untitled-01-city-skyline-installation-1.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/untitled-01-city-skyline-installation-1.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/untitled-01-city-skyline-installation-2.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/untitled-01-city-skyline-installation-3.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/untitled-01-city-skyline-installation-4.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 1200, "y": 600, "width": "500px", "rotation": 2 }
+  },
+  {
+    "id": "proj-017",
+    "title": "Areyeng di Zweiling",
+    "tags": [
+      "0723",
+      "Videography",
+      "Video Art"
+    ],
+    "year": 2024,
+    "description": "A visual journey from home to a vibrant car spinning competition — reflecting freedom, resilience, and township culture post-pandemic.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/areyeng-di-zweiling-1.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/areyeng-di-zweiling-1.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/areyeng-di-zweiling-2.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/areyeng-di-zweiling-3.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/areyeng-di-zweiling-4.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/areyeng-di-zweiling-5.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/areyeng-di-zweiling-6.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/areyeng-di-zweiling-7.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/areyeng-di-zweiling-8.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/areyeng-di-zweiling-9.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/areyeng-di-zweiling-10.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/areyeng-di-zweiling-11.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/areyeng-di-zweiling-12.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 900, "y": 1000, "width": "600px", "rotation": 1 }
+  },
+  {
+    "id": "proj-018",
+    "title": "Lebus",
+    "tags": [
+      "aes72studio",
+      "Sculpture"
+    ],
+    "year": 2024,
+    "description": "A sculpture recalling your father's car that carried him to work for over 20 years, blending memory and childhood toy cars.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/lebus-1.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/lebus-1.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/lebus-2.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/lebus-3.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/lebus-4.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/lebus-5.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 650, "y": 1100, "width": "350px", "rotation": 0 }
+  },
+  {
+    "id": "proj-020",
+    "title": "ME",
+    "tags": [
+      "thapography",
+      "Photography",
+      "Photo Essay"
+    ],
+    "year": 2018,
+    "description": "With help of a friend I shot a series of double exposures. For 5 days the self-portraits are the manifestations of my inner self.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/me-1.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/me-1.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/me-2.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/me-3.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/me-4.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/me-5.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/me-6.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/me-7.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/me-8.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/me-9.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/me-10.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 50, "y": 280, "width": "350px", "rotation": -4 }
+  },
+  {
+    "id": "proj-021",
+    "title": "Ama Qamata In Rich Mnisi",
+    "tags": [
+      "thapography",
+      "Editorial",
+      "Photography"
+    ],
+    "year": 2024,
+    "description": "In collaboration with Thickleeyonce, styling by Thebe Magugu & Rich Mnisi.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/aama-qamata-in-rich-mnisi-1.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/aama-qamata-in-rich-mnisi-1.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/aama-qamata-in-rich-mnisi-2.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/aama-qamata-in-rich-mnisi-3.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/aama-qamata-in-rich-mnisi-4.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/aama-qamata-in-rich-mnisi-5.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/aama-qamata-in-rich-mnisi-6.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 480, "y": 180, "width": "420px", "rotation": 2 }
+  },
+  {
+    "id": "proj-022",
+    "title": "Ama Qamata",
+    "tags": [
+      "thapography",
+      "Photography"
+    ],
+    "year": 2025,
+    "description": "Fight Like a Girl film screening event photography.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/amaqamata-1.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/amaqamata-1.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/amaqamata-2.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/amaqamata-3.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/amaqamata-4.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/amaqamata-5.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/amaqamata-6.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/amaqamata-7.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/amaqamata-8.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/amaqamata-9.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/amaqamata-10.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/amaqamata-11.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/amaqamata-12.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/amaqamata-13.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 1100, "y": 350, "width": "380px", "rotation": -3 }
+  },
+  {
+    "id": "proj-023",
+    "title": "Enhle Mbali",
+    "tags": [
+      "thapography",
+      "Photography",
+      "Editorial"
+    ],
+    "year": 2023,
+    "description": "Media kit images for Enhle Mbali.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/enhle-mbali-1.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/enhle-mbali-1.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/enhle-mbali-2.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/enhle-mbali-3.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/enhle-mbali-4.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 300, "y": 520, "width": "360px", "rotation": 5 }
+  },
+  {
+    "id": "proj-024",
+    "title": "Factorie Campaign",
+    "tags": [
+      "thapography",
+      "Editorial",
+      "Photography"
+    ],
+    "year": 2023,
+    "description": "Campaign shoot for Factorie with Phozisa and Thabisa.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/factorie-campaign-1.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/factorie-campaign-1.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/factorie-campaign-2.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/factorie-campaign-3.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/factorie-campaign-4.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/factorie-campaign-5.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 1050, "y": 120, "width": "400px", "rotation": -1 }
+  },
+  {
+    "id": "proj-025",
+    "title": "Kay Leigh D Fischer",
+    "tags": [
+      "thapography",
+      "Photography",
+      "Editorial"
+    ],
+    "year": 2024,
+    "description": "For Kay-Leigh Fischer's Block Black art residency.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/kay-leigh-d-fischer-1.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/kay-leigh-d-fischer-1.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/kay-leigh-d-fischer-2.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/kay-leigh-d-fischer-3.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/kay-leigh-d-fischer-4.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/kay-leigh-d-fischer-5.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/kay-leigh-d-fischer-6.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 750, "y": 450, "width": "340px", "rotation": 3 }
+  },
+  {
+    "id": "proj-026",
+    "title": "Lia Butler",
+    "tags": [
+      "thapography",
+      "Photography",
+      "Editorial"
+    ],
+    "year": 2023,
+    "description": "Media kit images for Lia Butler.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/lia-butler-1.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/lia-butler-1.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/lia-butler-2.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/lia-butler-3.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/lia-butler-4.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/lia-butler-5.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/lia-butler-6.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/lia-butler-7.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 150, "y": 1050, "width": "380px", "rotation": -5 }
+  },
+  {
+    "id": "proj-027",
+    "title": "Makundai",
+    "tags": [
+      "thapography",
+      "Photography",
+      "Editorial"
+    ],
+    "year": 2024,
+    "description": "Makundai pre-season campaign shoot.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/makundai-1.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/makundai-1.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/makundai-2.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/makundai-3.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/makundai-4.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/makundai-5.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/makundai-6.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/makundai-7.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/makundai-8.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/makundai-9.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/makundai-10.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 580, "y": 1250, "width": "440px", "rotation": 2 }
+  },
+  {
+    "id": "proj-028",
+    "title": "Vans Editorial",
+    "tags": [
+      "thapography",
+      "Photography",
+      "Editorial"
+    ],
+    "year": 2024,
+    "description": "Editorial shoot for VANS and Sportscene.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/vans-editorial-1.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/vans-editorial-1.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/vans-editorial-2.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/vans-editorial-3.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/vans-editorial-4.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/vans-editorial-5.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/vans-editorial-6.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/vans-editorial-7.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/vans-editorial-8.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/vans-editorial-9.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/vans-editorial-10.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/vans-editorial-11.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 1000, "y": 900, "width": "460px", "rotation": -2 }
+  },
+  {
+    "id": "proj-029",
+    "title": "Ex Communicado - Jabba & Kgale",
+    "tags": [
+      "0723",
+      "Videography",
+      "Music Video"
+    ],
+    "year": 2023,
+    "description": "A music video for song Ex Communicado by Jabba and Kgale.",
+    "coverImageUrl": "/images/Thapelo Madiba Masebe Portfolio F/ex-communicado-jabba-kgale-1.jpg",
+    "media": [
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/ex-communicado-jabba-kgale-1.jpg" },
+      { "type": "image", "url": "/images/Thapelo Madiba Masebe Portfolio F/ex-communicado-jabba-kgale-2.jpg" }
+    ],
+    "projectUrl": "",
+    "chaosLayout": { "x": 350, "y": 1400, "width": "380px", "rotation": 4 }
+  }
+]

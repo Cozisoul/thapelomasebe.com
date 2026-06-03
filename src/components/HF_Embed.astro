@@ -1,0 +1,26 @@
+---
+export interface Props {
+  url: string;
+  title: string;
+}
+
+const { url, title } = Astro.props;
+---
+
+<div class="my-12 border border-system-black/20 bg-system-black/5 p-2">
+    <div class="flex justify-between items-center px-4 py-2 border-b border-system-black/20 font-mono text-xs opacity-50 uppercase tracking-widest mb-4">
+        <span>[ LIVE INFERENCE: {title} ]</span>
+        <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> ONLINE</span>
+    </div>
+    <!-- Embed HuggingFace Space -->
+    <iframe
+        src={url}
+        width="100%"
+        height="600"
+        sandbox="allow-scripts allow-same-origin allow-forms"
+        loading="lazy"
+        title={title}
+        style="border: none;"
+        class="w-full grayscale hover:grayscale-0 transition-all duration-700"
+    ></iframe>
+</div>

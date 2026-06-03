@@ -14,48 +14,69 @@ const { projects } = content;
       <span class="ml-[15vw] italic font-light text-accent-blue">& Poetic</span>
     </h1>
 
-    <!-- 2. THE TABLE HEADER (Systematic/Office) -->
-    <div class="grid grid-cols-12 border-b border-system-black pb-2 font-mono text-xs tracking-widest opacity-50 uppercase">
-      <div class="col-span-1">No.</div>
-      <div class="col-span-6 md:col-span-5">Project / Entity</div>
-      <div class="col-span-3 hidden md:block">Category</div>
-      <div class="col-span-2 hidden md:block text-right">Year</div>
-      <div class="col-span-5 md:col-span-1 text-right">Status</div>
-    </div>
+    <!-- THE PROJECT DIRECTORY (INDEX) -->
+    <section class="mt-20">
+        <h2 class="font-mono text-xs uppercase opacity-50 mb-8 tracking-widest border-b border-system-black/20 pb-2">00.00 // Master Directory</h2>
 
-    <!-- 3. THE PROJECT LIST -->
-    <div class="flex flex-col">
-      {projects.map((project, index) => (
-        <a href={`/work/${project.slug}`} class="group relative border-b border-system-black py-6 hover:bg-white/50 transition-colors duration-300 ease-luxury">
-          
-          <!-- The Row Data -->
-          <div class="grid grid-cols-12 items-baseline pointer-events-none">
-            <div class="col-span-1 font-mono text-sm">
-              {(index + 1).toString().padStart(2, '0')}
-            </div>
-            <div class="col-span-6 md:col-span-5 font-sans text-3xl font-medium tracking-tight group-hover:italic transition-all">
-              {project.title}
-            </div>
-            <div class="col-span-3 hidden md:block font-mono text-xs uppercase pt-2">
-              [{project.category}]
-            </div>
-            <div class="col-span-2 hidden md:block font-mono text-xs text-right pt-2">
-              {project.year}
-            </div>
-            <div class="col-span-5 md:col-span-1 text-right font-mono text-xs pt-2 text-accent-blue">
-              ↗ VIEW
-            </div>
-          </div>
+        <!-- Table Header -->
+        <div class="hidden md:grid grid-cols-12 gap-4 font-mono text-xs opacity-50 uppercase tracking-widest mb-4 px-4">
+            <div class="col-span-1">ID</div>
+            <div class="col-span-4">SYSTEM / REPOSITORY</div>
+            <div class="col-span-3">DOMAIN</div>
+            <div class="col-span-3">STACK</div>
+            <div class="col-span-1 text-right">STATUS</div>
+        </div>
 
-          <!-- The Floating Image (Reveals on Hover) -->
-          <!-- We use 'group-hover' to show it. We will use simple CSS for position now, JS for cursor tracking later. -->
-          <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30vw] h-[40vh] hidden group-hover:block pointer-events-none z-10 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-             <img src={project.tech_stack && project.tech_stack.length > 0 ? project.tech_stack[0] : ''} alt={project.title} class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
-          </div>
+        <!-- Table Body (The Projects) -->
+        <div class="flex flex-col border-t border-system-black/20">
+            
+            <!-- PROJECT 1: COSMOS -->
+            <a href="https://github.com/Cozisoul/CalibratingTheCosmos-UHF" target="_blank" rel="noopener noreferrer" class="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 border-b border-system-black/20 hover:bg-system-black hover:text-cosmic-latte transition-colors group cursor-crosshair">
+                <div class="col-span-1 font-mono text-xs opacity-50 group-hover:opacity-100">01</div>
+                <div class="col-span-4 font-bold uppercase">Calibrating The Cosmos</div>
+                <div class="col-span-3 text-sm opacity-80">Radio Astronomy Pipeline</div>
+                <div class="col-span-3 font-mono text-[10px] uppercase">Python, Data Eng</div>
+                <div class="col-span-1 text-right font-mono text-xs text-green-500">LIVE</div>
+            </a>
 
-        </a>
-      ))}
-    </div>
+            <!-- PROJECT 2: HUGGING FACE -->
+            <a href="https://huggingface.co/coziSoul" target="_blank" rel="noopener noreferrer" class="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 border-b border-system-black/20 hover:bg-system-black hover:text-cosmic-latte transition-colors group cursor-crosshair">
+                <div class="col-span-1 font-mono text-xs opacity-50 group-hover:opacity-100">02</div>
+                <div class="col-span-4 font-bold uppercase">Live AI Inference Models</div>
+                <div class="col-span-3 text-sm opacity-80">Computer Vision & LLMs</div>
+                <div class="col-span-3 font-mono text-[10px] uppercase">Flask, Transformers</div>
+                <div class="col-span-1 text-right font-mono text-xs text-green-500">DEPLOYED</div>
+            </a>
+
+            <!-- PROJECT 3: CAPTIONING PHOTOS -->
+            <a href="https://github.com/Cozisoul/Captioning-Photos-with-Generative-AI" target="_blank" rel="noopener noreferrer" class="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 border-b border-system-black/20 hover:bg-system-black hover:text-cosmic-latte transition-colors group cursor-crosshair">
+                <div class="col-span-1 font-mono text-xs opacity-50 group-hover:opacity-100">03</div>
+                <div class="col-span-4 font-bold uppercase">Captioning Photos with Gen AI</div>
+                <div class="col-span-3 text-sm opacity-80">Generative AI Architecture</div>
+                <div class="col-span-3 font-mono text-[10px] uppercase">Python, Transformers</div>
+                <div class="col-span-1 text-right font-mono text-xs text-green-500">LIVE</div>
+            </a>
+
+            <!-- PROJECT 4: TMM-OS -->
+            <a href="https://github.com/Cozisoul/tmm-os" target="_blank" rel="noopener noreferrer" class="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 border-b border-system-black/20 hover:bg-system-black hover:text-cosmic-latte transition-colors group cursor-crosshair">
+                <div class="col-span-1 font-mono text-xs opacity-50 group-hover:opacity-100">04</div>
+                <div class="col-span-4 font-bold uppercase">TMM-OS (Project 0723)</div>
+                <div class="col-span-3 text-sm opacity-80">Local AI Agent Ecosystem</div>
+                <div class="col-span-3 font-mono text-[10px] uppercase">LangGraph, Ollama, Qdrant</div>
+                <div class="col-span-1 text-right font-mono text-xs text-accent-blue">RUNTIME</div>
+            </a>
+
+            <!-- PROJECT 5: DATA SCIENCE PORTFOLIO -->
+            <a href="https://github.com/Cozisoul/DataSciencePortfolio" target="_blank" rel="noopener noreferrer" class="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 border-b border-system-black/20 hover:bg-system-black hover:text-cosmic-latte transition-colors group cursor-crosshair">
+                <div class="col-span-1 font-mono text-xs opacity-50 group-hover:opacity-100">05</div>
+                <div class="col-span-4 font-bold uppercase">Data Science Portfolio</div>
+                <div class="col-span-3 text-sm opacity-80">EDA & Predictive Modeling</div>
+                <div class="col-span-3 font-mono text-[10px] uppercase">Python, SQL, Tableau</div>
+                <div class="col-span-1 text-right font-mono text-xs text-green-500">ACTIVE</div>
+            </a>
+
+        </div>
+    </section>
 
   </div>
 </MainLayout>

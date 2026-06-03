@@ -19,6 +19,7 @@
       "client": "Personal Inquiry",
       "narrative_md": "Mapping the DNA of South African Music through Graph Theory.",
       "hero_image": "/images/sonic-hero.jpg",
+      "tech_stack": ["Python", "NetworkX", "Graph Theory", "Data Visualization"],
       "is_featured": 1
     },
     {
@@ -30,6 +31,7 @@
       "client": "Social Practice",
       "narrative_md": "The art of repair. Rescuing discarded objects and restoring their dignity.",
       "hero_image": "/images/love-hero.jpg",
+      "tech_stack": ["Installation", "Social Practice", "Sculpture"],
       "is_featured": 1
     },
     {
@@ -41,6 +43,18 @@
       "client": "AI Research",
       "narrative_md": "Re-animating the archive. Using GANs to explore visual history.",
       "hero_image": "/images/biko-hero.jpg",
+      "tech_stack": ["Python", "PyTorch", "GANs", "Computer Vision"],
+      "is_featured": 1
+    },
+    {
+      "id": 8,
+      "title": "Pan-African Social Listening & Trend Analytics",
+      "slug": "pan-african-social-listening",
+      "category": "Data Science",
+      "year": 2026,
+      "client": "Regional Market Intelligence",
+      "narrative_md": "Architected an automated data pipeline to monitor, scrape, and analyze macroeconomic and consumer trends across South Africa, Kenya, and Nigeria.\n\nImplemented advanced Natural Language Processing (NLP) and sentiment analysis workflows to extract cultural nuances and brand insights from massive streams of unstructured text data.\n\nTransformed multi-country behavioral datasets into structured intelligence to fuel regional market strategies and corporate decision-making.",
+      "tech_stack": ["Python", "NLP", "Sentiment Analysis", "LLM Orchestration", "Data Engineering"],
       "is_featured": 1
     }
   ]

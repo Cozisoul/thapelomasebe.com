@@ -1,10 +1,10 @@
-/* Tailwind directives - MUST be first */
+/* Import Google Fonts for fallbacks */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap');
+
+/* Tailwind directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Import Google Fonts for fallbacks */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap');
 
 /* 1. THE FONTS */
 @font-face {
@@ -71,4 +71,13 @@ html.lenis, html.lenis body {
 }
 .font-mono {
   font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* No-scrollbar utility for filter bars */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
