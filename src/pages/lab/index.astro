@@ -1,0 +1,49 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import LabRegistry from '../../components/lab/LabRegistry.jsx';
+import projects from '../../data/lab_projects.json';
+---
+
+<MainLayout title="Lab">
+  <div class="pt-32 px-4 lg:px-6 mb-20">
+    
+    <!-- Section Header -->
+    <section class="mb-16">
+      <div class="font-mono text-xs uppercase tracking-widest opacity-50 mb-8 border-b border-system-black/20 pb-2">
+        03_LAB // SYSTEM_REGISTRY
+      </div>
+      
+      <h1 class="font-sans text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-4">
+        System Registry
+      </h1>
+      <p class="font-mono text-sm opacity-60 max-w-2xl">
+        Creative code executables. Each project is a self-contained system — an algorithm made visible. 
+        Hover to preview. Click to execute.
+      </p>
+    </section>
+
+    <!-- Live Registry Table -->
+    <section class="mt-12">
+      <LabRegistry client:load projects={projects} />
+    </section>
+
+    <!-- Footer Info -->
+    <section class="mt-24 border-t border-system-black/20 pt-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 font-mono text-[10px] uppercase tracking-widest opacity-40">
+        <div>
+          <span class="block mb-2 text-accent-blue opacity-100">[REGISTRY_SIZE]</span>
+          {projects.length} EXECUTABLES
+        </div>
+        <div>
+          <span class="block mb-2 text-accent-blue opacity-100">[ENGINES]</span>
+          P5.JS // CANVAS API
+        </div>
+        <div>
+          <span class="block mb-2 text-accent-blue opacity-100">[INPUT_TYPES]</span>
+          WEBCAM // IMAGE_UPLOAD // AUTONOMOUS
+        </div>
+      </div>
+    </section>
+
+  </div>
+</MainLayout>

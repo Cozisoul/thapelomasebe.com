@@ -5,7 +5,7 @@ import content from '../../data/content.json';
 // 1. GENERATE PATHS
 // This tells Astro to build a page for every project found in your JSON.
 export async function getStaticPaths() {
-  const { projects } = content;
+  const projects: any[] = content.projects;
   return projects.map((project) => ({
     params: { slug: project.slug },
     props: { project },
@@ -74,7 +74,7 @@ const { project } = Astro.props;
 
         <!-- Dynamic Assets Loop (Future Proofing) -->
         <!-- Once you populate 'assets_json' in your DB, they will appear here. -->
-        {project.assets_json && project.assets_json.map((asset, i) => (
+        {project?.assets_json && project.assets_json.map((asset: any, i: number) => (
            <div class="w-full">
              {asset.type === 'video' ? (
                 <video src={asset.url} autoplay loop muted playsinline class="w-full h-auto"></video>

@@ -1,0 +1,81 @@
+[
+  {
+    "id": "CC_001",
+    "name": "SYS_DEGRADE",
+    "title": "Structural Erasure",
+    "algorithm": "SOBEL_EDGE + ASCII_LUMINANCE",
+    "algorithmShort": "SOBEL_EDGE",
+    "engine": "p5.js",
+    "status": "ACTIVE",
+    "year": 2025,
+    "git_ref": "ascii-expiriments",
+    "git_url": "https://github.com/Cozisoul/ascii-expiriments",
+    "description": "Using the Sobel operator — an industrial computer vision tool — to reduce the human form to its mathematical edges, then re-weaving it into the ASCII character set. The project doesn't hide behind a 'filter.' It exposes the 1-bit dithering and the raw character grid. A study on how machines 'see' and 'remember' the user, moving from high-resolution surveillance to low-resolution archival texture.",
+    "abstract": "Structural Erasure explores the boundary between human perception and computational memory. Through the Sobel edge-detection operator, human presence is reduced to gradient magnitudes — the mathematical skeleton of form. These edges are then mapped into the ASCII character set, a technology of the 1960s designed for teletype machines. The result is a real-time portrait that oscillates between recognition and abstraction, between surveillance and poetry. The work asks: when a machine remembers you, what does it choose to keep?",
+    "scenes": [
+      "Random ASCII",
+      "Matrix Camera Scroll",
+      "Edge Flow",
+      "Dual Rect: Noise + Camera",
+      "Halftone Quantized",
+      "Rising ASCII Bubbles",
+      "Edge-Only Directional",
+      "Edge ASCII + Colored Shapes"
+    ],
+    "coreSnippet": "function sobelGrid(px, w, h) {\n  const out = new Float32Array(w * h * 2);\n  for (let y = 1; y < h - 1; y++) {\n    for (let x = 1; x < w - 1; x++) {\n      const i = (x + y * w) * 4;\n      const tl=px[i-4-w*4], t=px[i-w*4], tr=px[i+4-w*4];\n      const l =px[i-4],                  r =px[i+4];\n      const bl=px[i-4+w*4], b=px[i+w*4], br=px[i+4+w*4];\n      const k = (x + y * w) * 2;\n      out[k]   = -tl - 2*l - bl + tr + 2*r + br;  // Gx\n      out[k+1] = -tl - 2*t - tr + bl + 2*b + br;  // Gy\n    }\n  }\n  return out;\n}",
+    "tags": ["computer-vision", "sobel", "ascii", "webcam", "dithering", "real-time"],
+    "dependencies": ["p5.js"],
+    "inputType": "webcam"
+  },
+  {
+    "id": "CC_002",
+    "name": "EFFECT_ROULETTE",
+    "title": "Image Decomposition Engine",
+    "algorithm": "FLOYD_STEINBERG + MULTI_FILTER",
+    "algorithmShort": "MULTI_FILTER",
+    "engine": "Canvas API",
+    "status": "ACTIVE",
+    "year": 2025,
+    "git_ref": "generative-art-suite",
+    "git_url": "https://github.com/Cozisoul/generative-art-suite",
+    "description": "A systematic image decomposition pipeline. Upload any photograph and observe its destruction through seven algorithmic lenses: pixelation, voxelization, Floyd-Steinberg dithering, halftone screening, ASCII rendering, anaglyph displacement, and data-glitch corruption. Each effect exposes a different layer of the image's mathematical substrate.",
+    "abstract": "EFFECT_ROULETTE treats every uploaded image as raw data to be dissected. Seven rendering modes — from the geometric purity of halftone dots to the entropic chaos of glitch slicing — each reveal what the image 'is' beneath the surface of human perception. The Floyd-Steinberg dithering algorithm, in particular, demonstrates how a continuous-tone photograph can be reduced to a single bit per pixel while preserving the illusion of depth through error diffusion.",
+    "scenes": [
+      "Pixelate",
+      "Voxelize",
+      "Bitmap (Floyd-Steinberg)",
+      "Halftone",
+      "ASCII",
+      "Anaglyph 3D",
+      "Glitch"
+    ],
+    "coreSnippet": "// Floyd-Steinberg Dithering\nfor (let y = 0; y < height; y++) {\n  for (let x = 0; x < width; x++) {\n    const i = y * width + x;\n    const oldPixel = gs[i];\n    const newPixel = oldPixel < threshold ? 0 : 255;\n    const quantError = oldPixel - newPixel;\n    gs[i] = newPixel;\n    if (x+1 < width)   gs[i+1]       += quantError * 7/16;\n    if (x-1 >= 0 && y+1 < height)\n                       gs[i-1+width] += quantError * 3/16;\n    if (y+1 < height)  gs[i+width]   += quantError * 5/16;\n    if (x+1 < width && y+1 < height)\n                       gs[i+1+width] += quantError * 1/16;\n  }\n}",
+    "tags": ["image-processing", "dithering", "halftone", "glitch", "pixel-manipulation"],
+    "dependencies": ["Canvas API"],
+    "inputType": "image-upload"
+  },
+  {
+    "id": "CC_003",
+    "name": "CELLULAR_DITHER",
+    "title": "Emergent Grid Automata",
+    "algorithm": "CONWAY_GOL + GRID_RENDER",
+    "algorithmShort": "CONWAY_GOL",
+    "engine": "Canvas API",
+    "status": "ACTIVE",
+    "year": 2025,
+    "git_ref": "generative-art-suite",
+    "git_url": "https://github.com/Cozisoul/generative-art-suite",
+    "description": "A cellular automaton driving a generative grid composition. Conway's Game of Life determines which cells live and die; the visual output renders each generation as a color-coded grid with multiple rulesets (Standard, HighLife, Day & Night, Seeds). The system oscillates between order and entropy — the grid as organism.",
+    "abstract": "CELLULAR_DITHER collapses the distinction between algorithm and artwork. A cellular automaton — four simple rules governing birth and death — generates compositions that no human hand could predict. Each ruleset produces radically different emergent behavior: Standard Conway creates gliders and oscillators; HighLife spawns replicators; Day & Night produces organic, flowing patterns. The grid itself becomes a living system, its aesthetic value a byproduct of mathematical inevitability.",
+    "scenes": [
+      "Standard Conway",
+      "HighLife",
+      "Day & Night",
+      "Seeds"
+    ],
+    "coreSnippet": "// Conway's Game of Life\nfor (let i = 0; i < count; i++) {\n  for (let j = 0; j < count; j++) {\n    let liveNeighbors = 0;\n    for (let x = -1; x <= 1; x++) {\n      for (let y = -1; y <= 1; y++) {\n        if (x === 0 && y === 0) continue;\n        const ni = (i + x + count) % count;\n        const nj = (j + y + count) % count;\n        if (grid[ni][nj] === 1) liveNeighbors++;\n      }\n    }\n    const state = grid[i][j];\n    // B3/S23: Birth at 3, Survive at 2-3\n    if (state === 1)\n      newGrid[i][j] = [2,3].includes(liveNeighbors) ? 1 : 0;\n    else\n      newGrid[i][j] = liveNeighbors === 3 ? 1 : 0;\n  }\n}",
+    "tags": ["cellular-automata", "conway", "generative", "grid", "emergent-systems"],
+    "dependencies": ["Canvas API"],
+    "inputType": "autonomous"
+  }
+]

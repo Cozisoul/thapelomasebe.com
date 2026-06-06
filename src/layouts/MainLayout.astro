@@ -1,7 +1,7 @@
 ---
 import "../styles/global.css";
 import Cursor from "../components/Cursor.jsx";
-const { title } = Astro.props;
+const { title, hideNav } = Astro.props;
 ---
 
 <!doctype html>
@@ -55,11 +55,14 @@ const { title } = Astro.props;
         class="font-sans font-medium tracking-tight hover:italic transition-all"
         >THAPELO MADIBA MASEBE</a
       >
-      <div class="font-mono text-xs flex gap-4">
-        <a href="/">[INDEX]</a>
-        <a href="/art">[ART]</a>
-        <a href="/about">[INFO]</a>
-      </div>
+      {!hideNav && (
+        <div class="font-mono text-xs flex gap-4">
+          <a href="/">[INDEX]</a>
+          <a href="/art">[ART]</a>
+          <a href="/lab">[LAB]</a>
+          <a href="/about">[INFO]</a>
+        </div>
+      )}
     </nav>
 
     <!-- PAGE CONTENT -->

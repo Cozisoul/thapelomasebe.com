@@ -1,0 +1,98 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import projects from '../../data/lab_projects.json';
+import CC001_SysDegrade from '../../components/lab/CC001_SysDegrade.astro';
+import CC002_EffectRoulette from '../../components/lab/CC002_EffectRoulette.jsx';
+import CC003_CellularDither from '../../components/lab/CC003_CellularDither.jsx';
+
+// Generate static paths for each lab project
+export async function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+---
+
+<MainLayout title={project.name} hideNav={true}>
+
+  <div class="flex flex-col lg:flex-row min-h-screen w-full">
+    
+    <!-- COLUMN 1: IDENTITY & SPECS (The Left-Weighted Anchor) -->
+    <aside class="w-full lg:w-1/4 lg:h-screen lg:sticky lg:top-0 p-6 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-system-black/20 bg-cosmic-latte z-10 overflow-y-auto shrink-0">
+      
+      <!-- Vertical Label -->
+      <div>
+        <div class="font-mono text-[9px] uppercase tracking-[0.3em] opacity-30 mb-8 writing-mode-vertical hidden lg:block" style="writing-mode: vertical-lr; transform: rotate(180deg); position: absolute; left: 12px; top: 50%;">
+          PROJECT_SPEC_SHEET_V2.0
+        </div>
+
+        <!-- Header -->
+        <div class="mt-20 lg:mt-24">
+          <div class="font-mono text-[10px] uppercase tracking-widest opacity-40 mb-1">
+            SYS_ID: {project.id}
+          </div>
+          <div class="font-mono text-[10px] uppercase tracking-widest text-accent-blue mb-6">
+            {project.algorithm}
+          </div>
+          
+          <h1 class="font-sans text-3xl lg:text-4xl font-bold uppercase tracking-tighter leading-[0.9] mb-2">
+            {project.name}
+          </h1>
+          <h2 class="font-sans text-lg opacity-70 italic mb-8">
+            {project.title}
+          </h2>
+
+          <!-- Narrative -->
+          <p class="font-sans text-sm leading-relaxed opacity-80 mb-8">
+            {project.description}
+          </p>
+        </div>
+
+        <!-- Specs Grid -->
+        <div class="grid grid-cols-2 gap-6 font-mono text-[10px] uppercase tracking-widest opacity-50 mt-8">
+          <div>
+            <span class="block mb-1 text-accent-blue opacity-100">[ENGINE]</span>
+            {project.engine}
+          </div>
+          <div>
+            <span class="block mb-1 text-accent-blue opacity-100">[YEAR]</span>
+            {project.year}
+          </div>
+          <div>
+            <span class="block mb-1 text-accent-blue opacity-100">[INPUT]</span>
+            {project.inputType.toUpperCase().replace('-', '_')}
+          </div>
+          <div>
+            <span class="block mb-1 text-accent-blue opacity-100">[STATUS]</span>
+            <span class="flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+              {project.status}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Back Link -->
+      <div class="mt-8 lg:mt-0">
+        <a href="/lab" class="font-mono text-[10px] uppercase tracking-widest text-accent-blue hover:text-system-black transition-colors">
+          ← RETURN_TO_REGISTRY
+        </a>
+      </div>
+    </aside>
+
+    {/* REACT COMPONENTS: Column 2 (50%) and Column 3 (25%) */}
+    {project.id === 'CC_001' && <CC001_SysDegrade />}
+    {project.id === 'CC_002' && <CC002_EffectRoulette client:only="react" />}
+    {project.id === 'CC_003' && <CC003_CellularDither client:only="react" />}
+
+  </div>
+
+  <!-- Navigation Override -->
+  <a href="/lab" class="fixed top-6 right-6 font-mono text-xs z-50 mix-blend-difference text-cosmic-latte hover:text-accent-red cursor-pointer uppercase tracking-widest">
+    [CLOSE]
+  </a>
+
+</MainLayout>

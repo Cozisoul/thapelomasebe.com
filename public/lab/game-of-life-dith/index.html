@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TMM-OS — Dither Cam (v3.0)</title>
+
+  <!-- p5.js (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="theme-systematic-dark">
+  <!-- Project Info Modal -->
+  <div id="info-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>TMM-OS — Dither Cam (v3.0)</h2>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <h3>Strategic & Creative Operating System</h3>
+        <p><strong>Thapelo Madiba Masebe</strong> | Version 2.0 | Status: ACTIVE</p>
+        
+        <p>This creative web application combines real-time video dithering with Conway's Game of Life simulation. Part of the TMM-OS - the central, version-controlled operating system for my entire professional and personal practice.</p>
+        
+        <div class="features">
+          <h4>Features:</h4>
+          <p>Real-time dithering • Game of Life integration • 6 themed palettes • Color inversion • Media recording</p>
+        </div>
+        
+        <div class="links">
+          <a href="https://github.com/Cozisoul/tmm-os" target="_blank">TMM-OS Repository</a>
+          <a href="https://github.com/Cozisoul" target="_blank">GitHub Profile</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="main-container">
+    <div id="canvas-container">
+      <div id="loading-overlay">INITIALIZING</div>
+      <div id="countdown-overlay"></div>
+      <!-- p5 canvas will be inserted here -->
+    </div>
+
+    <div id="controls">
+      <div class="controls-grid">
+        <!-- Cell 1: Mode Toggle -->
+        <div class="control-cell">
+          <button id="mode-switch-btn" class="button mode-switch">
+            <span class="mode-icon">📹</span>
+            <span class="mode-text">WEBCAM</span>
+          </button>
+        </div>
+
+        <!-- Cell 2: INFO Button -->
+        <div class="control-cell">
+          <button id="info-btn" class="button primary">INFO</button>
+        </div>
+
+        <!-- Cell 3: THEME Button -->
+        <div class="control-cell">
+          <button id="toggle-theme-btn" class="button primary">THEME</button>
+        </div>
+        
+        <!-- Cell 4: CAPTURE Button -->
+        <div class="control-cell webcam-control">
+          <button id="capture-btn" class="button secondary">CAPTURE</button>
+        </div>
+
+        <!-- Cell 5: RECORD Button -->
+        <div class="control-cell webcam-control">
+          <button id="record-btn" class="button secondary">RECORD</button>
+        </div>
+        
+        <!-- Cell 6: CLEAR Button -->
+        <div class="control-cell playground-control">
+          <button id="clear-btn" class="button secondary">CLEAR</button>
+        </div>
+
+        <!-- Cell 7: RANDOM Button -->
+        <div class="control-cell playground-control">
+          <button id="random-btn" class="button secondary">RANDOM</button>
+        </div>
+
+        <!-- Cell 8: PATTERN Button -->
+        <div class="control-cell playground-control">
+          <button id="pattern-btn" class="button secondary">PATTERN</button>
+        </div>
+
+        <!-- Cell 9: CHAOS Button -->
+        <div class="control-cell playground-control">
+          <button id="chaos-btn" class="button secondary">CHAOS</button>
+        </div>
+
+        <!-- Cell 10: SPIRAL Button -->
+        <div class="control-cell playground-control">
+          <button id="spiral-btn" class="button secondary">SPIRAL</button>
+        </div>
+
+        <!-- Cell 11: MAZE Button -->
+        <div class="control-cell playground-control">
+          <button id="maze-btn" class="button secondary">MAZE</button>
+        </div>
+
+        <!-- Cell 12: FRACTAL Button -->
+        <div class="control-cell playground-control">
+          <button id="fractal-btn" class="button secondary">FRACTAL</button>
+        </div>
+
+        <!-- Cell 13: PULSE Button -->
+        <div class="control-cell playground-control">
+          <button id="pulse-btn" class="button secondary">PULSE</button>
+        </div>
+
+        <!-- Cell 14: DETAIL Slider -->
+        <div class="control-cell webcam-control">
+          <div class="slider-container">
+            <label for="detail-slider">DETAIL</label>
+            <input id="detail-slider" type="range" min="0" max="1" step="0.01" value="0.5">
+            <span id="detail-value">0.5</span>
+          </div>
+        </div>
+
+        <!-- Cell 15: PIXEL SIZE Slider -->
+        <div class="control-cell">
+          <div class="slider-container">
+            <label for="pixel-size-slider">PIXEL SIZE</label>
+            <input id="pixel-size-slider" type="range" min="2" max="40" step="1" value="10">
+            <span id="pixel-size-value">10</span>
+          </div>
+        </div>
+
+        <!-- Cell 16: DENSITY Slider -->
+        <div class="control-cell playground-control">
+          <div class="slider-container">
+            <label for="density-slider">DENSITY</label>
+            <input id="density-slider" type="range" min="0.01" max="0.5" step="0.01" value="0.1">
+            <span id="density-value">0.1</span>
+          </div>
+        </div>
+
+        <!-- Cell 17: GOL Toggle -->
+        <div class="control-cell">
+          <label for="gol-toggle" class="toggle-label">
+            <input id="gol-toggle" type="checkbox"> 
+            <span class="gol-slider"></span>
+            <span class="gol-label">GOL</span>
+          </label>
+        </div>
+
+        <!-- Cell 18: GOL Mode Select -->
+        <div class="control-cell">
+          <select id="gol-mode" class="gol-select">
+            <option value="continuous">reseed</option>
+            <option value="lock">evolve</option>
+          </select>
+        </div>
+
+        <!-- Cell 19: GOL Speed Slider -->
+        <div class="control-cell">
+          <div class="gol-speed-container">
+            <label for="gol-speed-slider">SPEED</label>
+            <input id="gol-speed-slider" type="range" min="1" max="10" value="5" step="1">
+            <span id="gol-speed-value">5</span>
+          </div>
+        </div>
+
+        <!-- Cell 20: GLIDER Button -->
+        <div class="control-cell">
+          <button id="gol-glider-btn" class="button gol-pattern">GLIDER</button>
+        </div>
+
+        <!-- Cell 21: PULSAR Button -->
+        <div class="control-cell">
+          <button id="gol-pulsar-btn" class="button gol-pattern">PULSAR</button>
+        </div>
+
+        <!-- Cell 22: GUN Button -->
+        <div class="control-cell">
+          <button id="gol-gun-btn" class="button gol-pattern">GUN</button>
+        </div>
+
+        <!-- Cell 23: AUTO RANDOM Button -->
+        <div class="control-cell">
+          <button id="gol-auto-random-btn" class="button gol-auto-btn">AUTO RANDOM</button>
+        </div>
+
+        <!-- Cell 24: AUTO CLEAR Button -->
+        <div class="control-cell">
+          <button id="gol-auto-clear-btn" class="button gol-auto-btn">AUTO CLEAR</button>
+        </div>
+        
+        <!-- Cell 25: EVOLVE Button -->
+        <div class="control-cell playground-control">
+          <button id="evolve-btn" class="button gol-auto-btn">EVOLVE</button>
+        </div>
+
+        <!-- Cell 26: MUTATE Button -->
+        <div class="control-cell playground-control">
+          <button id="mutate-btn" class="button gol-auto-btn">MUTATE</button>
+        </div>
+
+        <!-- Cell 27: BREED Button -->
+        <div class="control-cell playground-control">
+          <button id="breed-btn" class="button gol-auto-btn">BREED</button>
+        </div>
+
+        <!-- Cell 28: EXPLODE Button -->
+        <div class="control-cell playground-control">
+          <button id="explode-btn" class="button gol-auto-btn">EXPLODE</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- load theme & libs (order matters) -->
+  <script src="theme.js"></script>
+  <script src="dither.js"></script>
+  <script src="gol.js"></script>
+  <script src="sketch.js"></script>
+</body>
+</html>

@@ -1,0 +1,736 @@
+---
+const THEMES = {
+  matrix:    { fg: '#00ff66', bg: '#000000', accent: '#00ff66', chars: ' .:-=+*#%@' },
+  newspaper: { fg: '#111111', bg: '#f0f0f0', accent: '#ff0000', chars: ' .,:;i1tfLCG08@' },
+  vaporwave: { fg: '#00ffff', bg: '#2b00ff', accent: '#ff00ff', chars: ' .░▒▓█' },
+  risograph: { fg: '#ff48b0', bg: '#ffe8a1', accent: '#00a95c', chars: ' · • ●' },
+  solarized: { fg: '#839496', bg: '#002b36', accent: '#b58900', chars: ' ▏▎▍▌▋▊▉█' },
+  amber:     { fg: '#ffb000', bg: '#221100', accent: '#ffb000', chars: ' 01' }
+};
+const SCENES = [
+  'Random ASCII', 'Matrix Camera Scroll', 'Edge Flow', 'Dual Rect: Noise + Camera',
+  'Halftone Quantized', 'Rising ASCII Bubbles', 'Edge-Only Directional', 'Edge ASCII + Colored Shapes'
+];
+---
+
+<>
+  <section class="w-full lg:w-1/2 bg-system-black relative min-h-[60vh] lg:min-h-screen flex items-center justify-center p-8">
+    <div id="canvas-wrapper" class="w-full h-full flex items-center justify-center overflow-hidden"></div>
+  </section>
+
+  <aside class="w-full lg:w-1/4 lg:h-screen lg:max-h-[100vh] lg:sticky lg:top-0 bg-[#1a1a1a] text-white border-t lg:border-t-0 lg:border-l border-system-black/20 overflow-y-auto p-6 font-sans" style="color: #eee;">
+    <h3 class="font-mono text-lg mb-6 tracking-wider">SETTINGS</h3>
+
+    <div class="mb-6">
+      <label class="block mb-2 text-xs uppercase tracking-wider opacity-70">Active Scene</label>
+      <div class="flex flex-col gap-1" id="scene-buttons">
+        {SCENES.map((sceneName, idx) => (
+          <button 
+            data-scene-idx={idx}
+            class="scene-btn px-3 py-2 text-left text-xs font-mono uppercase transition-colors bg-white/5 hover:bg-white/10"
+          >
+            {idx + 1}. {sceneName}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <div class="mb-6">
+      <label class="block mb-2 text-xs uppercase tracking-wider opacity-70">Themes</label>
+      <div class="flex flex-wrap gap-2">
+        {Object.keys(THEMES).map(theme => (
+          <button data-theme={theme} class="theme-btn px-3 py-1 bg-white/10 hover:bg-white/20 text-xs font-mono uppercase transition-colors">
+            {theme}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <div class="space-y-4 mb-6">
+      <div>
+        <label class="block mb-1 text-xs uppercase tracking-wider opacity-70">Foreground Color</label>
+        <input type="color" id="fgColor" class="w-full h-8 cursor-pointer bg-transparent border-none" value="#00ff66" />
+      </div>
+      <div>
+        <label class="block mb-1 text-xs uppercase tracking-wider opacity-70">Background Color</label>
+        <input type="color" id="bgColor" class="w-full h-8 cursor-pointer bg-transparent border-none" value="#000000" />
+      </div>
+      <div>
+        <label class="block mb-1 text-xs uppercase tracking-wider opacity-70">Accent Color</label>
+        <input type="color" id="accentColor" class="w-full h-8 cursor-pointer bg-transparent border-none" value="#00ff66" />
+      </div>
+    </div>
+
+    <div class="mb-6">
+      <label class="block mb-2 text-xs uppercase tracking-wider opacity-70">Character Set</label>
+      <input type="text" id="charSet" class="w-full p-2 bg-white/5 border border-white/10 text-white font-mono text-xs mb-2" value=" .:-=+*#%@" />
+      <div class="flex flex-wrap gap-2 mt-2">
+        {[
+          { label: 'Standard', chars: ' .:-=+*#%@' },
+          { label: 'Blocks', chars: ' .░▒▓█' },
+          { label: 'Binary', chars: ' 01' },
+          { label: 'Detailed', chars: ' .,:;i1tfLCG08@' },
+          { label: 'Dots', chars: ' · • ●' },
+          { label: 'Bars', chars: ' ▏▎▍▌▋▊▉█' }
+        ].map(preset => (
+          <button data-chars={preset.chars} class="chars-btn px-2 py-1 bg-white/10 hover:bg-white/20 text-[10px] font-mono uppercase transition-colors">
+            {preset.label}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <div class="mb-6">
+      <label class="block mb-2 text-xs uppercase tracking-wider opacity-70">Cell Size: <span id="cellSizeVal">6</span></label>
+      <input type="range" id="cellSize" class="w-full" min="2" max="16" value="6" />
+    </div>
+
+    <div class="mb-6">
+      <label class="flex items-center gap-2 cursor-pointer text-xs uppercase tracking-wider opacity-70">
+        <input type="checkbox" id="mirror" checked />
+        Mirror Camera
+      </label>
+    </div>
+
+    <button 
+      id="exportPng"
+      class="w-full mt-4 py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-mono uppercase tracking-wider transition-colors"
+    >
+      Export PNG
+    </button>
+  </aside>
+</>
+
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+
+<script is:inline>
+// =====================================================
+//  ASCII EXPERIMENTS — responsive + customizable
+// =====================================================
+
+let cam, manager;
+let showMenu = false;
+
+// ---------- THEMES ----------
+const THEMES = {
+matrix:    { fg: '#00ff66', bg: '#000000', accent: '#00ff66', chars: ' .:-=+*#%@' },
+newspaper: { fg: '#000000', bg: '#f5f1e8', accent: '#000000', chars: ' .░▒▓█' },
+vaporwave: { fg: '#ff66cc', bg: '#1a0033', accent: '#66ffff', chars: ' .:-=+*#%@' },
+risograph: { fg: '#ff4d3d', bg: '#fef6e4', accent: '#3d5aff', chars: ' .░▒▓█' },
+solarized: { fg: '#b58900', bg: '#002b36', accent: '#268bd2', chars: ' .,:;i1tfLCG08@' },
+amber:     { fg: '#ffb000', bg: '#1a0f00', accent: '#ffb000', chars: ' .:-=+*#%@' },
+};
+
+// ---------- GLOBAL SETTINGS ----------
+const settings = {
+charSet:     ' .:-=+*#%@',
+fgColor:     '#00ff66',
+bgColor:     '#000000',
+accentColor: '#00ff66',
+cellSize:    6,
+mirror:      true,
+};
+
+// ---------- HELPERS ----------
+const fg     = () => color(settings.fgColor);
+const bg     = () => color(settings.bgColor);
+const accent = () => color(settings.accentColor);
+const chrs   = () => settings.charSet || ' .:-=+*#%@';
+const cs     = () => settings.cellSize;
+
+function brightnessAt(px, x, y, w) {
+const i = (x + y * w) * 4;
+return (px[i] + px[i+1] + px[i+2]) / 3;
+}
+
+function clipRect(x, y, w, h) {
+drawingContext.beginPath();
+drawingContext.rect(x, y, w, h);
+drawingContext.clip();
+}
+
+function frameRect() {
+// Standard inner frame for single-rect scenes
+const pad = width * 0.06;
+return { x: pad, y: pad * 1.5, w: width - 2*pad, h: height - 3*pad };
+}
+
+function sobelGrid(px, w, h) {
+const out = new Float32Array(w * h * 2);
+for (let y = 1; y < h - 1; y++) {
+  for (let x = 1; x < w - 1; x++) {
+    const i = (x + y * w) * 4;
+    const tl=px[i-4-w*4], t=px[i-w*4], tr=px[i+4-w*4];
+    const l =px[i-4],                  r =px[i+4];
+    const bl=px[i-4+w*4], b=px[i+w*4], br=px[i+4+w*4];
+    const k = (x + y * w) * 2;
+    out[k]   = -tl - 2*l - bl + tr + 2*r + br;
+    out[k+1] = -tl - 2*t - tr + bl + 2*b + br;
+  }
+}
+return out;
+}
+
+// ---------- SCENE BASE ----------
+class Scene {
+constructor(name) { this.name = name; }
+setup() {} draw() {} cleanup() {}
+mousePressed() {} keyPressed() {}
+}
+
+// ========== 1. RANDOM ASCII ==========
+class RandomAsciiScene extends Scene {
+  constructor() { super("Random ASCII"); this.useCamera = false; }
+  setup() { frameRate(5); }
+  cleanup() { frameRate(60); }
+  keyPressed() {
+    if (key.toLowerCase() === 'c') this.useCamera = !this.useCamera;
+  }
+  draw() {
+    background(bg());
+    const f = frameRect();
+    noFill(); stroke(accent()); strokeWeight(2);
+    rect(f.x, f.y, f.w, f.h);
+    drawingContext.save(); clipRect(f.x, f.y, f.w, f.h);
+    fill(fg()); noStroke();
+    textFont('monospace'); textSize(cs() * 1.5); textAlign(LEFT, TOP);
+    const s = chrs();
+    
+    if (this.useCamera) {
+      cam.loadPixels();
+      if (cam.pixels.length) {
+        const stepX = cs() * 1.2;
+        const stepY = cs() * 1.6;
+        const cols = floor((f.w - 8) / stepX);
+        const rows = floor((f.h - 8) / stepY);
+        const csx = cam.width / cols, csy = cam.height / rows;
+        for (let y = 0; y < rows; y++) {
+          for (let x = 0; x < cols; x++) {
+            const cx = settings.mirror ? cols - 1 - x : x;
+            const px = floor(cx * csx), py = floor(y * csy);
+            const b = brightnessAt(cam.pixels, px, py, cam.width);
+            // Only draw random characters if camera sees something bright enough
+            if (b > 60) {
+              const dx = f.x + 4 + x * stepX;
+              const dy = f.y + 4 + y * stepY;
+              text(s.charAt(floor(random(s.length))), dx, dy);
+            }
+          }
+        }
+      }
+    } else {
+      for (let y = f.y + 4; y < f.y + f.h - 4; y += cs() * 1.6)
+        for (let x = f.x + 4; x < f.x + f.w - 4; x += cs() * 1.2)
+          text(s.charAt(floor(random(s.length))), x, y);
+    }
+    drawingContext.restore();
+    
+    // Instructions for toggle
+    fill(accent()); textSize(12); textAlign(RIGHT, BOTTOM); textFont('sans-serif'); noStroke();
+    text("Press 'C' to toggle camera", f.x + f.w - 10, f.y + f.h - 10);
+  }
+}
+
+// ========== 2. MATRIX SCROLL ==========
+class MatrixScrollScene extends Scene {
+constructor() { super("Matrix Camera Scroll"); this.offset = 0; }
+setup() { this.offset = 0; }
+draw() {
+  background(bg());
+  cam.loadPixels(); if (!cam.pixels.length) return;
+  const f = frameRect();
+  drawingContext.save(); clipRect(f.x, f.y, f.w, f.h);
+  fill(fg()); noStroke();
+  textFont('monospace'); textSize(cs() * 1.4); textAlign(LEFT, TOP);
+  const s = chrs();
+  const cell = cs();
+  const cols = floor(f.w / cell), rows = floor(f.h / cell);
+  const csx = cam.width / cols, csy = cam.height / rows;
+  const shift = floor(this.offset / cell);
+  const sub = this.offset % cell;
+  for (let y = -1; y <= rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      const cy = ((y - shift) % rows + rows) % rows;
+      const cx = settings.mirror ? cols - 1 - x : x;
+      const b = brightnessAt(cam.pixels, floor(cx*csx), floor(cy*csy), cam.width);
+      const ci = constrain(floor(map(b, 0, 255, s.length-1, 0)), 0, s.length-1);
+      text(s[ci], f.x + x*cell, f.y + y*cell + sub);
+    }
+  }
+  drawingContext.restore();
+  noFill(); stroke(accent()); strokeWeight(2); rect(f.x, f.y, f.w, f.h);
+  this.offset += 2;
+}
+}
+
+// ========== 3. EDGE FLOW ==========
+class EdgeFlowScene extends Scene {
+constructor() { super("Edge Flow"); this.offset = 0; }
+setup() { this.offset = 0; }
+draw() {
+  background(bg());
+  cam.loadPixels(); if (!cam.pixels.length) return;
+  const edges = sobelGrid(cam.pixels, cam.width, cam.height);
+  const f = frameRect();
+  drawingContext.save(); clipRect(f.x, f.y, f.w, f.h);
+  textFont('monospace'); textSize(cs() * 1.2); textAlign(LEFT, TOP); noStroke();
+  const s = chrs();
+  const cell = cs();
+  const cols = floor(f.w / cell), rows = floor(f.h / cell);
+  const csx = cam.width / cols, csy = cam.height / rows;
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      const cx = settings.mirror ? cols - 1 - x : x;
+      const px = floor(cx*csx), py = floor(y*csy);
+      const ei = (px + py * cam.width) * 2;
+      const mag = sqrt(edges[ei]**2 + edges[ei+1]**2);
+      const b = brightnessAt(cam.pixels, px, py, cam.width);
+      if (mag > 80) { fill(accent()); text('#', f.x + x*cell, f.y + y*cell); continue; }
+      const yOff = b < 128 ? this.offset : -this.offset;
+      fill(fg());
+      const ci = constrain(floor(map(b, 0, 255, s.length-1, 0)), 0, s.length-1);
+      text(s[ci], f.x + x*cell, f.y + ((y*cell + yOff) % f.h + f.h) % f.h);
+    }
+  }
+  drawingContext.restore();
+  noFill(); stroke(accent()); strokeWeight(2); rect(f.x, f.y, f.w, f.h);
+  this.offset += 1.5;
+}
+}
+
+
+// ========== 4. DUAL RECT ==========
+class DualRectScene extends Scene {
+  constructor() { super("Dual Rect: Noise + Camera"); }
+  setup() { frameRate(15); }
+  cleanup() { frameRate(60); }
+  draw() {
+    background(bg());
+    cam.loadPixels(); if (!cam.pixels.length) return;
+    const f = frameRect();
+    const gap = f.h * 0.05;
+    const rh = (f.h - gap) / 2;
+    
+    this.drawRect(f.x, f.y, f.w, rh, () => {
+      fill(fg()); textSize(cs() * 1.5);
+      const s = chrs();
+      for (let yy = 4; yy < rh-4; yy += cs()*1.6)
+        for (let xx = 4; xx < f.w-4; xx += cs()*1.2)
+          text(s.charAt(floor(random(s.length))), f.x+xx, f.y+yy);
+    });
+    
+    const by = f.y + rh + gap;
+    this.drawRect(f.x, by, f.w, rh, () => {
+      fill(fg()); textSize(cs() * 1.4);
+      const s = chrs();
+      const cols = floor(f.w / cs()), rows = floor(rh / cs());
+      const csx = cam.width / cols, csy = cam.height / rows;
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+          const cx = settings.mirror ? cols - 1 - x : x;
+          const b = brightnessAt(cam.pixels, floor(cx*csx), floor(y*csy), cam.width);
+          const ci = constrain(floor(map(b, 0, 255, s.length-1, 0)), 0, s.length-1);
+          text(s[ci], f.x + x*cs(), by + y*cs());
+        }
+      }
+    });
+  }
+
+  drawRect(x, y, w, h, drawFn) {
+    noFill(); stroke(accent()); strokeWeight(2); rect(x, y, w, h);
+    drawingContext.save(); clipRect(x, y, w, h);
+    noStroke(); textFont('monospace'); textAlign(LEFT, TOP);
+    drawFn();
+    drawingContext.restore();
+  }
+}
+
+// ========== 5. HALFTONE COLOR-QUANTIZED ==========
+class HalftoneScene extends Scene {
+constructor() { super("Halftone Quantized"); }
+draw() {
+  background(bg());
+  cam.loadPixels(); if (!cam.pixels.length) return;
+  const f = frameRect();
+  const cell = cs();
+  const cols = floor(f.w / cell), rows = floor(f.h / cell);
+  const csx = cam.width / cols, csy = cam.height / rows;
+  // Use FG, accent, and a derived 3rd color from the theme
+  const palette = [
+    [red(fg()), green(fg()), blue(fg())],
+    [red(accent()), green(accent()), blue(accent())],
+    [red(bg()), green(bg()), blue(bg())].map(v => 255 - v),
+    [20, 20, 20],
+  ];
+  const s = chrs();
+  noStroke(); textFont('sans-serif'); textAlign(CENTER, CENTER);
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      const cx = settings.mirror ? cols - 1 - x : x;
+      const px = floor(cx*csx), py = floor(y*csy);
+      const i = (px + py*cam.width)*4;
+      const r = cam.pixels[i], g = cam.pixels[i+1], b = cam.pixels[i+2];
+      const br = (r+g+b)/3;
+      const sz = map(br, 0, 255, cell*1.5, 1);
+      const ci = constrain(floor(map(br, 0, 255, s.length-1, 0)), 0, s.length-1);
+      let best = palette[0], bd = Infinity;
+      for (const p of palette) {
+        const d = (r-p[0])**2 + (g-p[1])**2 + (b-p[2])**2;
+        if (d < bd) { bd = d; best = p; }
+      }
+      fill(best[0], best[1], best[2]);
+      textSize(sz);
+      text(s[ci], f.x + x*cell + cell/2, f.y + y*cell + cell/2);
+    }
+  }
+  noFill(); stroke(accent()); strokeWeight(3); rect(f.x, f.y, f.w, f.h);
+}
+}
+
+// ========== 6. RISING ASCII BUBBLES ==========
+class BubblesScene extends Scene {
+constructor() { super("Rising ASCII Bubbles"); this.bubbles = []; }
+setup() {
+  this.bubbles = [];
+  for (let i = 0; i < 8; i++) this.bubbles.push(this.makeBubble(random(height, height*2)));
+}
+makeBubble(startY) {
+  const r = random(width*0.05, width*0.15);
+  return { x: random(60, width-60), y: startY, r,
+    speed: map(r, width*0.05, width*0.15, 1.5, 0.4),
+    wAmp: random(8, 22), wSpd: random(0.015, 0.04), wPh: random(TWO_PI),
+    popping: false, popFrame: 0 };
+}
+draw() {
+  background(bg());
+  cam.loadPixels(); if (!cam.pixels.length) return;
+  noStroke(); textFont('monospace'); textSize(cs() * 0.7); textAlign(CENTER, CENTER);
+  const s = chrs();
+  for (let i = this.bubbles.length-1; i >= 0; i--) {
+    const b = this.bubbles[i];
+    if (b.popping) {
+      const t = b.popFrame/12;
+      noFill(); stroke(red(fg()), green(fg()), blue(fg()), (1-t)*255); strokeWeight(2);
+      ellipse(b.x, b.y, (b.r + t*30)*2);
+      b.popFrame++;
+      if (b.popFrame > 12) this.bubbles[i] = this.makeBubble(height + random(20,200));
+      continue;
+    }
+    const wob = sin(frameCount*b.wSpd + b.wPh) * b.wAmp;
+    const cx = b.x + wob, cy = b.y;
+    drawingContext.save();
+    drawingContext.beginPath();
+    drawingContext.arc(cx, cy, b.r, 0, TWO_PI);
+    drawingContext.clip();
+    fill(fg()); noStroke();
+    const cell = max(3, cs() * 0.6);
+    const cols = floor(b.r*2/cell), rows = floor(b.r*2/cell);
+    const csx = cam.width/cols, csy = cam.height/rows;
+    for (let yy = 0; yy < rows; yy++) {
+      for (let xx = 0; xx < cols; xx++) {
+        const mx = settings.mirror ? cols-1-xx : xx;
+        const br = brightnessAt(cam.pixels, floor(mx*csx), floor(yy*csy), cam.width);
+        const ci = constrain(floor(map(br, 0, 255, s.length-1, 0)), 0, s.length-1);
+        text(s[ci], cx - b.r + xx*cell + cell/2, cy - b.r + yy*cell + cell/2);
+      }
+    }
+    drawingContext.restore();
+    noFill(); stroke(accent()); strokeWeight(1); ellipse(cx, cy, b.r*2);
+    b.y -= b.speed;
+    if (b.y + b.r < 0) this.bubbles[i] = this.makeBubble(height + random(20,200));
+  }
+}
+mousePressed() {
+  for (let i = this.bubbles.length-1; i >= 0; i--) {
+    const b = this.bubbles[i];
+    if (b.popping) continue;
+    const wob = sin(frameCount*b.wSpd + b.wPh) * b.wAmp;
+    if (dist(mouseX, mouseY, b.x+wob, b.y) < b.r) { b.popping = true; b.popFrame = 0; break; }
+  }
+}
+}
+
+// ========== 7. EDGE-ONLY DIRECTIONAL ==========
+class EdgeOnlyScene extends Scene {
+constructor() { super("Edge-Only Directional"); }
+draw() {
+  background(bg());
+  cam.loadPixels(); if (!cam.pixels.length) return;
+  const edges = sobelGrid(cam.pixels, cam.width, cam.height);
+  const f = frameRect();
+  const cell = cs();
+  const cols = floor(f.w / cell), rows = floor(f.h / cell);
+  const csx = cam.width/cols, csy = cam.height/rows;
+  const ec = ['/','\\','|','—','+','x','*','#'];
+  drawingContext.save(); clipRect(f.x, f.y, f.w, f.h);
+  fill(fg()); noStroke(); textFont('monospace'); textSize(cell*1.3); textAlign(CENTER, CENTER);
+  for (let y = 1; y < rows-1; y++) {
+    for (let x = 1; x < cols-1; x++) {
+      const cx = settings.mirror ? cols-1-x : x;
+      const px = floor(cx*csx), py = floor(y*csy);
+      const ei = (px + py*cam.width) * 2;
+      const mag = sqrt(edges[ei]**2 + edges[ei+1]**2);
+      if (mag < 50) continue;
+      const ang = atan2(-edges[ei+1], edges[ei]), a = abs(ang);
+      let ci;
+      if (mag < 120) {
+        if (a < PI/8 || a > 7*PI/8) ci = 3;
+        else if (a > 3*PI/8 && a < 5*PI/8) ci = 2;
+        else ci = ang > 0 ? 0 : 1;
+      } else ci = constrain(floor(map(mag, 120, 400, 4, 7)), 4, 7);
+      text(ec[ci], f.x + x*cell + cell/2, f.y + y*cell + cell/2);
+    }
+  }
+  drawingContext.restore();
+  noFill(); stroke(accent()); strokeWeight(2); rect(f.x, f.y, f.w, f.h);
+}
+}
+
+// ========== 8. EDGE + COLORED SHAPES ==========
+class EdgeShapesScene extends Scene {
+  constructor() { super("Edge ASCII + Colored Shapes"); }
+  draw() {
+    background(bg());
+    cam.loadPixels(); if (!cam.pixels.length) return;
+    const edges = sobelGrid(cam.pixels, cam.width, cam.height);
+    const f = frameRect();
+    const cell = cs();
+    const cols = floor(f.w / cell), rows = floor(f.h / cell);
+    const csx = cam.width / cols, csy = cam.height / rows;
+    
+    // Mouse controlled circle, drifting square
+    const ccx = constrain(mouseX, f.x, f.x + f.w);
+    const ccy = constrain(mouseY, f.y, f.y + f.h);
+    const cR = f.w * 0.15;
+    const sX = f.x + f.w/2 - (f.w*0.15) + cos(frameCount*0.018) * (f.w*0.1);
+    const sY = f.y + f.h/2 + (f.h*0.1) + sin(frameCount*0.022) * (f.h*0.1);
+    const sS = f.w * 0.25;
+    
+    drawingContext.save(); clipRect(f.x, f.y, f.w, f.h);
+    noStroke(); textFont('monospace'); textSize(cell * 1.3); textAlign(CENTER, CENTER);
+    for (let y = 1; y < rows-1; y++) {
+      for (let x = 1; x < cols-1; x++) {
+        const cx = settings.mirror ? cols - 1 - x : x;
+        const px = floor(cx*csx), py = floor(y*csy);
+        const ei = (px + py*cam.width) * 2;
+        const mag = sqrt(edges[ei]**2 + edges[ei+1]**2);
+        if (mag < 50) continue;
+        const ang = atan2(-edges[ei+1], edges[ei]), a = abs(ang);
+        let ch = '+';
+        if (a < PI/8 || a > 7*PI/8) ch = '—';
+        else if (a > 3*PI/8 && a < 5*PI/8) ch = '|';
+        else ch = ang > 0 ? '/' : '\\';
+        
+        const dx = f.x + x*cell + cell/2, dy = f.y + y*cell + cell/2;
+        const inC = dist(dx, dy, ccx, ccy) < cR;
+        const inS = dx>sX && dx<sX+sS && dy>sY && dy<sY+sS;
+        
+        if (inC) fill(255,80,80); else if (inS) fill(80,80,255); else fill(fg());
+        text(ch, dx, dy);
+      }
+    }
+    drawingContext.restore();
+    noFill(); strokeWeight(3);
+    stroke(255,80,80); ellipse(ccx, ccy, cR*2);
+    stroke(80,80,255); rect(sX, sY, sS, sS);
+    stroke(accent()); strokeWeight(2); rect(f.x, f.y, f.w, f.h);
+  }
+}
+
+
+// ---------- SCENE MANAGER ----------
+class SceneManager {
+constructor() { this.scenes = []; this.index = 0; }
+add(s) { this.scenes.push(s); return this; }
+get current() { return this.scenes[this.index]; }
+switchTo(i) {
+  this.current?.cleanup?.();
+  this.index = ((i % this.scenes.length) + this.scenes.length) % this.scenes.length;
+  this.current?.setup?.();
+}
+next() { this.switchTo(this.index + 1); }
+prev() { this.switchTo(this.index - 1); }
+}
+
+// ---------- P5 LIFECYCLE ----------
+function setup() {
+const c = computeCanvasSize();
+let canvas = createCanvas(c.w, c.h);
+  canvas.parent('canvas-wrapper');
+
+cam = createCapture(VIDEO);
+cam.size(160, 160);
+cam.hide();
+
+manager = new SceneManager();
+manager
+  .add(new RandomAsciiScene())
+  .add(new MatrixScrollScene())
+  .add(new EdgeFlowScene())
+  .add(new DualRectScene())
+
+  .add(new HalftoneScene())
+  .add(new BubblesScene())
+  .add(new EdgeOnlyScene())
+  .add(new EdgeShapesScene());
+
+manager.switchTo(0);
+bindControls();
+if (!loadSettings()) {
+  applyTheme('matrix');
+}
+}
+
+function computeCanvasSize() {
+  const wrapper = document.getElementById('canvas-wrapper');
+  if (!wrapper) return { w: windowWidth - 40, h: windowHeight - 40 };
+  const maxW = wrapper.clientWidth - 40;
+  const maxH = wrapper.clientHeight - 40;
+  let w = maxW, h = w * 4/3;
+  if (h > maxH) { h = maxH; w = h * 3/4; }
+  return { w: floor(w), h: floor(h) };
+}
+
+function windowResized() {
+const c = computeCanvasSize();
+resizeCanvas(c.w, c.h);
+}
+
+function draw() {
+if (showMenu) { drawMenu(); return; }
+manager.current.draw();
+}
+
+function drawMenu() {
+background(bg());
+fill(fg()); noStroke();
+textFont('monospace'); textAlign(LEFT, TOP);
+textSize(width * 0.04); text("ASCII EXPERIMENTS", 30, 30);
+textSize(11); fill(accent());
+text("← / →  switch  ·  number key  jump  ·  M  toggle menu  ·  S  settings", 30, 30 + width*0.045 + 10);
+textSize(width * 0.022);
+manager.scenes.forEach((s, i) => {
+  fill(i === manager.index ? accent() : fg());
+  text(`${(i+1).toString().padStart(2,' ')}.  ${s.name}`,
+       30, 30 + width*0.045 + 40 + i * width * 0.03);
+});
+}
+
+function drawHUD() {
+noStroke(); fill(0, 200); rect(0, 0, width, 26);
+fill(255); textFont('monospace'); textSize(11); textAlign(LEFT, CENTER);
+text(`[${manager.index+1}/${manager.scenes.length}] ${manager.current.name}   ←/→  M=menu  S=settings`, 10, 13);
+}
+
+function keyPressed() {
+if (key === 'm' || key === 'M') { showMenu = !showMenu; return; }
+if (key === 's' || key === 'S') {
+  document.getElementById('panel').classList.toggle('open'); return;
+}
+if (key === 'f' || key === 'F') { fullscreen(!fullscreen()); return; }
+if (key === 'p' || key === 'P') { saveCanvas('ascii-scene-' + (manager.index + 1), 'png'); return; }
+if (keyCode === LEFT_ARROW)  { manager.prev(); showMenu = false; return; }
+if (keyCode === RIGHT_ARROW) { manager.next(); showMenu = false; return; }
+const n = parseInt(key, 10);
+if (!isNaN(n) && n >= 1 && n <= manager.scenes.length) {
+  manager.switchTo(n - 1); showMenu = false;
+}
+manager.current.keyPressed?.();
+}
+
+function mousePressed() {
+// Don't trigger if clicking on the settings panel
+const panel = document.getElementById('panel');
+if (panel.contains(mouseEvent?.target)) return;
+if (showMenu) { showMenu = false; return; }
+manager.current.mousePressed?.();
+}
+
+let mouseEvent;
+window.addEventListener('mousedown', e => mouseEvent = e);
+
+// ---------- HTML CONTROL BINDINGS ----------
+function bindControls() {
+const $ = id => document.getElementById(id);
+const update = (fn) => (e) => { fn(e); saveSettings(); };
+
+$('fgColor').addEventListener('input', update(e => settings.fgColor = e.target.value));
+$('bgColor').addEventListener('input', update(e => settings.bgColor = e.target.value));
+$('accentColor').addEventListener('input', update(e => settings.accentColor = e.target.value));
+$('charSet').addEventListener('input', update(e => settings.charSet = e.target.value));
+$('cellSize').addEventListener('input', update(e => {
+  settings.cellSize = parseInt(e.target.value);
+  $('cellSizeVal').textContent = e.target.value;
+}));
+$('mirror').addEventListener('change', update(e => settings.mirror = e.target.checked));
+
+// Scene presets
+document.querySelectorAll('[data-scene-idx]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    manager.switchTo(parseInt(btn.dataset.sceneIdx));
+    // Update active UI class
+    document.querySelectorAll('[data-scene-idx]').forEach(b => {
+      b.classList.remove('bg-white/20', 'border-l-2', 'border-white');
+      b.classList.add('bg-white/5');
+    });
+    btn.classList.remove('bg-white/5');
+    btn.classList.add('bg-white/20', 'border-l-2', 'border-white');
+  });
+});
+
+// Theme presets
+document.querySelectorAll('[data-theme]').forEach(btn => {
+  btn.addEventListener('click', () => applyTheme(btn.dataset.theme));
+});
+// Char preset buttons
+document.querySelectorAll('[data-chars]').forEach(btn => {
+  btn.addEventListener('click', update(() => {
+    settings.charSet = btn.dataset.chars;
+    $('charSet').value = btn.dataset.chars;
+  }));
+});
+
+const exportBtn = document.getElementById('exportPng');
+if (exportBtn) {
+  exportBtn.addEventListener('click', () => {
+    saveCanvas('ascii-scene-' + (manager.index + 1), 'png');
+  });
+}
+}
+
+function applyTheme(name) {
+const t = THEMES[name]; if (!t) return;
+settings.fgColor = t.fg;
+settings.bgColor = t.bg;
+settings.accentColor = t.accent;
+settings.charSet = t.chars;
+document.getElementById('fgColor').value = t.fg;
+document.getElementById('bgColor').value = t.bg;
+document.getElementById('accentColor').value = t.accent;
+document.getElementById('charSet').value = t.chars;
+saveSettings();
+}
+
+function saveSettings() {
+  localStorage.setItem('asciiSettings', JSON.stringify(settings));
+}
+
+function loadSettings() {
+  const saved = localStorage.getItem('asciiSettings');
+  if (saved) {
+    try {
+      Object.assign(settings, JSON.parse(saved));
+      document.getElementById('fgColor').value = settings.fgColor;
+      document.getElementById('bgColor').value = settings.bgColor;
+      document.getElementById('accentColor').value = settings.accentColor;
+      document.getElementById('charSet').value = settings.charSet;
+      document.getElementById('cellSize').value = settings.cellSize;
+      document.getElementById('cellSizeVal').textContent = settings.cellSize;
+      document.getElementById('mirror').checked = settings.mirror;
+      return true;
+    } catch(e){}
+  }
+  return false;
+}
+
+</script>
