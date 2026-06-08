@@ -18,7 +18,7 @@ const SCENES = [
     <div id="canvas-wrapper" class="w-full h-full flex items-center justify-center overflow-hidden"></div>
   </section>
 
-  <aside class="w-full lg:w-1/4 lg:h-screen lg:max-h-[100vh] lg:sticky lg:top-0 bg-[#1a1a1a] text-white border-t lg:border-t-0 lg:border-l border-system-black/20 overflow-y-auto p-6 font-sans" style="color: #eee;">
+  <aside id="panel" data-lenis-prevent="true" class="overscroll-contain w-full lg:w-1/4 lg:h-screen lg:max-h-[100vh] lg:sticky lg:top-0 bg-[#1a1a1a] text-white border-t lg:border-t-0 lg:border-l border-system-black/20 overflow-y-auto p-6 font-sans" style="color: #eee;">
     <h3 class="font-mono text-lg mb-6 tracking-wider">SETTINGS</h3>
 
     <div class="mb-6">
@@ -86,6 +86,16 @@ const SCENES = [
     </div>
 
     <div class="mb-6">
+      <label class="block mb-2 text-xs uppercase tracking-wider opacity-70">Input Source</label>
+      <div class="flex gap-2 mb-2">
+        <button id="sourceWebcamBtn" type="button" class="flex-1 py-2 bg-white/20 hover:bg-white/30 text-[10px] font-mono uppercase transition-colors border border-white">Webcam</button>
+        <button id="sourceUploadBtn" type="button" class="flex-1 py-2 bg-white/5 hover:bg-white/10 text-[10px] font-mono uppercase transition-colors border border-transparent">Upload</button>
+      </div>
+      <input type="file" id="mediaUploadInput" accept="image/*,video/*" class="hidden" />
+      <div id="uploadFileInfo" class="text-[9px] font-mono opacity-50 hidden truncate mt-1">No file loaded</div>
+    </div>
+
+    <div class="mb-6">
       <label class="flex items-center gap-2 cursor-pointer text-xs uppercase tracking-wider opacity-70">
         <input type="checkbox" id="mirror" checked />
         Mirror Camera
@@ -94,7 +104,9 @@ const SCENES = [
 
     <button 
       id="exportPng"
-      class="w-full mt-4 py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-mono uppercase tracking-wider transition-colors"
+      type="button"
+      class="w-full mt-4 py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-mono uppercase tracking-wider transition-colors relative z-50 cursor-pointer"
+      style="pointer-events: auto;"
     >
       Export PNG
     </button>
@@ -109,6 +121,9 @@ const SCENES = [
 // =====================================================
 
 let cam, manager;
+let webcamElement = null;
+let uploadedElement = null;
+let currentSourceType = 'webcam';
 let showMenu = false;
 
 // ---------- THEMES ----------
@@ -558,9 +573,17 @@ const c = computeCanvasSize();
 let canvas = createCanvas(c.w, c.h);
   canvas.parent('canvas-wrapper');
 
-cam = createCapture(VIDEO);
-cam.size(160, 160);
-cam.hide();
+try {
+  webcamElement = createCapture(VIDEO);
+  if (webcamElement) {
+    webcamElement.size(160, 160);
+    webcamElement.hide();
+  }
+  cam = webcamElement;
+} catch (e) {
+  console.error("Webcam initialization failed:", e);
+  cam = null;
+}
 
 manager = new SceneManager();
 manager
@@ -597,8 +620,25 @@ resizeCanvas(c.w, c.h);
 }
 
 function draw() {
-if (showMenu) { drawMenu(); return; }
-manager.current.draw();
+  if (showMenu) { drawMenu(); return; }
+  
+  const needsCam = manager.current.useCamera !== false;
+  if (needsCam && (!cam || !cam.pixels || cam.width === 0)) {
+    background(bg());
+    fill(fg());
+    noStroke();
+    textFont('monospace');
+    textAlign(CENTER, CENTER);
+    textSize(12);
+    text("INPUT SOURCE BLOCKED OR LOADING\n\nPLEASE UPLOAD AN IMAGE OR VIDEO\nIN THE SETTINGS PANEL", width/2, height/2);
+    return;
+  }
+  
+  try {
+    manager.current.draw();
+  } catch (e) {
+    console.error("Error drawing scene:", e);
+  }
 }
 
 function drawMenu() {
@@ -625,7 +665,9 @@ text(`[${manager.index+1}/${manager.scenes.length}] ${manager.current.name}   â†
 function keyPressed() {
 if (key === 'm' || key === 'M') { showMenu = !showMenu; return; }
 if (key === 's' || key === 'S') {
-  document.getElementById('panel').classList.toggle('open'); return;
+  const panel = document.getElementById('panel');
+  if (panel) panel.classList.toggle('open');
+  return;
 }
 if (key === 'f' || key === 'F') { fullscreen(!fullscreen()); return; }
 if (key === 'p' || key === 'P') { saveCanvas('ascii-scene-' + (manager.index + 1), 'png'); return; }
@@ -641,7 +683,7 @@ manager.current.keyPressed?.();
 function mousePressed() {
 // Don't trigger if clicking on the settings panel
 const panel = document.getElementById('panel');
-if (panel.contains(mouseEvent?.target)) return;
+if (panel && panel.contains(mouseEvent?.target)) return;
 if (showMenu) { showMenu = false; return; }
 manager.current.mousePressed?.();
 }
@@ -649,9 +691,83 @@ manager.current.mousePressed?.();
 let mouseEvent;
 window.addEventListener('mousedown', e => mouseEvent = e);
 
+function switchToSource(type) {
+  currentSourceType = type;
+  const webBtn = document.getElementById('sourceWebcamBtn');
+  const upBtn = document.getElementById('sourceUploadBtn');
+  
+  if (type === 'webcam') {
+    cam = webcamElement;
+    if (uploadedElement && uploadedElement.pause) uploadedElement.pause();
+    if (webcamElement && webcamElement.play) webcamElement.play();
+    
+    if (webBtn) {
+      webBtn.classList.remove('bg-white/5', 'border-transparent');
+      webBtn.classList.add('bg-white/20', 'border-white');
+    }
+    if (upBtn) {
+      upBtn.classList.remove('bg-white/20', 'border-white');
+      upBtn.classList.add('bg-white/5', 'border-transparent');
+    }
+  } else {
+    if (uploadedElement) {
+      cam = uploadedElement;
+      if (webcamElement && webcamElement.pause) webcamElement.pause();
+      if (uploadedElement.play) uploadedElement.play();
+      
+      if (upBtn) {
+        upBtn.classList.remove('bg-white/5', 'border-transparent');
+        upBtn.classList.add('bg-white/20', 'border-white');
+      }
+      if (webBtn) {
+        webBtn.classList.remove('bg-white/20', 'border-white');
+        webBtn.classList.add('bg-white/5', 'border-transparent');
+      }
+    }
+  }
+}
+
+function handleUpload(file) {
+  if (!file) return;
+  
+  if (uploadedElement) {
+    if (uploadedElement.pause) uploadedElement.pause();
+    if (uploadedElement.remove) uploadedElement.remove();
+  }
+  
+  const fileUrl = URL.createObjectURL(file);
+  const isVideo = file.type.startsWith('video/');
+  
+  if (isVideo) {
+    uploadedElement = createVideo(fileUrl, () => {
+      uploadedElement.size(160, 160);
+      uploadedElement.hide();
+      uploadedElement.loop();
+      uploadedElement.volume(0);
+      switchToSource('uploaded');
+    });
+  } else {
+    uploadedElement = loadImage(fileUrl, () => {
+      uploadedElement.resize(160, 160);
+      switchToSource('uploaded');
+    });
+  }
+  
+  const infoEl = document.getElementById('uploadFileInfo');
+  if (infoEl) {
+    infoEl.textContent = file.name;
+    infoEl.classList.remove('hidden');
+  }
+}
+
 // ---------- HTML CONTROL BINDINGS ----------
 function bindControls() {
 const $ = id => document.getElementById(id);
+const panel = document.getElementById('panel');
+if (panel) {
+  panel.addEventListener('wheel', (e) => e.stopPropagation(), { passive: false });
+  panel.addEventListener('touchmove', (e) => e.stopPropagation(), { passive: false });
+}
 const update = (fn) => (e) => { fn(e); saveSettings(); };
 
 $('fgColor').addEventListener('input', update(e => settings.fgColor = e.target.value));
@@ -690,11 +806,67 @@ document.querySelectorAll('[data-chars]').forEach(btn => {
   }));
 });
 
-const exportBtn = document.getElementById('exportPng');
-if (exportBtn) {
-  exportBtn.addEventListener('click', () => {
-    saveCanvas('ascii-scene-' + (manager.index + 1), 'png');
+const webBtn = document.getElementById('sourceWebcamBtn');
+const upBtn = document.getElementById('sourceUploadBtn');
+const fileInput = document.getElementById('mediaUploadInput');
+
+if (webBtn) {
+  webBtn.addEventListener('click', () => {
+    switchToSource('webcam');
   });
+}
+
+if (upBtn) {
+  upBtn.addEventListener('click', () => {
+    fileInput.click();
+  });
+}
+
+if (fileInput) {
+  fileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) handleUpload(file);
+  });
+}
+
+const exportBtn = document.getElementById('exportPng');
+
+function triggerPngDownload() {
+  try {
+    const canvasElement = document.querySelector('#canvas-wrapper canvas');
+    if (!canvasElement) {
+      alert("Export failed: Could not locate canvas on screen.");
+      return;
+    }
+    
+    canvasElement.toBlob((blob) => {
+      if (!blob) {
+        alert("Export failed: Canvas generated an empty image.");
+        return;
+      }
+      try {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.download = 'ascii-scene-' + (manager.index + 1) + '-' + Date.now() + '.png';
+        link.href = url;
+        document.body.appendChild(link);
+        link.click();
+        setTimeout(() => {
+          document.body.removeChild(link);
+          URL.revokeObjectURL(url);
+        }, 100);
+      } catch (err) {
+        alert("Export failed during file creation: " + err.message);
+      }
+    }, 'image/png');
+    
+  } catch (e) {
+    alert("Export Error (Likely Tainted Canvas): " + e.message);
+  }
+}
+
+if (exportBtn) {
+  exportBtn.addEventListener('click', triggerPngDownload);
 }
 }
 

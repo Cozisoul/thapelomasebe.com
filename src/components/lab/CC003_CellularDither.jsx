@@ -73,7 +73,26 @@ export default function CC003_CellularDither() {
       };
 
       p._exportPng = () => {
-        p.saveCanvas('cellular-dither', 'png');
+        const canvasElement = wrapperRef.current ? wrapperRef.current.querySelector('canvas') : null;
+        if (canvasElement) {
+          try {
+            const link = document.createElement('a');
+            link.download = `cellular-dither-${Date.now()}.png`;
+            link.href = canvasElement.toDataURL('image/png');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            return;
+          } catch (e) {
+            console.error("DOM export failed, using fallback", e);
+          }
+        }
+        
+        try {
+          p.saveCanvas('cellular-dither', 'png');
+        } catch (e) {
+          console.error("p5 saveCanvas failed", e);
+        }
       };
 
       class DitherEffect {
@@ -253,7 +272,13 @@ export default function CC003_CellularDither() {
         <div id="canvas-wrapper" ref={wrapperRef} className="w-full h-full flex items-center justify-center overflow-hidden"></div>
       </section>
 
-      <aside style={styles.sidebar} className="w-full lg:w-1/4 lg:h-screen lg:max-h-[100vh] lg:sticky lg:top-0 border-t lg:border-t-0 lg:border-l overflow-y-auto p-6 font-sans transition-colors duration-300">
+      <aside 
+        data-lenis-prevent="true"
+        style={styles.sidebar} 
+        className="w-full lg:w-1/4 lg:h-screen lg:max-h-[100vh] lg:sticky lg:top-0 border-t lg:border-t-0 lg:border-l overflow-y-auto p-6 font-sans transition-colors duration-300"
+        onWheel={(e) => e.stopPropagation()}
+        onTouchMove={(e) => e.stopPropagation()}
+      >
         <h3 className="font-mono text-lg mb-6 tracking-wider">CELLULAR DITHER</h3>
 
         {/* Theme Dropdown matches original "one button" style */}

@@ -21,7 +21,7 @@ const { project } = Astro.props;
   <div class="flex flex-col lg:flex-row min-h-screen w-full">
     
     <!-- COLUMN 1: IDENTITY & SPECS (The Left-Weighted Anchor) -->
-    <aside class="w-full lg:w-1/4 lg:h-screen lg:sticky lg:top-0 p-6 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-system-black/20 bg-cosmic-latte z-10 overflow-y-auto shrink-0">
+    <aside data-lenis-prevent class="w-full lg:w-1/4 lg:h-screen lg:sticky lg:top-0 p-6 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-system-black/20 bg-cosmic-latte z-10 overflow-y-auto shrink-0">
       
       <!-- Vertical Label -->
       <div>
@@ -46,7 +46,7 @@ const { project } = Astro.props;
           </h2>
 
           <!-- Narrative -->
-          <p class="font-sans text-sm leading-relaxed opacity-80 mb-8">
+          <p class="font-sans text-sm leading-relaxed opacity-80 mb-8 whitespace-pre-wrap">
             {project.description}
           </p>
         </div>

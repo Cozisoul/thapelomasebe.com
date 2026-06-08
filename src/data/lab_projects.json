@@ -10,8 +10,8 @@
     "year": 2025,
     "git_ref": "ascii-expiriments",
     "git_url": "https://github.com/Cozisoul/ascii-expiriments",
-    "description": "Using the Sobel operator — an industrial computer vision tool — to reduce the human form to its mathematical edges, then re-weaving it into the ASCII character set. The project doesn't hide behind a 'filter.' It exposes the 1-bit dithering and the raw character grid. A study on how machines 'see' and 'remember' the user, moving from high-resolution surveillance to low-resolution archival texture.",
-    "abstract": "Structural Erasure explores the boundary between human perception and computational memory. Through the Sobel edge-detection operator, human presence is reduced to gradient magnitudes — the mathematical skeleton of form. These edges are then mapped into the ASCII character set, a technology of the 1960s designed for teletype machines. The result is a real-time portrait that oscillates between recognition and abstraction, between surveillance and poetry. The work asks: when a machine remembers you, what does it choose to keep?",
+    "description": "A live camera feed is transformed into a field of ASCII characters and structural marks.\n\nRather than reproducing the image faithfully, the system extracts edges, contrast relationships, and directional information. The resulting image exists somewhere between language, drawing, and machine vision.\n\nThe viewer encounters a version of themselves that is no longer photographic but still recognizable.\n\nThis work investigates the threshold at which representation becomes abstraction.\n\n**Artistic Context**\n\nThe project is situated within ongoing investigations into memory, archives, digital materiality, and computational culture.\n\nRather than treating technology as a tool for producing ever more realistic images, What Remains uses reduction, degradation, and abstraction to reveal the structures through which contemporary vision is mediated.\n\nThe work proposes that loss is not the opposite of information. Loss can also be a method of understanding.\n\n**Technical Notes**\n\n• Live webcam input\n• Real-time ASCII rendering\n• Edge-detection and image analysis\n• p5.js and HTML5 Canvas\n• Browser-based installation environment\n• Projection, monitor, or screen-based presentation",
+    "abstract": "",
     "scenes": [
       "Random ASCII",
       "Matrix Camera Scroll",
@@ -25,7 +25,7 @@
     "coreSnippet": "function sobelGrid(px, w, h) {\n  const out = new Float32Array(w * h * 2);\n  for (let y = 1; y < h - 1; y++) {\n    for (let x = 1; x < w - 1; x++) {\n      const i = (x + y * w) * 4;\n      const tl=px[i-4-w*4], t=px[i-w*4], tr=px[i+4-w*4];\n      const l =px[i-4],                  r =px[i+4];\n      const bl=px[i-4+w*4], b=px[i+w*4], br=px[i+4+w*4];\n      const k = (x + y * w) * 2;\n      out[k]   = -tl - 2*l - bl + tr + 2*r + br;  // Gx\n      out[k+1] = -tl - 2*t - tr + bl + 2*b + br;  // Gy\n    }\n  }\n  return out;\n}",
     "tags": ["computer-vision", "sobel", "ascii", "webcam", "dithering", "real-time"],
     "dependencies": ["p5.js"],
-    "inputType": "webcam"
+    "inputType": "webcam-or-upload"
   },
   {
     "id": "CC_002",
@@ -38,8 +38,8 @@
     "year": 2025,
     "git_ref": "generative-art-suite",
     "git_url": "https://github.com/Cozisoul/generative-art-suite",
-    "description": "A systematic image decomposition pipeline. Upload any photograph and observe its destruction through seven algorithmic lenses: pixelation, voxelization, Floyd-Steinberg dithering, halftone screening, ASCII rendering, anaglyph displacement, and data-glitch corruption. Each effect exposes a different layer of the image's mathematical substrate.",
-    "abstract": "EFFECT_ROULETTE treats every uploaded image as raw data to be dissected. Seven rendering modes — from the geometric purity of halftone dots to the entropic chaos of glitch slicing — each reveal what the image 'is' beneath the surface of human perception. The Floyd-Steinberg dithering algorithm, in particular, demonstrates how a continuous-tone photograph can be reduced to a single bit per pixel while preserving the illusion of depth through error diffusion.",
+    "description": "A continuous image decomposition engine.\n\nThe system cycles through multiple modes of visual reduction, including bitmap dithering, halftone rendering, chromatic displacement, and signal corruption.\n\nEach transformation reveals a different historical method of image reproduction while exposing the material structure hidden beneath contemporary high-resolution media.\n\nThe image oscillates between clarity and collapse.\n\n**Artistic Context**\n\nThe project is situated within ongoing investigations into memory, archives, digital materiality, and computational culture.\n\nRather than treating technology as a tool for producing ever more realistic images, What Remains uses reduction, degradation, and abstraction to reveal the structures through which contemporary vision is mediated.\n\nThe work proposes that loss is not the opposite of information. Loss can also be a method of understanding.\n\n**Technical Notes**\n\n• Bitmap and halftone processing\n• Image decomposition and signal corruption\n• HTML5 Canvas API\n• Browser-based installation environment\n• Projection, monitor, or screen-based presentation",
+    "abstract": "",
     "scenes": [
       "Pixelate",
       "Voxelize",
@@ -65,8 +65,8 @@
     "year": 2025,
     "git_ref": "generative-art-suite",
     "git_url": "https://github.com/Cozisoul/generative-art-suite",
-    "description": "A cellular automaton driving a generative grid composition. Conway's Game of Life determines which cells live and die; the visual output renders each generation as a color-coded grid with multiple rulesets (Standard, HighLife, Day & Night, Seeds). The system oscillates between order and entropy — the grid as organism.",
-    "abstract": "CELLULAR_DITHER collapses the distinction between algorithm and artwork. A cellular automaton — four simple rules governing birth and death — generates compositions that no human hand could predict. Each ruleset produces radically different emergent behavior: Standard Conway creates gliders and oscillators; HighLife spawns replicators; Day & Night produces organic, flowing patterns. The grid itself becomes a living system, its aesthetic value a byproduct of mathematical inevitability.",
+    "description": "A generative system in which images become living computational ecologies.\n\nDrawing from cellular automata, the work translates visual information into evolving fields of autonomous cells. Patterns emerge, replicate, disappear, and reorganize themselves according to simple local rules.\n\nThe resulting image is never fixed. It behaves less like a photograph and more like an organism.\n\nThe work explores the possibility that contemporary images are no longer static representations but dynamic systems.\n\n**Artistic Context**\n\nThe project is situated within ongoing investigations into memory, archives, digital materiality, and computational culture.\n\nRather than treating technology as a tool for producing ever more realistic images, What Remains uses reduction, degradation, and abstraction to reveal the structures through which contemporary vision is mediated.\n\nThe work proposes that loss is not the opposite of information. Loss can also be a method of understanding.\n\n**Technical Notes**\n\n• Cellular automata simulation\n• Emergent generative algorithms\n• HTML5 Canvas API\n• Browser-based installation environment\n• Projection, monitor, or screen-based presentation",
+    "abstract": "",
     "scenes": [
       "Standard Conway",
       "HighLife",

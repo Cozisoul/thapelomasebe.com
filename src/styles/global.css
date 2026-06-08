@@ -65,6 +65,19 @@ html.lenis, html.lenis body {
   background: transparent;
 }
 
+/* Show sleek scrollbar for sticky scrollable panels */
+[data-lenis-prevent]::-webkit-scrollbar {
+  width: 6px;
+  background: rgba(255, 255, 255, 0.05);
+}
+[data-lenis-prevent]::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+[data-lenis-prevent]::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
 /* Font utility classes */
 .font-sans {
   font-family: 'Satoshi', 'Inter', sans-serif;

@@ -156,29 +156,37 @@ const LabRegistry = ({ projects }) => {
           <a
             key={project.id}
             href={`/lab/${project.id}`}
-            className="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 border-b border-system-black/20 hover:bg-system-black hover:text-cosmic-latte transition-colors group cursor-crosshair"
+            className="flex flex-col md:grid md:grid-cols-12 gap-2 md:gap-4 p-4 border-b border-system-black/20 hover:bg-system-black hover:text-cosmic-latte transition-colors group cursor-crosshair relative"
             onMouseEnter={() => setHoveredId(project.id)}
             onMouseLeave={() => setHoveredId(null)}
           >
-            <div className="col-span-1 font-mono text-xs opacity-50 group-hover:opacity-100">
-              {String(idx + 1).padStart(2, '0')}
+            <div className="flex justify-between md:contents">
+              <div className="font-mono text-xs opacity-50 group-hover:opacity-100 md:col-span-1">
+                {String(idx + 1).padStart(2, '0')}
+              </div>
+              <div className="md:hidden">
+                <span className="inline-flex items-center gap-1.5 font-mono text-[10px]">
+                  <span className="w-2 h-2 bg-accent-blue rounded-full animate-pulse" />
+                  <span className="uppercase">{project.status}</span>
+                </span>
+              </div>
             </div>
-            <div className="col-span-3 font-bold uppercase tracking-tight">
+            <div className="font-bold uppercase tracking-tight md:col-span-3">
               {project.name}
             </div>
-            <div className="col-span-3 font-mono text-[10px] uppercase opacity-80">
+            <div className="font-mono text-[10px] uppercase opacity-80 md:col-span-3">
               {project.algorithmShort}
             </div>
-            <div className="col-span-2 font-mono text-[10px] uppercase opacity-60">
+            <div className="hidden md:block font-mono text-[10px] uppercase opacity-60 md:col-span-2">
               {project.engine}
             </div>
-            <div className="col-span-2 font-mono text-[10px] uppercase opacity-60">
+            <div className="hidden md:block font-mono text-[10px] uppercase opacity-60 md:col-span-2">
               {project.inputType === 'webcam' ? '📹 WEBCAM' : project.inputType === 'image-upload' ? '📁 IMAGE' : '⚡ AUTO'}
             </div>
-            <div className="col-span-1 text-right">
+            <div className="hidden md:block text-right md:col-span-1">
               <span className="inline-flex items-center gap-1.5 font-mono text-[10px]">
                 <span className="w-2 h-2 bg-accent-blue rounded-full animate-pulse" />
-                <span className="hidden lg:inline uppercase">{project.status}</span>
+                <span className="uppercase">{project.status}</span>
               </span>
             </div>
           </a>

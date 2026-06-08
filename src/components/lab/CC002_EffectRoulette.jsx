@@ -354,7 +354,9 @@ export default function CC002_EffectRoulette() {
     const link = document.createElement('a');
     link.download = `effect_roulette_${settings.effect}_${Date.now()}.png`;
     link.href = canvasRef.current.toDataURL('image/png');
+    document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -365,7 +367,13 @@ export default function CC002_EffectRoulette() {
         </div>
       </section>
 
-      <aside className="w-full lg:w-1/4 lg:h-screen lg:sticky lg:top-0 bg-[#1a1a1a] text-white border-t lg:border-t-0 lg:border-l border-system-black/20 overflow-y-auto p-6 font-sans" style={{ color: '#eee' }}>
+      <aside 
+        data-lenis-prevent="true" 
+        className="overscroll-contain w-full lg:w-1/4 lg:h-screen lg:sticky lg:top-0 bg-[#1a1a1a] text-white border-t lg:border-t-0 lg:border-l border-system-black/20 overflow-y-auto p-6 font-sans" 
+        style={{ color: '#eee' }}
+        onWheel={(e) => e.stopPropagation()}
+        onTouchMove={(e) => e.stopPropagation()}
+      >
         <h3 className="font-mono text-lg mb-6 tracking-wider">EFFECT ROULETTE</h3>
 
         <div className="mb-6">

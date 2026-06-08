@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 ---
 
-<MainLayout title={project.title}>
+<MainLayout title={project.title} hideNav={true}>
   
   <div class="flex flex-col lg:flex-row min-h-screen">
     
@@ -24,11 +24,11 @@ const { project } = Astro.props;
     <aside class="w-full lg:w-1/2 lg:h-screen lg:sticky lg:top-0 p-6 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-system-black bg-cosmic-latte z-10">
       
       <!-- Top: Header -->
-      <div class="mt-24 lg:mt-32">
+      <div class="mt-16 lg:mt-32">
         <div class="font-mono text-xs uppercase tracking-widest opacity-60 mb-4">
           {project.id} — {project.category}
         </div>
-        <h1 class="font-sans font-normal text-6xl lg:text-7xl leading-[0.9] uppercase tracking-tighter mb-8">
+        <h1 class="font-sans font-normal text-5xl md:text-6xl lg:text-7xl leading-[0.9] uppercase tracking-tighter mb-8">
           {project.title}
         </h1>
         
@@ -101,7 +101,7 @@ const { project } = Astro.props;
 
   <!-- NAVIGATION OVERRIDE -->
   <!-- We add a specific 'Close' button for this view -->
-  <a href="/" class="fixed top-6 right-6 font-mono text-xs z-50 mix-blend-difference text-cosmic-latte hover:text-accent-red cursor-pointer">
+  <a href="/" class="fixed top-4 right-4 md:top-6 md:right-6 font-mono text-xs z-50 mix-blend-difference text-cosmic-latte hover:text-accent-red cursor-pointer bg-system-black/10 backdrop-blur-sm p-2 rounded-sm md:bg-transparent md:backdrop-blur-none md:p-0 md:rounded-none">
     [CLOSE]
   </a>
 
