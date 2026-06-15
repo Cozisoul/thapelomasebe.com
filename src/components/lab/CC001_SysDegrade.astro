@@ -832,7 +832,7 @@ if (upBtn) {
   });
 }
 
-$('exportBtn').addEventListener('click', () => {
+addEv('exportPng', 'click', () => {
   if (window.gtmPush) window.gtmPush('lab_export', { project_id: 'CC_001' });
   triggerPngDownload();
 });
