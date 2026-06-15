@@ -273,6 +273,19 @@ const { title, hideNav } = Astro.props;
           }
         });
       }
+
+      // Track ALL global <a> tag clicks (Outbound and Internal)
+      document.body.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const anchor = target.closest('a');
+        
+        if (anchor && anchor.href && 'gtmPush' in window) {
+          const isOutbound = anchor.hostname !== window.location.hostname;
+          if (isOutbound) {
+            (window as any).gtmPush('outbound_click', { link_url: anchor.href, link_text: anchor.textContent?.trim() || '' });
+          }
+        }
+      });
     </script>
 
     <!-- SMOOTH SCROLL SCRIPT -->
