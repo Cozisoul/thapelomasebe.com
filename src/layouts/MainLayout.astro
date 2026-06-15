@@ -13,7 +13,7 @@ const { title, hideNav } = Astro.props;
     <!-- Security Headers -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://tagassistant.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://cdn.simpleicons.org https://logo.clearbit.com https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://*.google-analytics.com; media-src 'self' blob: mediastream:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://tagassistant.google.com https://*.google-analytics.com https://*.analytics.google.com; font-src 'self'; worker-src 'self' blob:; frame-src 'self' https://www.googletagmanager.com https://tagassistant.google.com;" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://tagassistant.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https://cdn.simpleicons.org https://logo.clearbit.com https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://*.google-analytics.com; media-src 'self' blob: mediastream:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://tagassistant.google.com https://*.google-analytics.com https://*.analytics.google.com; font-src 'self' https://fonts.gstatic.com; worker-src 'self' blob:; frame-src 'self' https://www.googletagmanager.com https://tagassistant.google.com;" />
     
     <!-- Google Tag Manager -->
     <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -122,10 +122,10 @@ const { title, hideNav } = Astro.props;
     <!-- End Google Tag Manager (noscript) -->
     <!-- NOISE OVERLAY (Texture via SVG filter — no external file needed) -->
     <svg aria-hidden="true" class="hidden md:block fixed inset-0 w-full h-full pointer-events-none z-50 mix-blend-overlay opacity-[0.04]" xmlns="http://www.w3.org/2000/svg">
-      <filter id="noise">
+      <filter id="svg-noise-filter">
         <feTurbulence type="fractalNoise" baseFrequency="0.80" numOctaves="4" stitchTiles="stitch"/>
       </filter>
-      <rect width="100%" height="100%" filter="url(#noise)"/>
+      <rect width="100%" height="100%" filter="url(#svg-noise-filter)"/>
     </svg>
 
     <!-- CUSTOM CURSOR -->

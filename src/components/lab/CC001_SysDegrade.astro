@@ -775,15 +775,20 @@ const update = (fn, paramName) => (e) => {
   }
 };
 
-$('fgColor').addEventListener('input', update(e => settings.fgColor = e.target.value, 'fgColor'));
-$('bgColor').addEventListener('input', update(e => settings.bgColor = e.target.value, 'bgColor'));
-$('accentColor').addEventListener('input', update(e => settings.accentColor = e.target.value, 'accentColor'));
-$('charSet').addEventListener('input', update(e => settings.charSet = e.target.value, 'charSet'));
-$('cellSize').addEventListener('input', update(e => {
+const addEv = (id, evt, fn) => {
+  const el = $(id);
+  if (el) el.addEventListener(evt, fn);
+};
+
+addEv('fgColor', 'input', update(e => settings.fgColor = e.target.value, 'fgColor'));
+addEv('bgColor', 'input', update(e => settings.bgColor = e.target.value, 'bgColor'));
+addEv('accentColor', 'input', update(e => settings.accentColor = e.target.value, 'accentColor'));
+addEv('charSet', 'input', update(e => settings.charSet = e.target.value, 'charSet'));
+addEv('cellSize', 'input', update(e => {
   settings.cellSize = parseInt(e.target.value);
-  $('cellSizeVal').textContent = e.target.value;
+  if ($('cellSizeVal')) $('cellSizeVal').textContent = e.target.value;
 }, 'cellSize'));
-$('mirror').addEventListener('change', update(e => settings.mirror = e.target.checked, 'mirror'));
+addEv('mirror', 'change', update(e => settings.mirror = e.target.checked, 'mirror'));
 
 // Scene presets
 document.querySelectorAll('[data-scene-idx]').forEach(btn => {
