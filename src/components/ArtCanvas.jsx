@@ -7,20 +7,27 @@ export default function ArtCanvas({ projects }) {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const containerRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
   
   // Layout and Filtering State
   const [layoutMode, setLayoutMode] = useState('chaos'); // 'chaos' | 'grid'
   const [filterCategory, setFilterCategory] = useState('All');
   const [filterYear, setFilterYear] = useState('All');
 
+  // Touch/swipe tracking for modal
+  const touchStartRef = useRef({ x: 0, y: 0 });
+  const touchEndRef = useRef({ x: 0, y: 0 });
+
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
+    setIsTouchDevice(window.matchMedia("(pointer: coarse)").matches);
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   const openModal = (project) => {
+    if (window.gtmPush) window.gtmPush('art_view', { artwork_title: project.title, artwork_year: project.year });
     setSelectedProject(project);
     setActiveImageIndex(0);
     document.body.style.overflow = 'hidden';
@@ -34,6 +41,7 @@ export default function ArtCanvas({ projects }) {
   const nextImage = useCallback((e) => {
     if (e) e.stopPropagation();
     if (!selectedProject) return;
+    if (window.gtmPush) window.gtmPush('art_carousel_nav', { artwork_title: selectedProject.title, direction: 'next' });
     setActiveImageIndex((prev) => 
       prev === selectedProject.media.length - 1 ? 0 : prev + 1
     );
@@ -42,10 +50,45 @@ export default function ArtCanvas({ projects }) {
   const prevImage = useCallback((e) => {
     if (e) e.stopPropagation();
     if (!selectedProject) return;
+    if (window.gtmPush) window.gtmPush('art_carousel_nav', { artwork_title: selectedProject.title, direction: 'prev' });
     setActiveImageIndex((prev) => 
       prev === 0 ? selectedProject.media.length - 1 : prev - 1
     );
   }, [selectedProject]);
+
+  // Touch swipe handlers for modal
+  const handleTouchStart = useCallback((e) => {
+    touchStartRef.current = {
+      x: e.touches[0].clientX,
+      y: e.touches[0].clientY,
+    };
+    touchEndRef.current = {
+      x: e.touches[0].clientX,
+      y: e.touches[0].clientY,
+    };
+  }, []);
+
+  const handleTouchMove = useCallback((e) => {
+    touchEndRef.current = {
+      x: e.touches[0].clientX,
+      y: e.touches[0].clientY,
+    };
+  }, []);
+
+  const handleTouchEnd = useCallback(() => {
+    const deltaX = touchStartRef.current.x - touchEndRef.current.x;
+    const deltaY = touchStartRef.current.y - touchEndRef.current.y;
+    const minSwipeDistance = 50;
+
+    // Only trigger horizontal swipe if it's more horizontal than vertical
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
+      if (deltaX > 0) {
+        nextImage();
+      } else {
+        prevImage();
+      }
+    }
+  }, [nextImage, prevImage]);
 
   // Keyboard Navigation for Modal
   useEffect(() => {
@@ -102,11 +145,14 @@ export default function ArtCanvas({ projects }) {
   // Count visible for feedback
   const projectCount = visibleProjects.length;
 
+  // State for mobile filter panel
+  const [filterOpen, setFilterOpen] = useState(false);
+
   return (
     <div 
       className={clsx(
         "relative w-full overflow-hidden transition-colors duration-500",
-        isGrid ? "min-h-screen bg-system-black text-cosmic-latte pt-40 pb-32 px-6" : "min-h-[150vh] md:min-h-[200vh] bg-cosmic-latte"
+        isGrid ? "min-h-screen bg-system-black text-cosmic-latte pt-40 pb-32 px-4 md:px-6" : "min-h-[150vh] md:min-h-[200vh] bg-cosmic-latte"
       )} 
       ref={containerRef}
     >
@@ -120,11 +166,11 @@ export default function ArtCanvas({ projects }) {
 
       {/* Grid Mode Header */}
       {isGrid && (
-        <header className="max-w-[1440px] mx-auto mb-16 relative z-10">
-          <h1 className="font-sans text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-4">Visual Archive</h1>
-          <div className="flex items-center gap-4">
-            <p className="font-mono text-sm text-cosmic-latte/50">00.07 // PHOTOGRAPHY, PAINTING & TRANSDISCIPLINARY FORMS</p>
-            <span className="font-mono text-[10px] text-cosmic-latte/30 border border-cosmic-latte/10 px-2 py-0.5">
+        <header className="max-w-[1440px] mx-auto mb-12 md:mb-16 relative z-10">
+          <h1 className="font-sans text-3xl md:text-6xl font-bold uppercase tracking-tighter mb-4">Visual Archive</h1>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+            <p className="font-mono text-xs md:text-sm text-cosmic-latte/50">00.07 // PHOTOGRAPHY, PAINTING & TRANSDISCIPLINARY FORMS</p>
+            <span className="font-mono text-[10px] text-cosmic-latte/30 border border-cosmic-latte/10 px-2 py-0.5 w-fit">
               {projectCount} {projectCount === 1 ? 'WORK' : 'WORKS'}
             </span>
           </div>
@@ -134,7 +180,7 @@ export default function ArtCanvas({ projects }) {
       {/* Layout Container */}
       <div className={clsx(
         "relative w-full h-full max-w-[1440px] mx-auto",
-        isGrid ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12" : "p-4 md:p-0"
+        isGrid ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-12" : (isMobile ? "flex flex-col items-center pt-24 pb-48 px-4 overflow-hidden" : "p-4 md:p-0")
       )}>
         <AnimatePresence>
           {visibleProjects.map((project, idx) => {
@@ -145,15 +191,15 @@ export default function ArtCanvas({ projects }) {
               <motion.div
                 key={project.id}
                 layout
-                drag={!isGrid && !isMobile}
+                drag={!isGrid}
                 dragConstraints={containerRef}
                 dragElastic={0.2}
                 dragTransition={{ bounceStiffness: 100, bounceDamping: 10 }}
-                initial={isGrid ? { opacity: 0, y: 20 } : (isMobile ? { y: 20, opacity: 1 } : { x: layout.x, y: layout.y, rotate: layout.rotation, opacity: 1 })}
+                initial={isGrid ? { opacity: 0, y: 20 } : (isMobile ? { y: 20, opacity: 1, rotate: layout.rotation } : { x: layout.x, y: layout.y, rotate: layout.rotation, opacity: 1 })}
                 animate={isGrid 
                   ? { opacity: 1, y: 0, x: 0, rotate: 0, width: '100%' }
                   : (isMobile 
-                    ? { y: 0, opacity: 1, rotate: layout.rotation * 0.5, width: '100%' } 
+                    ? { y: 0, x: 0, opacity: 1, rotate: layout.rotation, width: '85%' } 
                     : { x: layout.x, y: layout.y, rotate: layout.rotation, opacity: 1, width: layout.width })}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.5, ease: "easeOut", delay: isGrid ? idx * 0.03 : 0 }}
@@ -161,22 +207,22 @@ export default function ArtCanvas({ projects }) {
                 whileDrag={!isGrid ? { scale: 1.05, zIndex: 100, cursor: 'grabbing' } : {}}
                 style={{
                   position: isGrid ? 'relative' : (isMobile ? 'relative' : 'absolute'),
-                  margin: isGrid ? '0' : (isMobile ? '0 auto 40px auto' : '0'),
+                  margin: isGrid ? '0' : (isMobile ? '20px auto 40px auto' : '0'),
                   maxWidth: isGrid ? 'none' : '500px',
-                  zIndex: 10
+                  zIndex: isMobile ? visibleProjects.length - idx : 10
                 }}
                 className={clsx(
                   "group transition-colors duration-300",
                   isGrid 
-                    ? "border border-cosmic-latte/20 p-4 hover:border-cosmic-latte/60 bg-[#0a0a0a] cursor-crosshair" 
-                    : "bg-system-black p-3 pb-8 shadow-2xl cursor-grab"
+                    ? "border border-cosmic-latte/20 p-3 md:p-4 hover:border-cosmic-latte/60 bg-[#0a0a0a] cursor-crosshair" 
+                    : (isMobile ? "bg-system-black p-3 pb-8 shadow-2xl cursor-grab border border-system-black/10" : "bg-system-black p-3 pb-8 shadow-2xl cursor-grab")
                 )}
                 onClick={() => openModal(project)}
               >
                 
                 {/* Evidence Room Framing (Grid Mode Only) */}
                 {isGrid && (
-                  <div className="flex justify-between font-mono text-[10px] text-cosmic-latte/50 uppercase tracking-widest mb-4 border-b border-cosmic-latte/20 pb-2">
+                  <div className="flex justify-between font-mono text-[10px] text-cosmic-latte/50 uppercase tracking-widest mb-3 md:mb-4 border-b border-cosmic-latte/20 pb-2">
                       <span>SYS_ID: {project.id}</span>
                       <span>{project.year}</span>
                   </div>
@@ -213,11 +259,11 @@ export default function ArtCanvas({ projects }) {
 
                 {/* Bottom Metadata */}
                 {isGrid ? (
-                  <div className="mt-6">
-                      <span className="inline-block bg-system-black text-cosmic-latte border border-cosmic-latte/20 font-mono text-[10px] px-2 py-1 uppercase tracking-widest mb-3">
+                  <div className="mt-4 md:mt-6">
+                      <span className="inline-block bg-system-black text-cosmic-latte border border-cosmic-latte/20 font-mono text-[10px] px-2 py-1 uppercase tracking-widest mb-2 md:mb-3">
                           {project.tags.find(t => !ignoredTags.includes(t)) || 'Visual Archive'}
                       </span>
-                      <h2 className="text-xl font-medium tracking-tight text-cosmic-latte/90 group-hover:text-cosmic-latte transition-colors">
+                      <h2 className="text-lg md:text-xl font-medium tracking-tight text-cosmic-latte/90 group-hover:text-cosmic-latte transition-colors">
                           {project.title}
                       </h2>
                   </div>
@@ -240,51 +286,112 @@ export default function ArtCanvas({ projects }) {
         )}
       </div>
 
-      {/* Control Bar (Fixed Dock) */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex flex-col md:flex-row gap-3 items-center bg-system-black text-cosmic-latte border border-cosmic-latte/20 p-3 md:p-4 shadow-2xl backdrop-blur-md w-[92vw] md:w-auto max-w-5xl">
+      {/* Control Bar (Fixed Dock) — Desktop: horizontal, Mobile: compact with expandable filters */}
+      <div className="fixed bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 z-50 bg-system-black text-cosmic-latte border border-cosmic-latte/20 shadow-2xl backdrop-blur-md w-[92vw] md:w-auto max-w-5xl safe-bottom">
         
-        {/* Layout Toggle */}
-        <div className="flex gap-2 md:border-r border-cosmic-latte/20 md:pr-4 w-full md:w-auto justify-center">
-          <button 
-            onClick={() => setLayoutMode('chaos')}
-            className={clsx("font-mono text-xs px-3 py-1.5 border transition-all duration-200", !isGrid ? 'bg-cosmic-latte text-system-black border-cosmic-latte' : 'border-cosmic-latte/20 hover:border-cosmic-latte/80 hover:bg-cosmic-latte/5')}
-          >
-            [CHAOS]
-          </button>
-          <button 
-            onClick={() => setLayoutMode('grid')}
-            className={clsx("font-mono text-xs px-3 py-1.5 border transition-all duration-200", isGrid ? 'bg-cosmic-latte text-system-black border-cosmic-latte' : 'border-cosmic-latte/20 hover:border-cosmic-latte/80 hover:bg-cosmic-latte/5')}
-          >
-            [GRID]
-          </button>
-        </div>
-
-        {/* Category Filters */}
-        <div className="flex gap-1.5 overflow-x-auto w-full md:w-auto no-scrollbar md:border-r border-cosmic-latte/20 md:pr-4">
-          {categories.map(cat => (
-            <button
-              key={cat}
-              onClick={() => setFilterCategory(cat)}
-              className={clsx("font-mono text-[10px] px-2 py-1 border whitespace-nowrap transition-all duration-200 uppercase", filterCategory === cat ? 'bg-accent-blue text-cosmic-latte border-accent-blue' : 'border-cosmic-latte/20 hover:border-cosmic-latte/80 hover:bg-cosmic-latte/5')}
+        {/* Main row: always visible */}
+        <div className="flex items-center justify-between md:justify-start gap-2 md:gap-3 p-3 md:p-4">
+          {/* Layout Toggle */}
+          <div className="flex gap-2 md:border-r border-cosmic-latte/20 md:pr-4">
+            <button 
+              onClick={() => {
+                if (window.gtmPush) window.gtmPush('art_layout_toggle', { layout_mode: 'chaos' });
+                setLayoutMode('chaos');
+              }}
+              className={clsx("font-mono text-[10px] md:text-xs px-2 md:px-3 py-1.5 border transition-all duration-200", !isGrid ? 'bg-cosmic-latte text-system-black border-cosmic-latte' : 'border-cosmic-latte/20 hover:border-cosmic-latte/80 hover:bg-cosmic-latte/5')}
             >
-              {cat}
+              [CHAOS]
             </button>
-          ))}
-        </div>
-
-        {/* Year Filter */}
-        <div className="flex gap-1.5 overflow-x-auto w-full md:w-auto no-scrollbar">
-          {years.map(yr => (
-            <button
-              key={yr}
-              onClick={() => setFilterYear(String(yr))}
-              className={clsx("font-mono text-[10px] px-2 py-1 border whitespace-nowrap transition-all duration-200", String(filterYear) === String(yr) ? 'bg-accent-red text-cosmic-latte border-accent-red' : 'border-cosmic-latte/20 hover:border-cosmic-latte/80 hover:bg-cosmic-latte/5')}
+            <button 
+              onClick={() => {
+                if (window.gtmPush) window.gtmPush('art_layout_toggle', { layout_mode: 'grid' });
+                setLayoutMode('grid');
+              }}
+              className={clsx("font-mono text-[10px] md:text-xs px-2 md:px-3 py-1.5 border transition-all duration-200", isGrid ? 'bg-cosmic-latte text-system-black border-cosmic-latte' : 'border-cosmic-latte/20 hover:border-cosmic-latte/80 hover:bg-cosmic-latte/5')}
             >
-              {yr}
+              [GRID]
             </button>
-          ))}
+          </div>
+
+          {/* Desktop filters (hidden on mobile) */}
+          <div className="hidden md:flex gap-1.5 overflow-x-auto no-scrollbar md:border-r border-cosmic-latte/20 md:pr-4">
+            {categories.map(cat => (
+              <button
+                key={cat}
+                onClick={() => {
+                  if (window.gtmPush) window.gtmPush('art_filter', { filter_type: 'category', filter_value: cat });
+                  setFilterCategory(cat);
+                }}
+                className={clsx("font-mono text-[10px] px-2 py-1 border whitespace-nowrap transition-all duration-200 uppercase", filterCategory === cat ? 'bg-accent-blue text-cosmic-latte border-accent-blue' : 'border-cosmic-latte/20 hover:border-cosmic-latte/80 hover:bg-cosmic-latte/5')}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          <div className="hidden md:flex gap-1.5 overflow-x-auto no-scrollbar">
+            {years.map(yr => (
+              <button
+                key={yr}
+                onClick={() => {
+                  if (window.gtmPush) window.gtmPush('art_filter', { filter_type: 'year', filter_value: String(yr) });
+                  setFilterYear(String(yr));
+                }}
+                className={clsx("font-mono text-[10px] px-2 py-1 border whitespace-nowrap transition-all duration-200", String(filterYear) === String(yr) ? 'bg-accent-red text-cosmic-latte border-accent-red' : 'border-cosmic-latte/20 hover:border-cosmic-latte/80 hover:bg-cosmic-latte/5')}
+              >
+                {yr}
+              </button>
+            ))}
+          </div>
+
+          {/* Mobile filter toggle */}
+          <button
+            className="md:hidden font-mono text-[10px] px-2 py-1.5 border border-cosmic-latte/20 hover:border-cosmic-latte/80 transition-all uppercase"
+            onClick={() => setFilterOpen(!filterOpen)}
+          >
+            {filterOpen ? '[CLOSE]' : '[FILTER]'}
+          </button>
         </div>
 
+        {/* Mobile expandable filter panel */}
+        {filterOpen && (
+          <div className="md:hidden border-t border-cosmic-latte/10 p-3 space-y-3">
+            <div>
+              <div className="font-mono text-[9px] text-cosmic-latte/40 uppercase tracking-widest mb-2">CATEGORY</div>
+              <div className="flex flex-wrap gap-1.5">
+                {categories.map(cat => (
+                  <button
+                    key={cat}
+                    onClick={() => {
+                      if (window.gtmPush) window.gtmPush('art_filter', { filter_type: 'category', filter_value: cat });
+                      setFilterCategory(cat);
+                    }}
+                    className={clsx("font-mono text-[10px] px-2 py-1 border whitespace-nowrap transition-all duration-200 uppercase", filterCategory === cat ? 'bg-accent-blue text-cosmic-latte border-accent-blue' : 'border-cosmic-latte/20 hover:border-cosmic-latte/80')}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div>
+              <div className="font-mono text-[9px] text-cosmic-latte/40 uppercase tracking-widest mb-2">YEAR</div>
+              <div className="flex flex-wrap gap-1.5">
+                {years.map(yr => (
+                  <button
+                    key={yr}
+                    onClick={() => {
+                      if (window.gtmPush) window.gtmPush('art_filter', { filter_type: 'year', filter_value: String(yr) });
+                      setFilterYear(String(yr));
+                    }}
+                    className={clsx("font-mono text-[10px] px-2 py-1 border whitespace-nowrap transition-all duration-200", String(filterYear) === String(yr) ? 'bg-accent-red text-cosmic-latte border-accent-red' : 'border-cosmic-latte/20 hover:border-cosmic-latte/80')}
+                  >
+                    {yr}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Lightbox / Modal */}
@@ -294,23 +401,28 @@ export default function ArtCanvas({ projects }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-system-black/95 p-4 md:p-8 backdrop-blur-sm"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-system-black/95 p-2 md:p-8 backdrop-blur-sm"
             onClick={closeModal}
           >
             {/* Close Button */}
             <button 
-              className="absolute top-6 right-6 text-cosmic-latte font-mono text-xs hover:text-accent-blue transition-colors z-50 uppercase tracking-widest"
+              className="absolute top-4 right-4 md:top-6 md:right-6 text-cosmic-latte font-mono text-xs hover:text-accent-blue transition-colors z-50 uppercase tracking-widest"
               onClick={closeModal}
             >
               [CLOSE] <span className="hidden md:inline text-cosmic-latte/30 ml-2">ESC</span>
             </button>
 
             <div 
-              className="relative w-full max-w-6xl h-full max-h-[85vh] flex flex-col md:flex-row gap-8 bg-cosmic-latte text-system-black p-1 md:p-6 shadow-2xl"
+              className="relative w-full max-w-6xl h-full max-h-[90vh] md:max-h-[85vh] flex flex-col md:flex-row gap-4 md:gap-8 bg-cosmic-latte text-system-black p-1 md:p-6 shadow-2xl overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Media Section */}
-              <div className="flex-1 relative bg-system-black flex items-center justify-center overflow-hidden min-h-[300px] group">
+              <div 
+                className="flex-1 relative bg-system-black flex items-center justify-center overflow-hidden min-h-[200px] md:min-h-[300px] group"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+              >
                 {selectedProject.media && selectedProject.media.length > 0 ? (
                   <motion.img 
                     key={activeImageIndex}
@@ -320,44 +432,52 @@ export default function ArtCanvas({ projects }) {
                     src={selectedProject.media[activeImageIndex].url}
                     alt={`${selectedProject.title} — ${activeImageIndex + 1}`}
                     className="max-w-full max-h-full object-contain"
+                    draggable={false}
                   />
                 ) : (
                   <div className="font-mono text-xs text-cosmic-latte/50">NO ASSET FOUND</div>
                 )}
                 
-                {/* Image Navigation */}
+                {/* Image Navigation — always visible on touch, hover on desktop */}
                 {selectedProject.media && selectedProject.media.length > 1 && (
                   <>
                     <button 
                       onClick={prevImage}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-cosmic-latte/10 hover:bg-cosmic-latte/30 text-cosmic-latte p-3 opacity-0 group-hover:opacity-100 transition-all font-mono text-sm"
+                      className={clsx(
+                        "absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-cosmic-latte/20 md:bg-cosmic-latte/10 hover:bg-cosmic-latte/30 text-cosmic-latte p-2 md:p-3 transition-all font-mono text-sm",
+                        isTouchDevice ? "opacity-70" : "opacity-0 group-hover:opacity-100"
+                      )}
                       aria-label="Previous image"
                     >
                       &larr;
                     </button>
                     <button 
                       onClick={nextImage}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-cosmic-latte/10 hover:bg-cosmic-latte/30 text-cosmic-latte p-3 opacity-0 group-hover:opacity-100 transition-all font-mono text-sm"
+                      className={clsx(
+                        "absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-cosmic-latte/20 md:bg-cosmic-latte/10 hover:bg-cosmic-latte/30 text-cosmic-latte p-2 md:p-3 transition-all font-mono text-sm",
+                        isTouchDevice ? "opacity-70" : "opacity-0 group-hover:opacity-100"
+                      )}
                       aria-label="Next image"
                     >
                       &rarr;
                     </button>
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 font-mono text-[10px] text-cosmic-latte/50 bg-system-black/80 px-2 py-1">
+                    <div className="absolute bottom-2 md:bottom-4 left-1/2 -translate-x-1/2 font-mono text-[10px] text-cosmic-latte/50 bg-system-black/80 px-2 py-1">
                       {activeImageIndex + 1} / {selectedProject.media.length}
+                      {isTouchDevice && <span className="ml-2 text-cosmic-latte/30">SWIPE TO NAVIGATE</span>}
                     </div>
                   </>
                 )}
               </div>
 
               {/* Info Section */}
-              <div className="w-full md:w-80 flex flex-col p-4 md:p-0 overflow-y-auto">
+              <div className="w-full md:w-80 flex flex-col p-3 md:p-0 overflow-y-auto max-h-[35vh] md:max-h-none shrink-0">
                 <div className="font-mono text-xs text-accent-blue uppercase tracking-widest mb-2 border-b border-system-black/20 pb-2">
                   {selectedProject.year}
                 </div>
-                <h2 className="font-sans text-2xl md:text-3xl font-bold uppercase tracking-tight leading-none mb-6">
+                <h2 className="font-sans text-xl md:text-3xl font-bold uppercase tracking-tight leading-none mb-4 md:mb-6">
                   {selectedProject.title}
                 </h2>
-                <p className="font-sans text-base leading-relaxed opacity-90 mb-8">
+                <p className="font-sans text-sm md:text-base leading-relaxed opacity-90 mb-6 md:mb-8">
                   {selectedProject.description}
                 </p>
                 
@@ -374,7 +494,7 @@ export default function ArtCanvas({ projects }) {
                   </div>
                   {selectedProject.media && selectedProject.media.length > 0 && (
                     <div className="font-mono text-[10px] text-system-black/30 mt-4">
-                      {selectedProject.media.length} {selectedProject.media.length === 1 ? 'IMAGE' : 'IMAGES'} IN ALBUM // USE ← → TO NAVIGATE
+                      {selectedProject.media.length} {selectedProject.media.length === 1 ? 'IMAGE' : 'IMAGES'} IN ALBUM {!isTouchDevice && '// USE ← → TO NAVIGATE'}
                     </div>
                   )}
                 </div>

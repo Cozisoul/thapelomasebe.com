@@ -268,16 +268,14 @@ export default function CC003_CellularDither() {
 
   return (
     <>
-      <section style={styles.section} className="w-full lg:w-1/2 relative min-h-[60vh] lg:min-h-screen flex items-center justify-center p-8 transition-colors duration-300">
+      <section style={styles.section} className="order-2 lg:order-2 sticky lg:relative top-[70px] lg:top-auto z-20 lg:z-auto w-full lg:w-1/2 h-[45vh] min-h-[300px] md:h-auto md:min-h-[60vh] lg:min-h-screen flex items-center justify-center p-4 md:p-8 shrink-0 transition-colors duration-300">
         <div id="canvas-wrapper" ref={wrapperRef} className="w-full h-full flex items-center justify-center overflow-hidden"></div>
       </section>
 
       <aside 
         data-lenis-prevent="true"
         style={styles.sidebar} 
-        className="w-full lg:w-1/4 lg:h-screen lg:max-h-[100vh] lg:sticky lg:top-0 border-t lg:border-t-0 lg:border-l overflow-y-auto p-6 font-sans transition-colors duration-300"
-        onWheel={(e) => e.stopPropagation()}
-        onTouchMove={(e) => e.stopPropagation()}
+        className="order-3 lg:order-3 w-full lg:w-1/4 lg:h-screen lg:max-h-[100vh] lg:sticky lg:top-0 border-t lg:border-t-0 lg:border-l overflow-y-visible lg:overflow-y-auto p-6 font-sans transition-colors duration-300"
       >
         <h3 className="font-mono text-lg mb-6 tracking-wider">CELLULAR DITHER</h3>
 

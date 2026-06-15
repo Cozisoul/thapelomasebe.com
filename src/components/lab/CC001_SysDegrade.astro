@@ -14,11 +14,11 @@ const SCENES = [
 ---
 
 <>
-  <section class="w-full lg:w-1/2 bg-system-black relative min-h-[60vh] lg:min-h-screen flex items-center justify-center p-8">
+  <section class="order-2 lg:order-2 sticky lg:relative top-[70px] lg:top-auto z-20 lg:z-auto w-full lg:w-1/2 bg-system-black h-[45vh] min-h-[300px] md:h-auto md:min-h-[60vh] lg:min-h-screen flex items-center justify-center p-4 md:p-8 shrink-0">
     <div id="canvas-wrapper" class="w-full h-full flex items-center justify-center overflow-hidden"></div>
   </section>
 
-  <aside id="panel" data-lenis-prevent="true" class="overscroll-contain w-full lg:w-1/4 lg:h-screen lg:max-h-[100vh] lg:sticky lg:top-0 bg-[#1a1a1a] text-white border-t lg:border-t-0 lg:border-l border-system-black/20 overflow-y-auto p-6 font-sans" style="color: #eee;">
+  <aside id="panel" data-lenis-prevent="true" class="order-3 lg:order-3 w-full lg:w-1/4 lg:h-screen lg:max-h-[100vh] lg:sticky lg:top-0 bg-[#1a1a1a] text-white border-t lg:border-t-0 lg:border-l border-system-black/20 overflow-y-visible lg:overflow-y-auto p-6 font-sans" style="color: #eee;">
     <h3 class="font-mono text-lg mb-6 tracking-wider">SETTINGS</h3>
 
     <div class="mb-6">
@@ -113,7 +113,7 @@ const SCENES = [
   </aside>
 </>
 
-<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js" integrity="sha384-o1n0vYpy22vpq+Ajm4kEg2VP5vPyIsWGxNNV7mL0g5kFuIrhfs2BzcvNwuH670so" crossorigin="anonymous"></script>
 
 <script is:inline>
 // =====================================================
@@ -123,6 +123,7 @@ const SCENES = [
 let cam, manager;
 let webcamElement = null;
 let uploadedElement = null;
+let previousUploadUrl = null;
 let currentSourceType = 'webcam';
 let showMenu = false;
 
@@ -692,6 +693,7 @@ let mouseEvent;
 window.addEventListener('mousedown', e => mouseEvent = e);
 
 function switchToSource(type) {
+  if (window.gtmPush) window.gtmPush('lab_engine_init', { project_id: 'CC_001', input_type: type });
   currentSourceType = type;
   const webBtn = document.getElementById('sourceWebcamBtn');
   const upBtn = document.getElementById('sourceUploadBtn');
@@ -735,7 +737,9 @@ function handleUpload(file) {
     if (uploadedElement.remove) uploadedElement.remove();
   }
   
+  if (previousUploadUrl) URL.revokeObjectURL(previousUploadUrl);
   const fileUrl = URL.createObjectURL(file);
+  previousUploadUrl = fileUrl;
   const isVideo = file.type.startsWith('video/');
   
   if (isVideo) {
@@ -763,22 +767,23 @@ function handleUpload(file) {
 // ---------- HTML CONTROL BINDINGS ----------
 function bindControls() {
 const $ = id => document.getElementById(id);
-const panel = document.getElementById('panel');
-if (panel) {
-  panel.addEventListener('wheel', (e) => e.stopPropagation(), { passive: false });
-  panel.addEventListener('touchmove', (e) => e.stopPropagation(), { passive: false });
-}
-const update = (fn) => (e) => { fn(e); saveSettings(); };
+const update = (fn, paramName) => (e) => { 
+  fn(e); 
+  saveSettings(); 
+  if (window.gtmPush && paramName) {
+    window.gtmPush('lab_parameter_tweak', { project_id: 'CC_001', parameter_name: paramName });
+  }
+};
 
-$('fgColor').addEventListener('input', update(e => settings.fgColor = e.target.value));
-$('bgColor').addEventListener('input', update(e => settings.bgColor = e.target.value));
-$('accentColor').addEventListener('input', update(e => settings.accentColor = e.target.value));
-$('charSet').addEventListener('input', update(e => settings.charSet = e.target.value));
+$('fgColor').addEventListener('input', update(e => settings.fgColor = e.target.value, 'fgColor'));
+$('bgColor').addEventListener('input', update(e => settings.bgColor = e.target.value, 'bgColor'));
+$('accentColor').addEventListener('input', update(e => settings.accentColor = e.target.value, 'accentColor'));
+$('charSet').addEventListener('input', update(e => settings.charSet = e.target.value, 'charSet'));
 $('cellSize').addEventListener('input', update(e => {
   settings.cellSize = parseInt(e.target.value);
   $('cellSizeVal').textContent = e.target.value;
-}));
-$('mirror').addEventListener('change', update(e => settings.mirror = e.target.checked));
+}, 'cellSize'));
+$('mirror').addEventListener('change', update(e => settings.mirror = e.target.checked, 'mirror'));
 
 // Scene presets
 document.querySelectorAll('[data-scene-idx]').forEach(btn => {
@@ -821,6 +826,11 @@ if (upBtn) {
     fileInput.click();
   });
 }
+
+$('exportBtn').addEventListener('click', () => {
+  if (window.gtmPush) window.gtmPush('lab_export', { project_id: 'CC_001' });
+  triggerPngDownload();
+});
 
 if (fileInput) {
   fileInput.addEventListener('change', (e) => {
@@ -891,7 +901,11 @@ function loadSettings() {
   const saved = localStorage.getItem('asciiSettings');
   if (saved) {
     try {
-      Object.assign(settings, JSON.parse(saved));
+      const parsed = JSON.parse(saved);
+      const VALID_KEYS = ['fgColor','bgColor','accentColor','charSet','cellSize','mirror'];
+      for (const key of VALID_KEYS) {
+        if (key in parsed) settings[key] = parsed[key];
+      }
       document.getElementById('fgColor').value = settings.fgColor;
       document.getElementById('bgColor').value = settings.bgColor;
       document.getElementById('accentColor').value = settings.accentColor;

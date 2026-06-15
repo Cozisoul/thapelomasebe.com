@@ -21,19 +21,19 @@ const { project } = Astro.props;
     
     <!-- LEFT COLUMN: THE LOGIC (Sticky) -->
     <!-- Holds the narrative, context, and specs. -->
-    <aside class="w-full lg:w-1/2 lg:h-screen lg:sticky lg:top-0 p-6 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-system-black bg-cosmic-latte z-10">
+    <aside class="w-full lg:w-1/2 max-h-[50vh] lg:max-h-none lg:h-screen lg:sticky lg:top-0 p-4 md:p-6 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-system-black bg-cosmic-latte z-10 overflow-y-auto">
       
       <!-- Top: Header -->
-      <div class="mt-16 lg:mt-32">
+      <div class="mt-12 md:mt-16 lg:mt-32">
         <div class="font-mono text-xs uppercase tracking-widest opacity-60 mb-4">
           {project.id} — {project.category}
         </div>
-        <h1 class="font-sans font-normal text-5xl md:text-6xl lg:text-7xl leading-[0.9] uppercase tracking-tighter mb-8">
+        <h1 class="font-sans font-normal text-3xl md:text-5xl lg:text-7xl leading-[0.9] uppercase tracking-tighter mb-6 md:mb-8">
           {project.title}
         </h1>
         
         <!-- The Narrative (Simple Text Render) -->
-        <div class="font-sans text-lg leading-relaxed max-w-md opacity-90 whitespace-pre-wrap">
+        <div class="font-sans text-base md:text-lg leading-relaxed max-w-md opacity-90 whitespace-pre-wrap">
           {project.narrative_md}
         </div>
       </div>

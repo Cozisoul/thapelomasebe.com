@@ -152,13 +152,21 @@ const LabRegistry = ({ projects }) => {
 
       {/* Table Body */}
       <div className="flex flex-col border-t border-system-black/20">
-        {projects.map((project, idx) => (
-          <a
+        {projects.map((project, idx) => {
+          const isActive = project.status === 'ACTIVE';
+          const Wrapper = isActive ? 'a' : 'div';
+          return (
+          <Wrapper
             key={project.id}
-            href={`/lab/${project.id}`}
-            className="flex flex-col md:grid md:grid-cols-12 gap-2 md:gap-4 p-4 border-b border-system-black/20 hover:bg-system-black hover:text-cosmic-latte transition-colors group cursor-crosshair relative"
-            onMouseEnter={() => setHoveredId(project.id)}
-            onMouseLeave={() => setHoveredId(null)}
+            href={isActive ? `/lab/${project.id}` : undefined}
+            className={`flex flex-col md:grid md:grid-cols-12 gap-2 md:gap-4 p-4 border-b border-system-black/20 transition-colors group relative ${isActive ? 'hover:bg-system-black hover:text-cosmic-latte cursor-crosshair' : 'opacity-60 cursor-not-allowed bg-system-black/5'}`}
+            onMouseEnter={() => {
+              if (isActive) {
+                setHoveredId(project.id);
+                if (window.gtmPush) window.gtmPush('lab_preview_hover', { project_id: project.id, project_name: project.name });
+              }
+            }}
+            onMouseLeave={() => isActive ? setHoveredId(null) : null}
           >
             <div className="flex justify-between md:contents">
               <div className="font-mono text-xs opacity-50 group-hover:opacity-100 md:col-span-1">
@@ -166,7 +174,7 @@ const LabRegistry = ({ projects }) => {
               </div>
               <div className="md:hidden">
                 <span className="inline-flex items-center gap-1.5 font-mono text-[10px]">
-                  <span className="w-2 h-2 bg-accent-blue rounded-full animate-pulse" />
+                  <span className={`w-2 h-2 rounded-full ${project.status === 'ACTIVE' ? 'bg-accent-blue animate-pulse' : 'bg-accent-red'}`} />
                   <span className="uppercase">{project.status}</span>
                 </span>
               </div>
@@ -185,18 +193,19 @@ const LabRegistry = ({ projects }) => {
             </div>
             <div className="hidden md:block text-right md:col-span-1">
               <span className="inline-flex items-center gap-1.5 font-mono text-[10px]">
-                <span className="w-2 h-2 bg-accent-blue rounded-full animate-pulse" />
+                <span className={`w-2 h-2 rounded-full ${project.status === 'ACTIVE' ? 'bg-accent-blue animate-pulse' : 'bg-accent-red'}`} />
                 <span className="uppercase">{project.status}</span>
               </span>
             </div>
-          </a>
-        ))}
+          </Wrapper>
+          );
+        })}
       </div>
 
       {/* Floating Live Preview Canvas */}
       {hoveredId && (
         <div
-          className="absolute z-50 pointer-events-none"
+          className="absolute z-50 pointer-events-none hidden md:block"
           style={{
             left: `${Math.min(mousePos.x + 20, (containerRef.current?.offsetWidth || 800) - 340)}px`,
             top: `${mousePos.y - 130}px`,

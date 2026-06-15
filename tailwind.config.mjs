@@ -18,6 +18,8 @@ export default {
         'meta': ['11px', { lineHeight: '1.4', letterSpacing: '0.05em', textTransform: 'uppercase' }],
       },
       screens: {
+        'sm': '640px',
+        'md': '768px',
         'lg': '1024px',
         'xl': '1440px',
         '2xl': '1920px',

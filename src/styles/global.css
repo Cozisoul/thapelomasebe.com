@@ -94,3 +94,49 @@ html.lenis, html.lenis body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Touch device overrides */
+@media (pointer: coarse) {
+  :root {
+    cursor: auto;
+  }
+  a, button {
+    cursor: auto;
+  }
+  .cursor-crosshair {
+    cursor: auto;
+  }
+  .cursor-grab {
+    cursor: auto;
+  }
+}
+
+/* Safe area utilities for notched devices */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Mobile text size clamp utility */
+.text-display-responsive {
+  font-size: clamp(2.5rem, 15vw, 12vw);
+  line-height: 0.8;
+}
+
+/* 5. ACCESSIBILITY (a11y) */
+*:focus-visible {
+  outline: 2px solid #FF0000; /* accent-red */
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

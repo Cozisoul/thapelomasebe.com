@@ -361,7 +361,7 @@ export default function CC002_EffectRoulette() {
 
   return (
     <>
-      <section className="w-full lg:w-1/2 bg-system-black relative min-h-[60vh] lg:min-h-screen flex items-center justify-center p-8">
+      <section className="order-2 lg:order-2 sticky lg:relative top-[70px] lg:top-auto z-20 lg:z-auto w-full lg:w-1/2 bg-system-black h-[45vh] min-h-[300px] md:h-auto md:min-h-[60vh] lg:min-h-screen flex items-center justify-center p-4 md:p-8 shrink-0">
         <div ref={containerRef} className="w-full h-full flex items-center justify-center overflow-hidden">
           <canvas ref={canvasRef} className="bg-[#111] shadow-2xl" />
         </div>
@@ -369,10 +369,8 @@ export default function CC002_EffectRoulette() {
 
       <aside 
         data-lenis-prevent="true" 
-        className="overscroll-contain w-full lg:w-1/4 lg:h-screen lg:sticky lg:top-0 bg-[#1a1a1a] text-white border-t lg:border-t-0 lg:border-l border-system-black/20 overflow-y-auto p-6 font-sans" 
+        className="order-3 lg:order-3 w-full lg:w-1/4 lg:h-screen lg:sticky lg:top-0 bg-[#1a1a1a] text-white border-t lg:border-t-0 lg:border-l border-system-black/20 overflow-y-visible lg:overflow-y-auto p-6 font-sans" 
         style={{ color: '#eee' }}
-        onWheel={(e) => e.stopPropagation()}
-        onTouchMove={(e) => e.stopPropagation()}
       >
         <h3 className="font-mono text-lg mb-6 tracking-wider">EFFECT ROULETTE</h3>
 

@@ -77,5 +77,54 @@
     "tags": ["cellular-automata", "conway", "generative", "grid", "emergent-systems"],
     "dependencies": ["Canvas API"],
     "inputType": "autonomous"
+  },
+  {
+    "id": "CC_004",
+    "name": "AUDIO_REGISTRY_12",
+    "title": "Acoustic-Architectural Engine",
+    "algorithm": "Kinetic Typography & Iterative Mark-Making",
+    "algorithmShort": "AUDIO_REACTIVE",
+    "engine": "Web Audio API + React",
+    "status": "ARCHIVED",
+    "year": 2026,
+    "git_ref": "sonic-architecture",
+    "git_url": "https://github.com/Cozisoul/sonic-architecture",
+    "description": "Sound is invisible structure. This suite of twelve custom-engineered modules intercepts audio data—frequencies, transients, and amplitude—and forces it to construct digital architecture in real-time.\n\nBypassing traditional 'music visualization,' the system treats acoustic energy as a mechanical force: disrupting grids, dictating typographical weight, and steering cellular automata. It is a tool designed to map the physical footprint of noise.",
+    "abstract": "",
+    "scenes": [
+      "02_Typographic_Signal",
+      "03_Iterative_Glyph_Engine",
+      "09_Kinetic_Grid_Tension",
+      "10_Component_Stress_Audit",
+      "Master Sequencer"
+    ],
+    "coreSnippet": "// Acoustic Energy Processing\nconst analyze = () => {\n  analyser.getByteFrequencyData(dataArray);\n  const bass = getBandEnergy(dataArray, 20, 250);\n  const mid = getBandEnergy(dataArray, 250, 2000);\n  const treble = getBandEnergy(dataArray, 2000, 20000);\n  \n  updateArchitecture({ bass, mid, treble });\n  requestAnimationFrame(analyze);\n};",
+    "tags": ["audio-reactive", "fft", "web-audio-api", "architecture", "data-visualization"],
+    "dependencies": ["Web Audio API", "React", "Tweakpane"],
+    "inputType": "microphone-or-upload",
+    "influences": ["DIA Studio", "Martin Grasser", "Konstantin Grcic"]
+  },
+  {
+    "id": "CC_005",
+    "name": "SPECTRAL_PROBE_V1",
+    "title": "Acoustic Archeology",
+    "algorithm": "FAST_FOURIER_TRANSFORM + DITHER",
+    "algorithmShort": "FFT_ANALYSIS",
+    "engine": "p5.sound / Web Audio API",
+    "status": "ARCHIVED",
+    "year": 2026,
+    "git_ref": "audio-registry-12",
+    "git_url": "https://github.com/Cozisoul/audio-registry-12",
+    "description": "An Audio Visualizer that functions not as a decorative wave, but as a Spectral Probe—a tool for analyzing the 'materiality' of sound.\n\nFollowing the Systematic-Poetic architecture, it utilizes Fast Fourier Transform (FFT) Analysis to break down the audio signal. The resulting frequency bins are mapped to grid coordinates and rendered as dithered strokes in Void Black and Cosmic Latte.\n\nA live crosshair probe allows the user to explore the exact Hertz and dB values of the invisible structures of sound. By capturing 'Freeze Frames', the volatile acoustic environment is permanently archived as a 1-bit artifact.\n\nThis tool proves that we do not just make art that moves to music. We build systems that analyze the architecture of signal.",
+    "abstract": "",
+    "scenes": [
+      "Void Black FFT Histogram",
+      "Cosmic Latte 1-bit Dither",
+      "Error Red Crosshair Probe"
+    ],
+    "coreSnippet": "// The Freeze Frame Export Logic\nif (exportTriggerRef.current) {\n  p.saveCanvas(`SPECTRAL_PROBE_${p.frameCount}`, 'png');\n  exportTriggerRef.current = false;\n}",
+    "tags": ["audio-visualizer", "fft", "p5.sound", "spectral-probe", "dithering"],
+    "dependencies": ["p5", "p5.sound"],
+    "inputType": "webcam"
   }
 ]

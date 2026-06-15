@@ -4,6 +4,8 @@ import projects from '../../data/lab_projects.json';
 import CC001_SysDegrade from '../../components/lab/CC001_SysDegrade.astro';
 import CC002_EffectRoulette from '../../components/lab/CC002_EffectRoulette.jsx';
 import CC003_CellularDither from '../../components/lab/CC003_CellularDither.jsx';
+import CC004_SonicArchitecture from '../../components/lab/cc004/CC004_SonicArchitecture.jsx';
+import AcousticRegistry from '../../components/lab/AcousticRegistry.jsx';
 
 // Generate static paths for each lab project
 export async function getStaticPaths() {
@@ -21,7 +23,7 @@ const { project } = Astro.props;
   <div class="flex flex-col lg:flex-row min-h-screen w-full">
     
     <!-- COLUMN 1: IDENTITY & SPECS (The Left-Weighted Anchor) -->
-    <aside data-lenis-prevent class="w-full lg:w-1/4 lg:h-screen lg:sticky lg:top-0 p-6 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-system-black/20 bg-cosmic-latte z-10 overflow-y-auto shrink-0">
+    <aside data-lenis-prevent class="order-1 lg:order-1 w-full lg:w-1/4 lg:h-screen lg:sticky lg:top-0 pt-24 lg:pt-6 p-4 md:p-6 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-system-black/20 bg-cosmic-latte z-10 overflow-y-visible lg:overflow-y-auto shrink-0">
       
       <!-- Vertical Label -->
       <div>
@@ -30,7 +32,7 @@ const { project } = Astro.props;
         </div>
 
         <!-- Header -->
-        <div class="mt-20 lg:mt-24">
+        <div class="mt-16 lg:mt-24">
           <div class="font-mono text-[10px] uppercase tracking-widest opacity-40 mb-1">
             SYS_ID: {project.id}
           </div>
@@ -38,10 +40,10 @@ const { project } = Astro.props;
             {project.algorithm}
           </div>
           
-          <h1 class="font-sans text-3xl lg:text-4xl font-bold uppercase tracking-tighter leading-[0.9] mb-2">
+          <h1 class="font-sans text-2xl md:text-3xl lg:text-4xl font-bold uppercase tracking-tighter leading-[0.9] mb-2">
             {project.name}
           </h1>
-          <h2 class="font-sans text-lg opacity-70 italic mb-8">
+          <h2 class="font-sans text-base md:text-lg opacity-70 italic mb-6 md:mb-8">
             {project.title}
           </h2>
 
@@ -87,11 +89,13 @@ const { project } = Astro.props;
     {project.id === 'CC_001' && <CC001_SysDegrade />}
     {project.id === 'CC_002' && <CC002_EffectRoulette client:only="react" />}
     {project.id === 'CC_003' && <CC003_CellularDither client:only="react" />}
+    {project.id === 'CC_004' && <CC004_SonicArchitecture client:only="react" />}
+    {project.id === 'CC_005' && <AcousticRegistry client:only="react" />}
 
   </div>
 
   <!-- Navigation Override -->
-  <a href="/lab" class="fixed top-6 right-6 font-mono text-xs z-50 mix-blend-difference text-cosmic-latte hover:text-accent-red cursor-pointer uppercase tracking-widest">
+  <a href="/lab" class="fixed top-4 right-4 md:top-6 md:right-6 font-mono text-xs z-50 mix-blend-difference text-cosmic-latte hover:text-accent-red cursor-pointer uppercase tracking-widest">
     [CLOSE]
   </a>
 
