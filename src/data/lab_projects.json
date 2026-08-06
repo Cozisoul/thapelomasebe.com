@@ -8,8 +8,8 @@
     "engine": "p5.js",
     "status": "ACTIVE",
     "year": 2025,
-    "git_ref": "ascii-expiriments",
-    "git_url": "https://github.com/Cozisoul/ascii-expiriments",
+    "git_ref": "ascii-experiments",
+    "git_url": "https://github.com/Cozisoul/ascii-experiments",
     "description": "A live camera feed is transformed into a field of ASCII characters and structural marks.\n\nRather than reproducing the image faithfully, the system extracts edges, contrast relationships, and directional information. The resulting image exists somewhere between language, drawing, and machine vision.\n\nThe viewer encounters a version of themselves that is no longer photographic but still recognizable.\n\nThis work investigates the threshold at which representation becomes abstraction.\n\n**Artistic Context**\n\nThe project is situated within ongoing investigations into memory, archives, digital materiality, and computational culture.\n\nRather than treating technology as a tool for producing ever more realistic images, What Remains uses reduction, degradation, and abstraction to reveal the structures through which contemporary vision is mediated.\n\nThe work proposes that loss is not the opposite of information. Loss can also be a method of understanding.\n\n**Technical Notes**\n\n• Live webcam input\n• Real-time ASCII rendering\n• Edge-detection and image analysis\n• p5.js and HTML5 Canvas\n• Browser-based installation environment\n• Projection, monitor, or screen-based presentation",
     "abstract": "",
     "scenes": [
